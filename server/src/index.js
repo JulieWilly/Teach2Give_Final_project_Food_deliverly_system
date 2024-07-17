@@ -1,5 +1,6 @@
 import express from 'express'
 import usersRouter from './routers/users.router.js'
+import productsRouter from './routers/products.router.js'
 import { config } from 'dotenv'
 
 config()
@@ -11,3 +12,4 @@ foodDelivery.listen(process.env.PORT, () => {
 })
 
 foodDelivery.use('/foodie.com/ke/api/v1',usersRouter )
+foodDelivery.use('/foodie.com/ke/api/v1/products',productsRouter )
