@@ -12,3 +12,35 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Customers{
+  cust_id String @id @default(uuid())
+  custName String @map("customer_name")
+  custEmail String @map("customer_email")
+  custPhoneNumber Int @map("customer_phone_number")
+  custLocation String @map("customer location")
+  approvedCust Boolean @map("approved_customer")
+  createdAt DateTime @default(now()) @map("customer_createdAt")
+  updatedAt DateTime @updatedAt() @map("customer_updatedAt")
+
+@@map("customers_tb")
+}
+
+model Orders{
+  order_id String @id @default(uuid())
+  orderName String @map("orders_name")
+
+  @@map("orders_tb")
+}
+
+model food_products{
+  product_id String @id @default(uuid())
+  productName String @map("product_name")
+  productDesc String @map("product_description")
+  productPrice String @map("product_price")
+  createdAt DateTime @map("product_createdAt")
+  updatedAt DateTime @map("product_updatedAt")
+
+
+  @@map("food_products_tb")
+}
