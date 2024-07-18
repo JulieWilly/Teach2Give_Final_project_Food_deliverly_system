@@ -19,8 +19,9 @@ model Customers {
   custEmail       String   @unique @map("customer_email")
   custPhoneNumber Int      @map("customer_phone_number")
   custLocation    String   @map("customer location")
-  password        String  @map("customer_password")
-  approvedCust    Boolean  @map("approved_customer")
+  password        String   @map("customer_password")
+  customerRole    String   @map("customer_role")
+  approvedCust    Boolean  @default(false) @map("approved_customer")
   createdAt       DateTime @default(now()) @map("customer_createdAt")
   updatedAt       DateTime @updatedAt() @map("customer_updatedAt")
 
