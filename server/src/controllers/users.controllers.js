@@ -1,5 +1,6 @@
 import {PrismaClient} from '@prisma/client'
 const prisma = new PrismaClient()
+import bcrypt from 'bcrypt'
 
 export const getAllCustomers = async (req, res) => {
     try{
@@ -44,16 +45,37 @@ export const getOneCustomer =  async (req, res) => {
 
 export const createCustomer = async (req, res) => {
     try{
-    const {custName,custEmail, custPhoneNumber, custLocation, approvedCust } = req.body
+    const {custName,custEmail, custPhoneNumber, custLocation, approvedCust, password} = req.body
+    const passToString = password.toString();
+    const passwordHash = bcrypt.hashSync(passToString, 10)
+    console.log(passwordHash)
     const createCust = await prisma.customers.create({
         data: {
-            custName, custEmail, custPhoneNumber, custLocation, approvedCust
+            custName, custEmail, custPhoneNumber, custLocation, approvedCust, password:passwordHash
         }
     })
     res.status(200).json({ success: true, message: "Customer created successfully.", data: createCust})
    } catch(error) {
     res.status(500).json({ success: false, message: error.message})
    }
+}
+
+export const loginCustomer = async (req, res) => {
+    // extract email and password from the database.
+    const { custEmail, password } =req.body;
+    try{
+        // login customer if the email password exists.
+        const loginCustomer = await prisma.customers.findFirst({
+            where: { custEmail: custEmail}
+        })
+
+        res.json("email qualifies")
+
+    } catch(error) {
+        res.status(500).json({ success: false, message: error.message})
+    }
+
+    res.json("sklkldsklsdklsd")
 }
 
 export const updateCustomer = async (req, res) => {

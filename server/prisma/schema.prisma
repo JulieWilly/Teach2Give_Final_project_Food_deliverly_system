@@ -16,9 +16,10 @@ datasource db {
 model Customers {
   cust_id         String   @id @default(uuid())
   custName        String   @map("customer_name")
-  custEmail       String   @map("customer_email")
+  custEmail       String   @unique @map("customer_email")
   custPhoneNumber Int      @map("customer_phone_number")
   custLocation    String   @map("customer location")
+  password        String  @map("customer_password")
   approvedCust    Boolean  @map("approved_customer")
   createdAt       DateTime @default(now()) @map("customer_createdAt")
   updatedAt       DateTime @updatedAt() @map("customer_updatedAt")
@@ -35,11 +36,11 @@ model Orders {
 
 model food_products {
   product_id   String   @id @default(uuid())
-  productName  String   @map("product_name")
+  productName  String   @unique @map("product_name")
   productDesc  String   @map("product_description")
   productPrice String   @map("product_price")
   createdAt    DateTime @default(now()) @map("product_createdAt")
-  updatedAt    DateTime @updatedAt()  @map("product_updatedAt")
+  updatedAt    DateTime @updatedAt() @map("product_updatedAt")
 
   @@map("food_products_tb")
 }

@@ -6,6 +6,7 @@ const verifyUserDetails = async (req, res, next) => {
             if(!custPhoneNumber) return  res.status(400).json('Please provide a the customer phone number.')
             if(!custLocation) return res.status(400).json('Please provide a the customer location.')
             if(!approvedCust) return res.status(400).json('Please provide if the customers accout has been approved or has not been approved..')
+                next()
     } catch(error) {
         res.status(500).json({success: false, message: error.message})
     }
