@@ -1,0 +1,20 @@
+form{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 20rem;
+}
+
+form input {
+    height: 2rem;
+    padding-inline-start: .5rem;
+    min-width: 90%;
+}
+
+p{
+    color: black;
+}
+
