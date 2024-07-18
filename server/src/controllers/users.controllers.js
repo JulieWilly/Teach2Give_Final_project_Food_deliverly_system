@@ -56,7 +56,6 @@ export const createCustomer = async (req, res) => {
       custEmail,
       custPhoneNumber,
       custLocation,
-      approvedCust,
       password,
       customerRole
     } = req.body;
