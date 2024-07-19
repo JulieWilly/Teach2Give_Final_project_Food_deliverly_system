@@ -20,28 +20,105 @@ model Customers {
   custPhoneNumber Int      @map("customer_phone_number")
   custLocation    String   @map("customer location")
   password        String   @map("customer_password")
+  customerAddress String @map("customer_address")
   customerRole    String   @map("customer_role")
   approvedCust    Boolean  @default(false) @map("approved_customer")
   createdAt       DateTime @default(now()) @map("customer_createdAt")
   updatedAt       DateTime @updatedAt() @map("customer_updatedAt")
+  profile         Profile?
+  orders Orders[]
+  reviewer Reviews?
 
   @@map("customers_tb")
 }
 
-model Orders {
-  order_id  String @id @default(uuid())
-  orderName String @map("orders_name")
-
-  @@map("orders_tb")
-}
 
 model food_products {
   product_id   String   @id @default(uuid())
   productName  String   @unique @map("product_name")
   productDesc  String   @map("product_description")
-  productPrice String   @map("product_price")
+  productPrice Int      @map("product_price")
+  productCartegory String @map("product_category")
   createdAt    DateTime @default(now()) @map("product_createdAt")
   updatedAt    DateTime @updatedAt() @map("product_updatedAt")
+  order_items Order_items?
+  
 
   @@map("food_products_tb")
+}
+
+model Profile {
+  profile_id  String    @id @default(uuid())
+  profileName String    @map("customer_name")
+  profileImg  String    @map("customer_image")
+  cust_id     String    @unique
+  customer    Customers @relation(fields: [cust_id], references: [cust_id])
+}
+
+
+model Orders{
+  order_id String @id @default(uuid())
+  orderStatus String @map("order_status")
+  orderDate DateTime @default(now())
+  totalAmount Int @map("total_amount")
+  noOfItems Int @map("no_of_items")
+
+  customers Customers @relation(fields: [cust_id], references: [cust_id])
+  cust_id String @unique
+  order_items Order_items[]
+  @@map("orders_tb")
+}
+
+model Order_items {
+  order_items_id String @id @default(uuid())
+  orderQuantity String @map("order_quantity")
+  itemPrice String @map("item_price")
+  orders Orders @relation(fields: [order_id], references: [order_id])
+  order_id String @unique
+  products food_products @relation(fields: [product_id], references: [product_id])
+  product_id String @unique
+
+  @@map("order_items_tb")
+
+}
+
+model Reviews {
+  review_id String @id @default(uuid())
+  reviewRating Int @map("review_rating")
+  reviewDate DateTime @default(now())
+  reviewComment String @map("review_comment")
+  customerName String @map("cust_name")
+
+  customers Customers @relation(fields: [cust_id], references: [cust_id])
+  cust_id String @unique
+
+  @@map("reviews_tb")
+}
+
+model Categories {
+  category_id String @id @default(uuid())
+  categoryName String @map("category_name")
+  categoryDesc String @map("category_desc")
+
+  @@map("categories_tb")
+}
+
+model Payment {
+  payment_id String @id @default(uuid()) 
+  paymentMethod String @map("payment_method")
+  amount String @map("amount")
+  paymentDate DateTime @default(now())
+  paymentStatus String @map("payment_status")
+
+  @@map("payments_tb")
+}
+
+model Address{
+  address_id String @id @default(uuid())
+  customerAddress String @map("customer_address")
+  city String @map("city")
+  state String @map("state")
+  zipcode Int @map("zipcode")
+
+  @@map("address_tb")
 }

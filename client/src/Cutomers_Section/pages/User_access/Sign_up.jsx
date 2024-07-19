@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./user_access.css";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
@@ -9,11 +10,13 @@ const Sign_up = () => {
   const [inputs, setInputs] = useState("");
   const [loading, setLoading] = useState("");
   const [error, setError] = useState(false);
+  const navigate = useNavigate()
 
   // form validations.
 
 
   const handleSubmit = async (values) => {
+
      try {
       setError(false)
       setLoading(true)
@@ -24,10 +27,16 @@ const Sign_up = () => {
           custPhoneNumber: values.custPhoneNumber,
           custLocation: values.custLocation,
           customerRole: values.customerRole,
+          customerAddress: values.customerAddress,
           password: values.password,
         })
         .catch((error) => console.log(error));
         setInputs(createCustomer)
+
+        console.log(createCustomer)
+        if( createCustomer.data.success === true){
+          navigate('/')
+        }
     } catch (error) {
       console.log(error)
       setError(error)
@@ -51,6 +60,7 @@ const Sign_up = () => {
       .required("Customer location is required.")
       .min(5, "Customer location name should have atleast 4 characters")
       .max(15, "Customer location name should not have max of 15 characters"),
+    customerAddress: Yup.string().required("Please provide an address below."),
     customerRole: Yup.string().required("Customer role is required."),
     password: Yup.number()
       .required("Password is required.")
@@ -64,6 +74,7 @@ const Sign_up = () => {
       custPhoneNumber: "",
       custLocation: "",
       customerRole: "",
+      customerAddress:"",
       password: "",
     },
     onSubmit: handleSubmit,
@@ -111,6 +122,21 @@ const Sign_up = () => {
           <p>{formik.errors.custPhoneNumber}</p>
         )}
       </div>
+
+      <div>
+        <input
+          type="text"
+          placeholder="Post address name"
+          name="customerAddress"
+          value={formik.values.customerAddress}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.customerAddress && formik.errors.customerAddress && (
+          <p>{formik.errors.customerAddress}</p>
+        )}
+        </div>
+
       <div>
         <input
           type="text"
@@ -148,7 +174,10 @@ const Sign_up = () => {
         />
       </div>
 
-      <button type="submit">Sign in</button>
+      <button type="submit">
+        {loading ? "Signing up. Please wait ..." : "Sign up"}
+      </button>
+
       <p>
         Already have an account? <Link to={"/"}> Sign in</Link>
       </p>

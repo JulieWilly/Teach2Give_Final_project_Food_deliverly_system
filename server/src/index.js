@@ -9,7 +9,9 @@ config();
 
 const foodDelivery = express();
 foodDelivery.use(cors({
-  origin: 'http://localhost:5173'
+  origin: 'http://localhost:5173',
+  methods: ["GET", "POST", "DELETE", "PATCH"],
+  credentials: true
 }))
 foodDelivery.use(express.json());
 foodDelivery.use(cookieParser());

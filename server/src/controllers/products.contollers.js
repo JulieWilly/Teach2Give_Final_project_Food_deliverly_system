@@ -44,7 +44,6 @@ export const getOneProduct = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
     const { productName, productDesc, productPrice } = req.body;
-
     // create the products.
     const createProduct = await prisma.food_products.create({
       data: {

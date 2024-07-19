@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import "./user_access.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -7,9 +7,9 @@ import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 
 const Sign_in = () => {
-  const [input, setInputs] = useState();
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
+  const navigate = useNavigate()
 
   const handleSubmit = async (values) => {
     try {
@@ -19,10 +19,18 @@ const Sign_in = () => {
       const login = await axios.post(`${VITE_API_URL_BASE}/login`, {
         custEmail: values.custEmail,
         password: values.password
+      },{
+        withCredentials:true
       }).catch(error => console.log(error))
 
-      if(login.data.message=== 'success'){
-        alert('Logged in successfully.')
+      console.log(login.data.data.customerRole);
+      console.log(values)
+      if(login.data.success=== true){
+        if (login.data.data.customerRole === "Admin") {
+          navigate("/admin_home");
+        } else {
+          navigate("/users_home");
+        }
       }
     } catch (error) {
       console.log(error);
@@ -75,7 +83,13 @@ const Sign_in = () => {
           <p>{formik.errors.password}</p>
         )}
       </div>
-      <button type="submit">Log in</button>
+      
+        <button type="submit">
+          {
+              loading ? 'Signing in. Please wait ...' : "Sign in"
+          }
+        </button>
+        
       <p>
         Create accout with us. <Link to={"/sign_up"}> Sign up</Link>
       </p>

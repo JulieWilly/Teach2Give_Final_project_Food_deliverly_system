@@ -14,17 +14,22 @@ export const getAllCustomers = async (req, res) => {
         custPhoneNumber: true,
         custLocation: true,
         approvedCust: true,
-        customerRole: true
+        customerRole: true,
+        customerAddress:true
       },
     });
 
-    res
+    if (getAllCustomers !== null) {
+      res
       .status(200)
       .json({
         success: true,
         message: "Al users found successfully.",
         data: getAllCustomers,
       });
+    } else {
+      res.status(404).json({ success: false, message: 'No user has been found'})
+    }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -37,13 +42,18 @@ export const getOneCustomer = async (req, res) => {
     const findCustomer = await prisma.customers.findFirst({
       where: { cust_id: id },
     });
-    res
+    if(findCustomer !== null) {
+res
       .status(200)
       .json({
         success: true,
         message: "Customer found successfully.",
         data: findCustomer,
       });
+    } else {
+      res.status(404).json({ success: false, message: "User has not been found."})
+    }
+    
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -57,6 +67,7 @@ export const createCustomer = async (req, res) => {
       custPhoneNumber,
       custLocation,
       password,
+      customerAddress,
       customerRole
     } = req.body;
     const passToString = password.toString();
@@ -68,6 +79,7 @@ export const createCustomer = async (req, res) => {
         custPhoneNumber,
         custLocation,
         password: passwordHash,
+        customerAddress,
         customerRole
       },
     });
@@ -108,15 +120,16 @@ export const loginCustomer = async (req, res) => {
           custEmail: loginCustomer.custEmail,
           custPhoneNumber: loginCustomer.custPhoneNumber,
           approvedCust: loginCustomer.approvedCust,
-          customerRole: loginCustomer.customerRole
+          customerRole: loginCustomer.customerRole,
+          customerAddress:loginCustomer.customerAddress
         };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-          expiresIn: "30m",
-        });
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {expiresIn: '20m'});
 
         res.cookie("access_token", token);
-        res.status(200).json({ success: true, message: "Customer logged in successfully."})
+
+
+        res.status(200).json({ success: true, message: "Customer logged in successfully.", data: payload})
       } else {
         res
           .status(400)
@@ -128,7 +141,7 @@ export const loginCustomer = async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-};
+}
 
 export const updateCustomer = async (req, res) => {
   try {
@@ -141,6 +154,7 @@ export const updateCustomer = async (req, res) => {
         custPhoneNumber,
         custLocation,
         approvedCust,
+        customerAddress,
         customerRole
       },
     });
