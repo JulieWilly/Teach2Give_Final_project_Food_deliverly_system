@@ -14,10 +14,10 @@ const router = Router();
 
 router
   .get("/customers",verifyToken,  getAllCustomers)
-  .get("/:cust_id",verifyToken,  getOneCustomer)
+  .get("/:cust_id",  getOneCustomer)
   .post("/create", createCustomer)
-  .post("/login",verifyToken, loginCustomer)
-  .patch("/:cust_id",verifyToken,  updateCustomer)
-  .delete("/:cust_id",verifyToken,  deleteCustomer);
+  .post("/login", loginCustomer)
+  .patch("/:cust_id",  updateCustomer)
+  .delete("/:cust_id",  deleteCustomer);
 
 export default router;

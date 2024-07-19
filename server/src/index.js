@@ -1,6 +1,7 @@
 import express from "express";
 import usersRouter from "./routers/users.router.js";
 import productsRouter from "./routers/products.router.js";
+import orderRouter from './routers/orders.routes.js'
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from 'cors'
@@ -22,3 +23,5 @@ foodDelivery.listen(process.env.PORT, () => {
 foodDelivery.use("/foodie.com/ke/api/v1", usersRouter);
 
 foodDelivery.use("/foodie.com/ke/api/v1/products", productsRouter);
+foodDelivery.use("/foodie.com/ke/api/v1/orders",orderRouter );
+

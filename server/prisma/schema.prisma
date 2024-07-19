@@ -59,13 +59,13 @@ model Profile {
 model Orders{
   order_id String @id @default(uuid())
   orderStatus String @map("order_status")
-  orderDate DateTime @default(now())
   totalAmount Int @map("total_amount")
   noOfItems Int @map("no_of_items")
-
+  orderDate DateTime @default(now())
+  cust_id String
   customers Customers @relation(fields: [cust_id], references: [cust_id])
-  cust_id String @unique
   order_items Order_items[]
+  
   @@map("orders_tb")
 }
 
