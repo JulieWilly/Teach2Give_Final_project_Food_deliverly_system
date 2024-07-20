@@ -124,8 +124,7 @@ export const loginCustomer = async (req, res) => {
           customerAddress:loginCustomer.customerAddress
         };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {expiresIn: '3600m'});
-console.log('create token', token)
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {expiresIn: '2000m'});
         res.cookie("access_token", token);
 
 

@@ -5,7 +5,7 @@ const router  = Router()
 
 router.get('/all',getOrders)
 
-router.get('/:order_id',getOrder)
+router.get('/:order_id',verifyToken, getOrder)
 
 router.post('/create',verifyToken, createOrder)
 

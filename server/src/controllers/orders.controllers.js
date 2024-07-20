@@ -27,16 +27,18 @@ export const getOrders =  async(req, res) => {
 
 export const getOrder = async (req, res) => {
     try{
-        const orderId = req.params.order_id
-        console.log(orderId)
+        const orderID = req.params.order_id
+        console.log('order id',     orderID)
+
         const getOrder = await prisma.orders.findFirst({
-            where: { order_id: orderId}
+            where: {order_id: orderID}
         })
         if( getOrder !== null) {
             res.status(200).json({success: true, message: "Product found successfully!", data: getOrder})
         } else {
             res.status(500).json({ success: false, message: "Product has not been found successfully."})
         }
+       
     }catch(error){
         res.status(500).json({success:false, message: error.message})
     }
