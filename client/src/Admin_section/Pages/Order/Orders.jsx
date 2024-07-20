@@ -1,7 +1,6 @@
 import React from 'react';
 import './order.css'
-import img from '../../../assets/react.svg'
-import ordersData from '../../../Data/ordersData';
+import ordersData from '../../Data/ordersData.js';
 const Orders = () => {
     return (
       <div className="orders_sect">

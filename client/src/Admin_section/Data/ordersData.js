@@ -1,4 +1,4 @@
-import img from '../assets/react.svg'
+import img from '../../assets/react.svg'
 
 const ordersData = [
     {

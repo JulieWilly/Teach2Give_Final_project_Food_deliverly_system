@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Link  } from 'react-router-dom'
 import Sign_in from './Cutomers_Section/pages/User_access/Sign_in'
 import Sign_up from './Cutomers_Section/pages/User_access/Sign_up'
 import AdminHome from './Admin_section/Pages/Home/AdminHome'
-import Home from './Cutomers_Section/pages/Home/Home'
 import App_ from './Admin_section/App_'
 function App() {
   const [count, setCount] = useState(0)
