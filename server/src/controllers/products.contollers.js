@@ -11,13 +11,11 @@ export const getAllProducts = async (req, res) => {
         productPrice: true,
       },
     });
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Products found successfully",
-        data: getAllProducts,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Products found successfully",
+      data: getAllProducts,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -29,13 +27,11 @@ export const getOneProduct = async (req, res) => {
     const findProduct = await prisma.food_products.findFirst({
       where: { product_id: id },
     });
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Product found successfully.",
-        data: findProduct,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Product found successfully.",
+      data: findProduct,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -52,13 +48,11 @@ export const createProduct = async (req, res) => {
         productPrice,
       },
     });
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Product created successfully.",
-        data: createProduct,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Product created successfully.",
+      data: createProduct,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

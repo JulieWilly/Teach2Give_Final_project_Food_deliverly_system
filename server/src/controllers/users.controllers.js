@@ -15,20 +15,20 @@ export const getAllCustomers = async (req, res) => {
         custLocation: true,
         approvedCust: true,
         customerRole: true,
-        customerAddress:true
+        customerAddress: true,
       },
     });
 
     if (getAllCustomers !== null) {
-      res
-      .status(200)
-      .json({
+      res.status(200).json({
         success: true,
         message: "Al users found successfully.",
         data: getAllCustomers,
       });
     } else {
-      res.status(404).json({ success: false, message: 'No user has been found'})
+      res
+        .status(404)
+        .json({ success: false, message: "No user has been found" });
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -42,18 +42,17 @@ export const getOneCustomer = async (req, res) => {
     const findCustomer = await prisma.customers.findFirst({
       where: { cust_id: id },
     });
-    if(findCustomer !== null) {
-res
-      .status(200)
-      .json({
+    if (findCustomer !== null) {
+      res.status(200).json({
         success: true,
         message: "Customer found successfully.",
         data: findCustomer,
       });
     } else {
-      res.status(404).json({ success: false, message: "User has not been found."})
+      res
+        .status(404)
+        .json({ success: false, message: "User has not been found." });
     }
-    
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -68,7 +67,7 @@ export const createCustomer = async (req, res) => {
       custLocation,
       password,
       customerAddress,
-      customerRole
+      customerRole,
     } = req.body;
     const passToString = password.toString();
     const passwordHash = bcrypt.hashSync(passToString, 10);
@@ -80,16 +79,14 @@ export const createCustomer = async (req, res) => {
         custLocation,
         password: passwordHash,
         customerAddress,
-        customerRole
+        customerRole,
       },
     });
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Customer created successfully.",
-        data: createCust,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Customer created successfully.",
+      data: createCust,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -112,7 +109,7 @@ export const loginCustomer = async (req, res) => {
       );
 
       // if the password is true, generate a token for the user.
-      console.log(matchPassword)
+      console.log(matchPassword);
       if (matchPassword === true) {
         const payload = {
           cust_id: loginCustomer.cust_id,
@@ -121,31 +118,44 @@ export const loginCustomer = async (req, res) => {
           custPhoneNumber: loginCustomer.custPhoneNumber,
           approvedCust: loginCustomer.approvedCust,
           customerRole: loginCustomer.customerRole,
-          customerAddress:loginCustomer.customerAddress
+          customerAddress: loginCustomer.customerAddress,
         };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {expiresIn: '2000m'});
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
+          expiresIn: "2000m",
+        });
         res.cookie("access_token", token);
 
-
-        res.status(200).json({ success: true, message: "Customer logged in successfully.", data: payload})
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "Customer logged in successfully.",
+            data: payload,
+          });
       } else {
         res
           .status(400)
           .json({ success: false, message: "Wrong user credentials." });
       }
     } else {
-        res.status(404).json({success: false, message: "User not found"})
+      res.status(404).json({ success: false, message: "User not found" });
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-}
+};
 
 export const updateCustomer = async (req, res) => {
   try {
-    const { custName, custEmail, custPhoneNumber, custLocation, approvedCust, customerRole} =
-      req.body;
+    const {
+      custName,
+      custEmail,
+      custPhoneNumber,
+      custLocation,
+      approvedCust,
+      customerRole,
+    } = req.body;
     const createCust = await prisma.customers.create({
       data: {
         custName,
@@ -154,16 +164,14 @@ export const updateCustomer = async (req, res) => {
         custLocation,
         approvedCust,
         customerAddress,
-        customerRole
+        customerRole,
       },
     });
-    res
-      .status(201)
-      .json({
-        success: true,
-        message: "Customer created successfully.",
-        data: createCust,
-      });
+    res.status(201).json({
+      success: true,
+      message: "Customer created successfully.",
+      data: createCust,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

@@ -1,94 +1,136 @@
 import { PrismaClient } from "@prisma/client";
 import { json } from "express";
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-export const getOrders =  async(req, res) => {
-    try{
+export const getOrders = async (req, res) => {
+    const customer = req.user
+    const custID = customer.cust_id
+  try {
 
-        const getOrders = await prisma.orders.findMany({
-            select: {
-            orderStatus: true, 
-            totalAmount: true, 
-            noOfItems: true,
-            cust_id: true,
-            order_id: true
-            }
-        })
-        if (getOrder !== null) {
-            res.status(200).json({ success: true, message: "Orders found successfully", data: getOrders})
-        } else {
-            res.status(500).json({success: false, message: "No orders have been found!!" })
-        }
-
-    } catch(error) {
-        res.status(500).json({success: false, message: error.message})
+    const getOrders = await prisma.orders.findMany({
+        where:{ cust_id: custID},
+      select: {
+        orderStatus: true,
+        totalAmount: true,
+        noOfItems: true,
+        cust_id: true,
+        order_id: true,
+      },
+    });
+    if (getOrder !== null) {
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "Orders found successfully",
+          data: getOrders,
+        });
+    } else {
+      res
+        .status(500)
+        .json({ success: false, message: "No orders have been found!!" });
     }
-}
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 export const getOrder = async (req, res) => {
-    try{
-        const orderID = req.params.order_id
-        console.log('order id',     orderID)
-
-        const getOrder = await prisma.orders.findFirst({
-            where: {order_id: orderID}
-        })
-        if( getOrder !== null) {
-            res.status(200).json({success: true, message: "Product found successfully!", data: getOrder})
-        } else {
-            res.status(500).json({ success: false, message: "Product has not been found successfully."})
-        }
-       
-    }catch(error){
-        res.status(500).json({success:false, message: error.message})
-    }
-}
-
-export const createOrder = async (req, res) => {
-        const user = req.user;
-        const cust_id = user.cust_id
-    try{
-         const {orderStatus, totalAmount, noOfItems } = req.body;
-        const createOrder = await prisma.orders.create({
-            data: {
-                orderStatus,
-                 totalAmount,
-                  noOfItems,
-                  cust_id: cust_id
-            }
-        })
-        if (createOrder !== null) {
-         res.status(200).json({success:true, message: "User has been created.!!"})
-
-        } else {
-        res.status(500).json({success:false, message: "Something went wrong.!!"})
-
-        }
-    }catch(error) {
-        res.status(500).json({success: false, message: error.message})
-    }
-
-       
-   
-
-}
-
-export const updateOrder =  async(req, res) => {
-    res.send('update order')
-}
-
-export const deleteOrder = async (req, res) => {
     const customer = req.user;
     const custID = customer.cust_id;
-   try{
-    const orderId = req.params.order_id;
-    const deleteOrder = await prisma.orders.delete({
-        where: { order_id: orderId},
-        include:custID
-    })
-    res.json('user deleted successfully.')
+  try {
 
-   } catch(error) {
-    res.status(500).json({success: false, message: error.message})
-   }
+    const orderID = req.params.order_id;
+
+    // fatch the data to ensure the item is there.
+    const order = await prisma.orders.findUnique({
+        where:{order_id: orderID}
+    })
+
+    if (!order) {
+        return res.status(404).json({success: false, message: "Order has not been found."})
+    }
+
+    // authorization. Check if the customer id in the order id the same as that in the verified decoded body.
+    if (order.cust_id !== custID) {
+        console.log('object', order.cust_id !== custID)
+        return res.status(403).json({success: false, message:"Unauthorized operation."})
+    }
+
+    const getOrder = await prisma.orders.findFirst({
+      where: { order_id: orderID },
+    });
+    if (getOrder !== null) {
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "Product found successfully!",
+          data: getOrder,
+        });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const createOrder = async (req, res) => {
+  const user = req.user;
+  const cust_id = user.cust_id;
+  try {
+    const { orderStatus, totalAmount, noOfItems } = req.body;
+    const createOrder = await prisma.orders.create({
+      data: {
+        orderStatus,
+        totalAmount,
+        noOfItems,
+        cust_id: cust_id,
+      },
+    });
+    if (createOrder !== null) {
+      res
+        .status(200)
+        .json({ success: true, message: "User has been created.!!" });
+    } else {
+      res
+        .status(500)
+        .json({ success: false, message: "Something went wrong.!!" });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const updateOrder = async (req, res) => {
+  res.send("update order");
+};
+
+export const deleteOrder = async (req, res) => {
+  const customer = req.user;
+  const custID = customer.cust_id;
+  try {
+    const orderId = req.params.order_id;
+
+    // chec if the order is present
+    const order = await prisma.orders.findUnique({
+        where: { order_id: orderId}
+    })
+
+    // retuen eerror if the order has not been found.
+    if (!order) {
+        return res.status(404).json({ success: false, message: "Order not found."})
+    }
+
+    // check if the order belongs to the authenticated user.
+    if (order.cust_id != custID) {
+        return res.status(403).json({success: false, message:'Unauthorized action.'})
+    }
+
+    await prisma.orders.delete({
+      where: { order_id: orderId },
+    });
+    res.json("Order deleted successfully.");
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 }
