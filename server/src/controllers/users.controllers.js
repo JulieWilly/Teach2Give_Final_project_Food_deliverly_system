@@ -126,13 +126,11 @@ export const loginCustomer = async (req, res) => {
         });
         res.cookie("access_token", token);
 
-        res
-          .status(200)
-          .json({
-            success: true,
-            message: "Customer logged in successfully.",
-            data: payload,
-          });
+        res.status(200).json({
+          success: true,
+          message: "Customer logged in successfully.",
+          data: payload,
+        });
       } else {
         res
           .status(400)

@@ -88,7 +88,6 @@ model Reviews {
   reviewDate DateTime @default(now())
   reviewComment String @map("review_comment")
   customerName String @map("cust_name")
-
   customers Customers @relation(fields: [cust_id], references: [cust_id])
   cust_id String @unique
 

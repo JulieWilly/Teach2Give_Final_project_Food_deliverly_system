@@ -3,12 +3,11 @@ import { json } from "express";
 const prisma = new PrismaClient();
 
 export const getOrders = async (req, res) => {
-    const customer = req.user
-    const custID = customer.cust_id
+  const customer = req.user;
+  const custID = customer.cust_id;
   try {
-
     const getOrders = await prisma.orders.findMany({
-        where:{ cust_id: custID},
+      where: { cust_id: custID },
       select: {
         orderStatus: true,
         totalAmount: true,
@@ -18,13 +17,11 @@ export const getOrders = async (req, res) => {
       },
     });
     if (getOrder !== null) {
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Orders found successfully",
-          data: getOrders,
-        });
+      res.status(200).json({
+        success: true,
+        message: "Orders found successfully",
+        data: getOrders,
+      });
     } else {
       res
         .status(500)
@@ -36,38 +33,43 @@ export const getOrders = async (req, res) => {
 };
 
 export const getOrder = async (req, res) => {
-    const customer = req.user;
-    const custID = customer.cust_id;
+  const customer = req.user;
+  const custID = customer.cust_id;
   try {
-
     const orderID = req.params.order_id;
 
     // fatch the data to ensure the item is there.
     const order = await prisma.orders.findUnique({
-        where:{order_id: orderID}
-    })
-
-    if (!order) {
-        return res.status(404).json({success: false, message: "Order has not been found."})
-    }
+      where: { order_id: orderID },
+    });
 
     // authorization. Check if the customer id in the order id the same as that in the verified decoded body.
     if (order.cust_id !== custID) {
-        console.log('object', order.cust_id !== custID)
-        return res.status(403).json({success: false, message:"Unauthorized operation."})
+      return res
+        .status(403)
+        .json({ success: false, message: "Unauthorized operation." });
     }
+
+
+    if (!order) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Order has not been found." });
+    }
+
+    
 
     const getOrder = await prisma.orders.findFirst({
       where: { order_id: orderID },
     });
-    if (getOrder !== null) {
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Product found successfully!",
-          data: getOrder,
-        });
+    if (getOrder !== null ) {
+      res.status(200).json({
+        success: true,
+        message: "Product found successfully!",
+        data: getOrder,
+      });
+    } else {
+        return res.status(404).json({success: false, message: 'Customer has no orders'})
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -113,17 +115,21 @@ export const deleteOrder = async (req, res) => {
 
     // chec if the order is present
     const order = await prisma.orders.findUnique({
-        where: { order_id: orderId}
-    })
+      where: { order_id: orderId },
+    });
 
     // retuen eerror if the order has not been found.
     if (!order) {
-        return res.status(404).json({ success: false, message: "Order not found."})
+      return res
+        .status(404)
+        .json({ success: false, message: "Order not found." });
     }
 
     // check if the order belongs to the authenticated user.
     if (order.cust_id != custID) {
-        return res.status(403).json({success: false, message:'Unauthorized action.'})
+      return res
+        .status(403)
+        .json({ success: false, message: "Unauthorized action." });
     }
 
     await prisma.orders.delete({
@@ -133,4 +139,4 @@ export const deleteOrder = async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-}
+};

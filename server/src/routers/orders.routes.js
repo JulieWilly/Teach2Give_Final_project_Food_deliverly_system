@@ -9,14 +9,6 @@ import {
 } from "../controllers/orders.controllers.js";
 const router = Router();
 
-router.get("/all",verifyToken, getOrders);
-
-router.get("/:order_id",verifyToken, getOrder);
-
-router.post("/create", verifyToken, createOrder);
-
-router.patch("/:order_id", verifyToken, updateOrder);
-
-router.delete("/:order_id", verifyToken, deleteOrder);
+router.get("/all", verifyToken, getOrders).get("/:order_id", verifyToken, getOrder).post("/create", verifyToken, createOrder).patch("/:order_id", verifyToken, updateOrder).delete("/:order_id", verifyToken, deleteOrder);
 
 export default router;
