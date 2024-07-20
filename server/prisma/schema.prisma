@@ -27,7 +27,7 @@ model Customers {
   updatedAt       DateTime @updatedAt() @map("customer_updatedAt")
   profile         Profile?
   orders Orders[]
-  reviewer Reviews?
+  reviewer Reviews[]
   payment Payment[]
 
 
@@ -93,7 +93,7 @@ model Reviews {
   reviewComment String @map("review_comment")
   customerName String @map("cust_name")
   customers Customers @relation(fields: [cust_id], references: [cust_id])
-  cust_id String @unique
+  cust_id String 
 
   @@map("reviews_tb")
 }
