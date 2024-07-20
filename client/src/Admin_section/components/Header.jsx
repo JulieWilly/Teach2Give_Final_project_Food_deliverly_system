@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NavigationLink from "./NavigationLink";
 import icon from '../../../src/assets/react.svg'
 import "./global.css";
 
@@ -12,9 +13,8 @@ const Header = () => {
           <h1>Foodies</h1>
         </div>
         <div className="right">
-          
-            <img src={icon} alt="" />
-       
+          <img src={icon} alt="" />
+
           <h3>Admin name here</h3>
         </div>
       </div>
