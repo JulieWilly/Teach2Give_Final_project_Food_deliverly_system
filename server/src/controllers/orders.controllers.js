@@ -50,26 +50,25 @@ export const getOrder = async (req, res) => {
         .json({ success: false, message: "Unauthorized operation." });
     }
 
-
     if (!order) {
       return res
         .status(404)
         .json({ success: false, message: "Order has not been found." });
     }
 
-    
-
     const getOrder = await prisma.orders.findFirst({
       where: { order_id: orderID },
     });
-    if (getOrder !== null ) {
+    if (getOrder !== null) {
       res.status(200).json({
         success: true,
         message: "Product found successfully!",
         data: getOrder,
       });
     } else {
-        return res.status(404).json({success: false, message: 'Customer has no orders'})
+      return res
+        .status(404)
+        .json({ success: false, message: "Customer has no orders" });
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

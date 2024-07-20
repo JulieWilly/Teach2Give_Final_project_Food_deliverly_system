@@ -28,6 +28,9 @@ model Customers {
   profile         Profile?
   orders Orders[]
   reviewer Reviews?
+  payment Payment[]
+
+
 
   @@map("customers_tb")
 }
@@ -65,6 +68,7 @@ model Orders{
   cust_id String
   customers Customers @relation(fields: [cust_id], references: [cust_id])
   order_items Order_items[]
+  // payment Payment?
   
   @@map("orders_tb")
 }
@@ -108,7 +112,10 @@ model Payment {
   amount String @map("amount")
   paymentDate DateTime @default(now())
   paymentStatus String @map("payment_status")
-
+  cust_id String
+  customer Customers @relation(fields: [cust_id], references: [cust_id])
+  // order_id String @unique
+  // order Orders @relation(fields: [order_id], references: [order_id])
   @@map("payments_tb")
 }
 

@@ -5,9 +5,9 @@ import orderRouter from "./routers/orders.routes.js";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import order_itemsRouter from './routers/order_item.router.js'
-import reviewRouter from './routers/customer.review.router.js'
-
+import order_itemsRouter from "./routers/order_item.router.js";
+import reviewRouter from "./routers/customer.review.router.js";
+import paymentRouter from "./routers/payments.router.js";
 config();
 
 const foodDelivery = express();
@@ -31,5 +31,4 @@ foodDelivery.use("/foodie.com/ke/api/v1/orders", orderRouter);
 foodDelivery.use("/foodie.com/ke/api/v1/orders/items", order_itemsRouter);
 foodDelivery.use("/foodie.com/ke/api/v1/customer/review", reviewRouter);
 
-
-
+foodDelivery.use("/foodie.com/ke/api/v1/payments", paymentRouter);
