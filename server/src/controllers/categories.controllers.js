@@ -12,13 +12,11 @@ export const getAllCategories = async (req, res) => {
     });
 
     if (getAllCategories !== null) {
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "Categories found successfully.",
-          data: getAllCategories,
-        });
+      return res.status(200).json({
+        success: true,
+        message: "Categories found successfully.",
+        data: getAllCategories,
+      });
     } else {
       return res
         .status(500)
@@ -46,13 +44,11 @@ export const getSingleCategory = async (req, res) => {
       where: { category_id: categoryID },
     });
     if (getCategory !== null) {
-      return res
-        .status(200)
-        .json({
-          success: false,
-          message: "Category has been found successfully.",
-          data: getCategory,
-        });
+      return res.status(200).json({
+        success: false,
+        message: "Category has been found successfully.",
+        data: getCategory,
+      });
     }
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
@@ -74,12 +70,10 @@ export const createCategory = async (req, res) => {
         .status(200)
         .json({ success: true, message: "Category created successfully." });
     } else {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: "Category not created. Something went wrong.",
-        });
+      return res.status(500).json({
+        success: false,
+        message: "Category not created. Something went wrong.",
+      });
     }
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });

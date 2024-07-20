@@ -39,6 +39,7 @@ model Customers {
 model food_products {
   product_id   String   @id @default(uuid())
   productName  String   @unique @map("product_name")
+  productImg String @map("product_url")
   productDesc  String   @map("product_description")
   productPrice Int      @map("product_price")
   productCartegory String @map("product_category")

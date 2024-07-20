@@ -1,0 +1,24 @@
+.reviews_sect{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+    align-items: center ;
+}
+.checked {
+    color: orange;
+}
+.ratings{
+    display: flex;
+    flex-direction: row ;
+    align-items: center;
+    gap: .5rem;
+    justify-content: center;
+}
+
+.reviews{
+    display: flex;
+    justify-content: space-between;
+    height: 20rem;
+}

@@ -54,11 +54,10 @@ const ManageUsers = () => {
                 {<CiLocationOn className="icon" />}
                 <p>{customers.custLocation}</p>
               </div>
-
-              <div className="buttons">
-                <button>Approve</button>
-                <button>Reject</button>
-              </div>
+            </div>
+            <div className="buttons">
+              <button>Approve</button>
+              <button>Reject</button>
             </div>
           </div>
         ))

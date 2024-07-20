@@ -1,4 +1,5 @@
 import { Router } from "express";
+import cloudinary from "../cloudinary/cloudinary.js";
 import {
   getAllProducts,
   getOneProduct,

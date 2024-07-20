@@ -9,6 +9,8 @@ import order_itemsRouter from "./routers/order_item.router.js";
 import reviewRouter from "./routers/customer.review.router.js";
 import paymentRouter from "./routers/payments.router.js";
 import categoriesRouter from "./routers/categories.router.js";
+import bodyParser from "body-parser";
+
 config();
 
 const foodDelivery = express();
@@ -21,6 +23,8 @@ foodDelivery.use(
 );
 foodDelivery.use(express.json());
 foodDelivery.use(cookieParser());
+foodDelivery.use(bodyParser({ limit: "50mb" }));
+foodDelivery.use(express.urlencoded({ extended: true, limit: "50mb" }));
 foodDelivery.listen(process.env.PORT, () => {
   console.log(`Application running at port 3001`);
 });

@@ -13,7 +13,7 @@ const App = () => {
         <BrowserRouter>
           <Header />
           <NavigationLink />
-          <div className='app'>
+          <div className="app">
             <Routes>
               <Route exact path="dashboard" element={<Dashboard />} />
               <Route exact path="orders" element={<Orders />} />

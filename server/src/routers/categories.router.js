@@ -9,6 +9,11 @@ import {
 import verifyToken from "../middleware/verifyToken.js";
 const router = Router();
 
-router.get("/all", verifyToken, getAllCategories).get("/:category_id", verifyToken, getSingleCategory).post("/create", verifyToken, createCategory).patch("/:category_id", verifyToken, updateCategory).delete("/:category_id", verifyToken, deleteCategory);
+router
+  .get("/all", verifyToken, getAllCategories)
+  .get("/:category_id", verifyToken, getSingleCategory)
+  .post("/create", verifyToken, createCategory)
+  .patch("/:category_id", verifyToken, updateCategory)
+  .delete("/:category_id", verifyToken, deleteCategory);
 
 export default router;

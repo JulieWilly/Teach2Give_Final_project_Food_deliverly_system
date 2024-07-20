@@ -18,13 +18,11 @@ export const getAllPayments = async (req, res) => {
     });
 
     if (getAllPayments !== null) {
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "Payment found successfully.",
-          data: getAllPayments,
-        });
+      return res.status(200).json({
+        success: true,
+        message: "Payment found successfully.",
+        data: getAllPayments,
+      });
     } else {
       return res
         .status(500)
@@ -60,13 +58,11 @@ export const getSinglePayment = async (req, res) => {
     const getPayment = await prisma.payment.findFirst({
       where: { payment_id: paymentID },
     });
-    res
-      .status(500)
-      .json({
-        success: true,
-        message: "Payment details found successfully.",
-        data: getPayment,
-      });
+    res.status(500).json({
+      success: true,
+      message: "Payment details found successfully.",
+      data: getPayment,
+    });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
@@ -92,12 +88,10 @@ export const makePayment = async (req, res) => {
         .status(200)
         .json({ success: true, message: "Payment made successfully." });
     } else {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: "Payment not made.Something went wrong!!!",
-        });
+      return res.status(500).json({
+        success: false,
+        message: "Payment not made.Something went wrong!!!",
+      });
     }
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
@@ -131,12 +125,10 @@ export const deletePayment = async (req, res) => {
       where: { payment_id: paymentID },
     });
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Payment details deleted successfully.",
-      });
+    res.status(200).json({
+      success: true,
+      message: "Payment details deleted successfully.",
+    });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
