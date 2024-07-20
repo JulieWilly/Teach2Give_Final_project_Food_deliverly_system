@@ -20,13 +20,11 @@ export const getAllReviews = async (req, res) => {
     });
 
     if (getAllReviews !== null) {
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "Products have been found successfully.",
-          data: getAllReviews,
-        });
+      return res.status(200).json({
+        success: true,
+        message: "Products have been found successfully.",
+        data: getAllReviews,
+      });
     } else {
       return res
         .status(500)
@@ -66,13 +64,11 @@ export const getSingleReview = async (req, res) => {
     });
 
     if (getReview !== null) {
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "Reviews found successfully.",
-          data: getReview,
-        });
+      return res.status(200).json({
+        success: true,
+        message: "Reviews found successfully.",
+        data: getReview,
+      });
     } else {
       return res
         .status(500)
@@ -101,12 +97,10 @@ export const createReview = async (req, res) => {
         .status(200)
         .json({ success: true, message: "Review created successfully." });
     } else {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: "Review not created. Soomething went wrong!!",
-        });
+      return res.status(500).json({
+        success: false,
+        message: "Review not created. Soomething went wrong!!",
+      });
     }
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
