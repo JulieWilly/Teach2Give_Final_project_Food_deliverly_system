@@ -1,36 +1,34 @@
-.profile_sect{
-    width: 15rem;
-    text-align: start;
-    height: auto;
-    border-radius: .5rem;
-    padding: .5rem;
-    position: absolute;
-    float: left;
-    background-color: aliceblue;
-    color: black;
-    margin-right: 5rem;
-    transform: translate(-75%, 5%);
+.profile_sect {
+  width: 15rem;
+  text-align: start;
+  height: auto;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  position: absolute;
+  float: left;
+  background-color: aliceblue;
+  color: black;
+  margin-right: 5rem;
+  transform: translate(-75%, 5%);
 }
 
-.profile_sect p{
-    text-align: start;
-    padding: 0;
-    color: black;
+.profile_sect p {
+  text-align: start;
+  padding: 0;
+  color: black;
 }
-.profile_sect .buttons{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 3rem;
-
-}
-
-.user_profile{
-    border-radius: 50%;
-}
-.user_profile img{
-    display: block;
-    object-fit: fill;
-    width: 100%;
-    height: 100%;
+.profile_sect .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
 }
 
+.user_profile {
+  border-radius: 50%;
+}
+.user_profile img {
+  display: block;
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+}

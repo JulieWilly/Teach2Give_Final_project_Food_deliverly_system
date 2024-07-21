@@ -2,11 +2,12 @@ import Banner from "../../compnents/Banner";
 import Title from "../../compnents/Title";
 import "./cart.css";
 import React, { useState } from "react";
-import icon from '../../../assets/foods.jpg'
+import icon from "../../../assets/foods.jpg";
 import { MdDeleteForever } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../compnents/Footer";
 const Cart = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div>
       <Banner
@@ -72,11 +73,18 @@ const Cart = () => {
               </thead>
             </table>
             <div className="buttons">
-              <button onClick={() => { navigate("/billing")}}>Check Out</button>
+              <button
+                onClick={() => {
+                  navigate("/billing");
+                }}
+              >
+                Check Out
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

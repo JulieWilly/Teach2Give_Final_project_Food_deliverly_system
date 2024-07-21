@@ -1,70 +1,68 @@
-
-.order_sect{
-    padding: 1rem;
+.order_sect {
+  padding: 1rem;
 }
-.orders_desc{
-    width: 100%;
+.orders_desc {
+  width: 100%;
 }
-table{
-    width: 100%;
-    outline: none;
-    border: none;
+table {
+  width: 100%;
+  outline: none;
+  border: none;
 }
 
 thead {
-    background-color: red;
+  background-color: red;
 }
-thead tr th{
-    padding: .5rem;
+thead tr th {
+  padding: 0.5rem;
 }
-
 
 ._product {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
-th h3{
-    text-align: start;
+th h3 {
+  text-align: start;
 }
 
-.orderstotal{
-    border-radius: 1rem;
-    width: 40%;
-    padding: 1rem;
-    color: white;
-    background-color: red;
+.orderstotal {
+  border-radius: 1rem;
+  width: 40%;
+  padding: 1rem;
+  color: white;
+  background-color: red;
 }
-.order_sect{
-    display: flex;
-    gap: 1rem;
-
-}
-
-.del{
-    display: flex;
-    align-items: center;justify-content: space-around;
-}
-.del .icon{
-    fill: white;
-    font-size: 2rem;
+.order_sect {
+  display: flex;
+  gap: 1rem;
 }
 
-.del .icon:hover{
-    fill: red;
-    transition: all ease .5s;
+.del {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.del .icon {
+  fill: white;
+  font-size: 2rem;
 }
 
-.product_img{
-    width: 7rem;
-    height: 7rem;
-    display: block;
-    place-content: center;
+.del .icon:hover {
+  fill: red;
+  transition: all ease 0.5s;
 }
 
-.product_img img{
-    width: 100%;
-    height: 100;
+.product_img {
+  width: 7rem;
+  height: 7rem;
+  display: block;
+  place-content: center;
+}
+
+.product_img img {
+  width: 100%;
+  height: 100;
 }

@@ -5,7 +5,7 @@ import React from "react";
 import icon from "../../../assets/react.svg";
 
 const Heros = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="heros_sect">
       <div className="heros_left">
@@ -16,7 +16,7 @@ const Heros = () => {
         </p>
 
         <div className="button">
-          <button >Order Now</button>
+          <button>Order Now</button>
           <button>Explore Menu</button>
         </div>
       </div>

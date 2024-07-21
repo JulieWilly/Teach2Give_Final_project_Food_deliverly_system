@@ -1,4 +1,4 @@
-.header_sect nav{
+.header_sect nav {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -6,7 +6,7 @@
   padding: 0.8rem;
   position: relative;
 }
-.header  {
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -21,7 +21,7 @@
 }
 
 /* BANNERS SECTION  */
-.banner_sect{
+.banner_sect {
   height: 10rem;
   display: flex;
   flex-direction: column;
@@ -30,16 +30,13 @@
   box-shadow: 2px 2px 2px 2px;
 }
 
-
-
- /* USER PROFILE  */
-.user_profile{
+/* USER PROFILE  */
+.user_profile {
   cursor: pointer;
 }
 
-
 .left nav ._icons {
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 50%;
   font-size: 1rem;
   display: block;
@@ -47,50 +44,49 @@
   cursor: pointer;
   /* background-color:crimson; */
 }
- nav a.active {
+nav a.active {
   color: aliceblue;
-    border-radius: 50%;
-    background-color:crimson;
- }
+  border-radius: 50%;
+  background-color: crimson;
+}
 
- nav a:not(active) {
-   color: white;
- }
+nav a:not(active) {
+  color: white;
+}
 
- /* FOOTER section */
-.footer{
+/* FOOTER section */
+.footer {
   display: flex;
-  flex-direction: column  ;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
   border-top: 1px solid white;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   margin-top: 1rem;
 }
 
- .socials{
+.socials {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-.footer ._icons{
+.footer ._icons {
   border: 1px solid white;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 50%;
 }
 
-.footer ._icons:hover{
+.footer ._icons:hover {
   background-color: crimson;
   color: white;
 }
 
-
 /* SEARCH BAR SECTION  */
-.search{
+.search {
   display: flex;
   flex-direction: row;
 }
-.search input{
-  padding-inline-start: .5rem;
+.search input {
+  padding-inline-start: 0.5rem;
 }

@@ -75,19 +75,15 @@ export const createProduct = async (req, res) => {
         });
 
         if (createProduct !== null) {
-          return res
-            .status(200)
-            .json({
-              success: true,
-              message: "Product has been created successfully.",
-            });
+          return res.status(200).json({
+            success: true,
+            message: "Product has been created successfully.",
+          });
         } else {
-          return res
-            .status(500)
-            .json({
-              success: false,
-              message: "Product has not been created. Something went wrong!!.",
-            });
+          return res.status(500).json({
+            success: false,
+            message: "Product has not been created. Something went wrong!!.",
+          });
         }
       } catch (error) {
         res.status(500).json({ success: false, message: error.message });

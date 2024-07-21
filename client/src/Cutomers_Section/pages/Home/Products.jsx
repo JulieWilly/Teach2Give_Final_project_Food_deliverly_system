@@ -9,7 +9,7 @@ const Products = () => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
   const [product, setProducts] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -41,14 +41,18 @@ const Products = () => {
                 <p>$ ({products.productPrice})</p>
               </div>
               <div className="buttons">
-                <button onClick={() => { navigate('/cart')}}>Add to Cart</button>
+                <button
+                  onClick={() => {
+                    navigate("/cart");
+                  }}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))
         ) : (
-          <p>Loading data ...
-
-          </p>
+          <p>Loading data ...</p>
         )}
       </div>
     </div>

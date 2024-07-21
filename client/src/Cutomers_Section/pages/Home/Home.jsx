@@ -5,15 +5,14 @@ import Products from "./Products";
 import Reviews from "./Reviews";
 import Profile from "../Profile/Profile";
 import Footer from "../../compnents/Footer";
-import './home.css'
+import "./home.css";
 const Home = () => {
   return (
-    <div  className="home">
-      
+    <div className="home">
       <Heros />
       <Products />
       <Reviews />
-      <Footer/>
+      <Footer />
     </div>
   );
 };

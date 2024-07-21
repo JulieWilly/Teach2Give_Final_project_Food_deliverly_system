@@ -19,7 +19,7 @@ const Reviews = () => {
         },
       );
       console.log("reviews", reviews);
-      setReviews(setReviews)
+      setReviews(setReviews);
     };
 
     getReviews();
