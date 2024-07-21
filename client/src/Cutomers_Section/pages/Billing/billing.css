@@ -1,0 +1,49 @@
+
+.billing_details{
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    gap: 2rem;
+}
+
+.address_details_left{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+
+.billing_details_right{
+    width: 30%;
+}
+
+table tr{
+    text-align: start;
+
+}
+table tr th{
+    text-align: start;
+}
+
+.inputs{
+    width: auto;
+}
+
+.inputs input{
+    width: auto;
+    color:white;
+    height: 2.5rem;
+    display: flex;
+    
+
+}
+
+.form{
+    background-color: none;
+    width: 30rem;
+}
+
+label{
+    color: black;
+    float: left;
+    padding: .2rem 0;
+}

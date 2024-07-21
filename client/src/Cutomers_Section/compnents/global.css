@@ -1,9 +1,12 @@
-.header_sect {
+.header_sect nav{
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 1rem;
   padding: 0.8rem;
+  position: relative;
 }
-.header {
+.header  {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,4 +28,54 @@
   align-items: center;
   justify-content: center;
   box-shadow: 2px 2px 2px 2px;
+}
+
+
+
+ /* USER PROFILE  */
+
+ .user_profile{
+  border: 2px solid blue;
+ }
+
+.left nav ._icons {
+  padding: .5rem;
+  border-radius: 50%;
+  background-color:crimson;
+}
+ nav a.active {
+  color: aliceblue;
+  /* background-color: crimson; */
+ }
+
+ nav a:not(active) {
+   color: blue;
+ }
+
+ /* FOOTER section */
+.footer{
+  display: flex;
+  flex-direction: column  ;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid white;
+  padding-top: .5rem;
+  margin-top: 1rem;
+}
+
+ .socials{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer ._icons{
+  border: 1px solid white;
+  padding: .5rem;
+  border-radius: 50%;
+}
+
+.footer ._icons:hover{
+  background-color: crimson;
+  color: white;
 }

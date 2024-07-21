@@ -10,6 +10,7 @@ import Cart from "./Cutomers_Section/pages/Cart/Cart";
 import Profile from "./Cutomers_Section/pages/Profile/Profile";
 import Search from "./Cutomers_Section/pages/Search/Search";
 import Header from  './Cutomers_Section/compnents/Header'
+import Billing from "./Cutomers_Section/pages/Billing/Billing";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -25,7 +26,8 @@ function App() {
           <Route exact path="/home" element={<Home/>} />
           <Route exact path="search" element={<Search />} />
           <Route exact path="cart" element={<Cart />} />
-          <Route exact path="profile" element={<Profile />} />
+          {/* <Route exact path="profile" element={<Profile />} /> */}
+          <Route exact path="billing" element={<Billing/>}/>
         </Routes>
       </BrowserRouter>
       <App_ />
