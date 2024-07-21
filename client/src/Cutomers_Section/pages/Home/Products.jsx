@@ -4,10 +4,12 @@ import food from "../../../assets/foods.jpg";
 import Title from "../../compnents/Title";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
+import { useNavigate } from "react-router-dom";
 const Products = () => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
   const [product, setProducts] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getProducts = async () => {
@@ -39,12 +41,14 @@ const Products = () => {
                 <p>$ ({products.productPrice})</p>
               </div>
               <div className="buttons">
-                <button>Add to Cart</button>
+                <button onClick={() => { navigate('/cart')}}>Add to Cart</button>
               </div>
             </div>
           ))
         ) : (
-          <p>sdjsdjksdjksd</p>
+          <p>Loading data ...
+
+          </p>
         )}
       </div>
     </div>

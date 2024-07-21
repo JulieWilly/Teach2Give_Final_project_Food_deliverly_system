@@ -34,18 +34,21 @@
 
  /* USER PROFILE  */
 
- .user_profile{
-  border: 2px solid blue;
- }
+
 
 .left nav ._icons {
   padding: .5rem;
   border-radius: 50%;
-  background-color:crimson;
+  font-size: 1rem;
+  display: block;
+  place-content: center;
+  /* background-color:crimson; */
 }
  nav a.active {
   color: aliceblue;
   /* background-color: crimson; */
+    border-radius: 50%;
+    background-color:crimson;
  }
 
  nav a:not(active) {

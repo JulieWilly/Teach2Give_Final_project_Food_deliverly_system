@@ -7,21 +7,23 @@ import React, { useState } from "react";
 import icon from "../../assets/react.svg";
 import { NavLink } from "react-router-dom";
 import Profile from "../pages/Profile/Profile";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [open, setOpen] = useState()
+  const navigate = useNavigate()
+
   return (
     <div className="header_sect">
       <div className="header">
-        <NavLink to={"/"}>
-          <div className="logo">
+       
+          <div className="logo" onClick={() => {navigate('/home')}}>
             <img src={icon} alt="" />
             <h1>Foodiee</h1>
           </div>
-        </NavLink>
+       
         <div className="left">
           <nav>
-            <NavLink to={"/billing"}>Billing</NavLink>
             <NavLink to={"/search"}>
               <FaSearch className="_icons" />
             </NavLink>

@@ -1,10 +1,12 @@
 import Banner from "../../compnents/Banner";
 import Title from "../../compnents/Title";
 import "./cart.css";
-import React from "react";
+import React, { useState } from "react";
 import icon from '../../../assets/foods.jpg'
 import { MdDeleteForever } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
+  const navigate = useNavigate()
   return (
     <div>
       <Banner
@@ -70,7 +72,7 @@ const Cart = () => {
               </thead>
             </table>
             <div className="buttons">
-              <button>Check Out</button>
+              <button onClick={() => { navigate("/billing")}}>Check Out</button>
             </div>
           </div>
         </div>
