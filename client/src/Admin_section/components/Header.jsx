@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NavigationLink from "./NavigationLink";
-import icon from '../../../src/assets/react.svg'
+import icon from "../../../src/assets/react.svg";
 import "./global.css";
 
 const Header = () => {
@@ -20,7 +20,6 @@ const Header = () => {
       </div>
     </div>
   );
-  
 };
 
 export default Header;

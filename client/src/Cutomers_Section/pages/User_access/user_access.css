@@ -1,20 +1,26 @@
-form{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    padding: 1rem;
-    border-radius: .5rem;
-    width: 20rem;
+form {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 20rem;
+  height: 30rem;
 }
 
 form input {
-    height: 2rem;
-    padding-inline-start: .5rem;
-    min-width: 90%;
+  height: 2rem;
+  padding-inline-start: 0.5rem;
+  min-width: 90%;
+}
+form div {
+  border: 2px solid black;
+  padding: 0;
+  height: auto;
 }
 
-p{
-    color: black;
+p {
+  color: black;
+  padding: 0;
 }
-

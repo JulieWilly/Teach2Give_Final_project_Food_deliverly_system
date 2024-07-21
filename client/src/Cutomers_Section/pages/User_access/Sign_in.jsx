@@ -5,27 +5,34 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
+import { MdOpenWith } from "react-icons/md";
 
 const Sign_in = () => {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
     try {
-      setLoading(true)
-      setError(false)
+      setLoading(true);
+      setError(false);
 
-      const login = await axios.post(`${VITE_API_URL_BASE}/login`, {
-        custEmail: values.custEmail,
-        password: values.password
-      },{
-        withCredentials:true
-      }).catch(error => console.log(error))
+      const login = await axios
+        .post(
+          `${VITE_API_URL_BASE}/login`,
+          {
+            custEmail: values.custEmail,
+            password: values.password,
+          },
+          {
+            withCredentials: true,
+          },
+        )
+        .catch((error) => console.log(error));
 
       console.log(login.data.data.customerRole);
-      console.log(values)
-      if(login.data.success=== true){
+      console.log(login);
+      if (login.data.success === true) {
         if (login.data.data.customerRole === "Admin") {
           navigate("/admin_home");
         } else {
@@ -83,13 +90,11 @@ const Sign_in = () => {
           <p>{formik.errors.password}</p>
         )}
       </div>
-      
-        <button type="submit">
-          {
-              loading ? 'Signing in. Please wait ...' : "Sign in"
-          }
-        </button>
-        
+
+      <button type="submit">
+        {loading ? "Signing in. Please wait ..." : "Sign in"}
+      </button>
+
       <p>
         Create accout with us. <Link to={"/sign_up"}> Sign up</Link>
       </p>

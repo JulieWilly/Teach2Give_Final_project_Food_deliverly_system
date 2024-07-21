@@ -10,16 +10,14 @@ const Sign_up = () => {
   const [inputs, setInputs] = useState("");
   const [loading, setLoading] = useState("");
   const [error, setError] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // form validations.
 
-
   const handleSubmit = async (values) => {
-
-     try {
-      setError(false)
-      setLoading(true)
+    try {
+      setError(false);
+      setLoading(true);
       const createCustomer = await axios
         .post(`${VITE_API_URL_BASE}/create`, {
           custName: values.custName,
@@ -31,17 +29,17 @@ const Sign_up = () => {
           password: values.password,
         })
         .catch((error) => console.log(error));
-        setInputs(createCustomer)
+      setInputs(createCustomer);
 
-        console.log(createCustomer)
-        if( createCustomer.data.success === true){
-          navigate('/')
-        }
+      console.log(createCustomer);
+      if (createCustomer.data.success === true) {
+        navigate("/");
+      }
     } catch (error) {
-      console.log(error)
-      setError(error)
+      console.log(error);
+      setError(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
   const formValidations = Yup.object({
@@ -74,7 +72,7 @@ const Sign_up = () => {
       custPhoneNumber: "",
       custLocation: "",
       customerRole: "",
-      customerAddress:"",
+      customerAddress: "",
       password: "",
     },
     onSubmit: handleSubmit,
@@ -135,7 +133,7 @@ const Sign_up = () => {
         {formik.touched.customerAddress && formik.errors.customerAddress && (
           <p>{formik.errors.customerAddress}</p>
         )}
-        </div>
+      </div>
 
       <div>
         <input

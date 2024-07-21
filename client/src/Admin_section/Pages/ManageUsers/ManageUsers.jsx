@@ -15,8 +15,8 @@ const ManageUsers = () => {
   useEffect(() => {
     const getCustomers = async () => {
       try {
-        setLoading(true)
-        setError(false)
+        setLoading(true);
+        setError(false);
         const customers = await axios
           .get(`${VITE_API_URL_BASE}/customers`, { withCredentials: true })
           .catch((error) => console.log(error));
@@ -24,9 +24,9 @@ const ManageUsers = () => {
         setCustomer(customers.data.data);
       } catch (error) {
         console.log(error);
-        setError(error)
-      } finally{
-        setLoading(false)
+        setError(error);
+      } finally {
+        setLoading(false);
       }
     };
 
