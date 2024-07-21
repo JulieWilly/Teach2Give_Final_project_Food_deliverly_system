@@ -8,6 +8,7 @@ import {
   deleteProduct,
 } from "../controllers/products.contollers.js";
 import { PrismaClient } from "@prisma/client";
+import verifyToken from "../middleware/verifyToken.js";
 const prisma = new PrismaClient();
 
 const router = Router();
@@ -17,6 +18,6 @@ router
   .get("/:product_id", getOneProduct)
   .post("/create", createProduct)
   .patch("/:product_id", updateProduct)
-  .delete("/:product_id", deleteProduct);
+  .delete("/:product_id", verifyToken, deleteProduct);
 
 export default router;

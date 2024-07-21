@@ -33,7 +33,9 @@
 
 
  /* USER PROFILE  */
-
+.user_profile{
+  cursor: pointer;
+}
 
 
 .left nav ._icons {
@@ -42,17 +44,17 @@
   font-size: 1rem;
   display: block;
   place-content: center;
+  cursor: pointer;
   /* background-color:crimson; */
 }
  nav a.active {
   color: aliceblue;
-  /* background-color: crimson; */
     border-radius: 50%;
     background-color:crimson;
  }
 
  nav a:not(active) {
-   color: blue;
+   color: white;
  }
 
  /* FOOTER section */
@@ -81,4 +83,14 @@
 .footer ._icons:hover{
   background-color: crimson;
   color: white;
+}
+
+
+/* SEARCH BAR SECTION  */
+.search{
+  display: flex;
+  flex-direction: row;
+}
+.search input{
+  padding-inline-start: .5rem;
 }

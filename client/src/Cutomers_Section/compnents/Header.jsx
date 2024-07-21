@@ -10,23 +10,36 @@ import Profile from "../pages/Profile/Profile";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const [open, setOpen] = useState()
-  const navigate = useNavigate()
+  const [open, setOpen] = useState();
+  const [openSearch, setOpenSearch] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <div className="header_sect">
       <div className="header">
-       
-          <div className="logo" onClick={() => {navigate('/home')}}>
-            <img src={icon} alt="" />
-            <h1>Foodiee</h1>
-          </div>
-       
+        <div
+          className="logo"
+          onClick={() => {
+            navigate("/home");
+          }}
+        >
+          <img src={icon} alt="" />
+          <h1>Foodiee</h1>
+        </div>
+
         <div className="left">
           <nav>
-            <NavLink to={"/search"}>
+            <div className="search" onClick={() => setOpenSearch(!openSearch)}>
+              {openSearch && (
+                <input
+                  onClick={() => setOpenSearch(!openSearch)}
+                  type="text "
+                  placeholder="Search product"
+                />
+              )}
               <FaSearch className="_icons" />
-            </NavLink>
+            </div>
 
             <NavLink to={"/cart"}>
               <FaCartPlus className="_icons" />

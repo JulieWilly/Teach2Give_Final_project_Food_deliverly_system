@@ -122,9 +122,10 @@ export const loginCustomer = async (req, res) => {
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-          expiresIn: "2000m",
+          expiresIn: "5000m",
         });
         res.cookie("access_token", token);
+        console.log(token);
 
         res.status(200).json({
           success: true,

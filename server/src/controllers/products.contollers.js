@@ -11,6 +11,7 @@ export const getAllProducts = async (req, res) => {
         productDesc: true,
         productPrice: true,
         productCartegory: true,
+        productImg: true,
       },
     });
     res.status(200).json({
@@ -48,7 +49,6 @@ export const createProduct = async (req, res) => {
     productImg,
   } = req.body;
 
-
   const uploadedImg = await cloudinary.uploader.upload(
     productImg,
     {
@@ -62,7 +62,7 @@ export const createProduct = async (req, res) => {
       if (error) {
         console.log(error);
       }
-      console.log('image details', result)
+      console.log("image details", result);
       try {
         const createProduct = await prisma.food_products.create({
           data: {
@@ -70,21 +70,30 @@ export const createProduct = async (req, res) => {
             productDesc,
             productPrice,
             productCartegory,
-            productImg: result.url
+            productImg: result.url,
           },
         });
-        
-        if (createProduct !== null){
-          return res.status(200).json({success: true, message: 'Product has been created successfully.'})
-        } else{
-          return res.status(500).json({success: false, message: 'Product has not been created. Something went wrong!!.'})
+
+        if (createProduct !== null) {
+          return res
+            .status(200)
+            .json({
+              success: true,
+              message: "Product has been created successfully.",
+            });
+        } else {
+          return res
+            .status(500)
+            .json({
+              success: false,
+              message: "Product has not been created. Something went wrong!!.",
+            });
         }
       } catch (error) {
         res.status(500).json({ success: false, message: error.message });
       }
     },
   );
-  
 };
 export const updateProduct = (req, res) => {
   res.send("Update one");
