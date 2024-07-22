@@ -8,28 +8,29 @@
 
 .orders_sect .order {
   padding: 0.5rem;
-  background-color: white;
+  background-color: #0F0F13;
   border-radius: 0.5rem;
   display: flex;
+  color: white;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 30rem;
+  gap: 1rem;
 }
 
 .order_desc {
   width: 50%;
-  height: 15rem;
 }
 .order .order_img {
   width: 50%;
-  height: 15rem;
+  display: block;
+
 }
 
 .order .order_img img {
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: fill;
 }
 
@@ -40,12 +41,23 @@
   justify-content: space-between;
 }
 
-.buttons {
+ .order_desc .buttons {
   display: flex;
   gap: 2rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.order_desc .buttons button{
+  background-color:#52556C;
+}
+.order_desc .buttons button:hover{
+  background-color: black;
 }
 
 .order_desc h2,
 .p {
-  color: black;
+  color: white;
 }
+
+

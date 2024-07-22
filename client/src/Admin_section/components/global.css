@@ -1,5 +1,4 @@
 .admin_header_sect {
-  border: 2px solid red;
   /* width: 70rem; */
   background-color: red;
   width: 100%;
@@ -38,4 +37,9 @@ nav ul {
 .link {
   text-align: center;
   padding: 0;
+}
+
+.heros_sect{
+  max-height: 1rem;
+  margin-bottom: 1rem;
 }

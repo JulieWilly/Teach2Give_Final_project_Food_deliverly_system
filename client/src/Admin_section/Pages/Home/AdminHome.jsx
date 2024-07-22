@@ -4,8 +4,8 @@ import NavigationLink from "../../components/NavigationLink";
 const AdminHome = () => {
   return (
     <div>
-      <Header />
-      <NavigationLink />
+      {/* <Header />
+       <NavigationLink /> */}
     </div>
   );
 };
