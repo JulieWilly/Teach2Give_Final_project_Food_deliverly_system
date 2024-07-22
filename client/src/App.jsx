@@ -12,6 +12,7 @@ import Search from "./Cutomers_Section/pages/Search/Search";
 import Header from "./Cutomers_Section/compnents/Header";
 import Billing from "./Cutomers_Section/pages/Billing/Billing";
 import Root from "./Cutomers_Section/Root";
+import Add_products from "./Admin_section/Pages/Products/Add_products";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -32,6 +33,8 @@ function App() {
 
           {/* <Route exact path="profile" element={<Profile />} /> */}
           <Route exact path="billing" element={<Billing />} />
+
+          {/* admin  */}
         </Routes>
       </BrowserRouter>
       <App_ />

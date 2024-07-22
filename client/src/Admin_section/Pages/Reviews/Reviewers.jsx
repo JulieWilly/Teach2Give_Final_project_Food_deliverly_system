@@ -3,6 +3,7 @@ import "./reviewers.css";
 import img from "../../../assets/react.svg";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
+import Add_products from "../Products/Add_products";
 
 const Reviewers = () => {
   const [error, setError] = useState();
@@ -19,6 +20,7 @@ const Reviewers = () => {
             withCredentials: true,
           })
           .catch((error) => console.log(error));
+          console.log('reviews', reviews)
         setReview(reviews.data.data);
       } catch (error) {
         console.log(error);

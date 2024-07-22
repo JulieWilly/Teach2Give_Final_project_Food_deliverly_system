@@ -23,6 +23,8 @@ const Sign_in = () => {
           {
             custEmail: values.custEmail,
             password: values.password,
+          },{
+            withCredentials: true
           }
         )
         .catch((error) => console.log(error));
