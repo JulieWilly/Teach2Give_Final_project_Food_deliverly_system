@@ -62,7 +62,7 @@ model Profile {
 
 model Orders{
   order_id String @id @default(uuid())
-  orderStatus String @map("order_status")
+  orderStatus Boolean @default(false) @map("order_status") 
   totalAmount Int @map("total_amount")
   noOfItems Int @map("no_of_items")
   orderDate DateTime @default(now())

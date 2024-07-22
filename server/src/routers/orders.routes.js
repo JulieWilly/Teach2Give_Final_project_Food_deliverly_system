@@ -13,7 +13,7 @@ router
   .get("/all", verifyToken, getOrders)
   .get("/:order_id", verifyToken, getOrder)
   .post("/create", verifyToken, createOrder)
-  .patch("/:order_id", verifyToken, updateOrder)
+  .put("/:order_id", verifyToken, updateOrder)
   .delete("/:order_id", verifyToken, deleteOrder);
 
 export default router;
