@@ -1,5 +1,4 @@
 import { Router } from "express";
-
 import {
   getAllCustomers,
   getOneCustomer,
@@ -13,10 +12,11 @@ import verifyToken from "../middleware/verifyToken.js";
 const router = Router();
 
 router
+  .post("/login", loginCustomer)
+
   .get("/customers", verifyToken, getAllCustomers)
   .get("/:cust_id", verifyToken, getOneCustomer)
   .post("/create", createCustomer)
-  .post("/login", verifyToken, loginCustomer)
   .patch("/:cust_id", verifyToken, updateCustomer)
   .delete("/:cust_id", verifyToken, deleteCustomer);
 

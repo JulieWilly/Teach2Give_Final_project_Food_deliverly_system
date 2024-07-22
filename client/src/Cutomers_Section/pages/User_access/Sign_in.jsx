@@ -23,10 +23,7 @@ const Sign_in = () => {
           {
             custEmail: values.custEmail,
             password: values.password,
-          },
-          {
-            withCredentials: true,
-          },
+          }
         )
         .catch((error) => console.log(error));
 
@@ -50,9 +47,8 @@ const Sign_in = () => {
     custEmail: Yup.string()
       .email("Incorrect email format.")
       .required("Customer email address required."),
-    password: Yup.number()
+    password: Yup.string()
       .required("Password required.")
-      .integer("Password should be a number."),
   });
   const formik = useFormik({
     initialValues: {

@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
 import bcrypt from "bcrypt";
 import { application } from "express";
+import { config } from "dotenv";
+
+config()
 
 export const getAllCustomers = async (req, res) => {
   try {
@@ -101,10 +104,10 @@ export const loginCustomer = async (req, res) => {
       where: { custEmail: custEmail },
     });
 
+    console.log(custEmail + '' + password)
     if (loginCustomer) {
-      const passToString = password.toString();
       const matchPassword = bcrypt.compareSync(
-        passToString,
+        password,
         loginCustomer.password,
       );
 
@@ -122,11 +125,11 @@ export const loginCustomer = async (req, res) => {
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-          expiresIn: "5000m",
+          expiresIn: "3600m", 
         });
-        res.cookie("access_token", token);
-        console.log(token);
 
+        res.cookie("access_token", token);
+        console.log('gen token - ',token)
         res.status(200).json({
           success: true,
           message: "Customer logged in successfully.",
