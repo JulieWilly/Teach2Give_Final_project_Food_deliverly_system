@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 import React from "react";
 import icon from "../../../assets/react.svg";
+import foods from '../../../assets/foods.jpg'
 
 const Heros = () => {
   const navigate = useNavigate();
   return (
-    <div className="heros_sect">
+    <div className="herosSect">
       <div className="heros_left">
         <h1>Delicious Food delivery</h1>
         <p>
@@ -21,7 +22,7 @@ const Heros = () => {
         </div>
       </div>
       <div className="heros_right">
-        <img src={icon} alt="" />
+        <img src={foods} alt="" />
       </div>
     </div>
   );

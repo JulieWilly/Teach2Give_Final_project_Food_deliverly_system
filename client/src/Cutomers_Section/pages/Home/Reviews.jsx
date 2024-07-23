@@ -17,9 +17,9 @@ const Reviews = () => {
         {
           withCredentials: true,
         },
-      );
+      ).catch(error => console.log(error))
       console.log("reviews", reviews);
-      setReviews(setReviews);
+      setReviews(reviews.data.data);
     };
 
     getReviews();

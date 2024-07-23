@@ -90,7 +90,18 @@ const ManageUsers = () => {
               </div>
             </div>
             <div className="buttons">
-              <button onClick={() => handleApproval(customers.cust_id)}>Approve</button>
+              {customers && customers.approvedCust == true ? (
+                <button className="btn_2" onClick={() => handleApproval(customers.cust_id)}>
+                  Approved
+                </button>
+              ) : (
+                <button
+                  className="btn2"
+                  onClick={() => handleApproval(customers.cust_id)}
+                >
+                  Approve
+                </button>
+              )}
               <button onClick={() => handleDelete(customers.cust_id)}>
                 Reject
               </button>
@@ -103,5 +114,5 @@ const ManageUsers = () => {
     </div>
   );
 };
-
+ 
 export default ManageUsers;

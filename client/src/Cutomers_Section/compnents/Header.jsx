@@ -1,8 +1,7 @@
 import "./global.css";
 import { FaSearch } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa";
-import { FaRegUser } from "react-icons/fa";
-import { BsCake } from "react-icons/bs";
+import food_logo from '../../assets/food_logo.avif'
 import React, { useState } from "react";
 import icon from "../../assets/react.svg";
 import { NavLink } from "react-router-dom";
@@ -24,7 +23,9 @@ const Header = () => {
             navigate("/home");
           }}
         >
-          <img src={icon} alt="" />
+          <div className="foodie_logo">
+            <img src={food_logo} alt="" />
+          </div>
           <h1>Foodiee</h1>
         </div>
 

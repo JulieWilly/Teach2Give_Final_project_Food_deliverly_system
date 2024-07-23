@@ -19,14 +19,15 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Header />
         <Routes>
           {/* <Route exact path="/home" element={} /> */}
           <Route exact path="/" element={<Sign_in />}></Route>
           <Route exact path="/sign_up" element={<Sign_up />} />
           <Route exact path="/users_home" element={<Home />} />
-          {/* <Route path="/header" element={<Header />}/> */}
-            <Route exact path="/home" element={<Home />} />
-            <Route exact path="/root" element={<Root/>}/>
+          {/* <Route path="/header" element={<Header />} /> */}
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/root" element={<Root />} />
           <Route exact path="search" element={<Search />} />
           <Route exact path="cart" element={<Cart />} />
           <Route exact path="/admin_home" element={<AdminHome />} />

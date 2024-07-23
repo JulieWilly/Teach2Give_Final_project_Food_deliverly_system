@@ -30,8 +30,8 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <Header />
-        <NavigationLink />
+        {/* <Header /> */}
+        {/* <NavigationLink /> */}
         <div className="app">
           <Routes>
             {/* <Route path="/admin_home" element={<AdminHome />}></Route> */}

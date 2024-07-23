@@ -4,7 +4,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { ImLinkedin2 } from "react-icons/im";
 import { FaInstagram } from "react-icons/fa";
 import React from "react";
-import icon from "../../assets/react.svg";
+import logo from "../../assets/food_logo.avif";
 import { NavLink, Link } from "react-router-dom";
 
 const Footer = () => {
@@ -13,7 +13,9 @@ const Footer = () => {
       <div>
         <NavLink to={"/"}>
           <div className="logo">
-            <img src={icon} alt="" />
+            <div className="foodie_logo">
+              <img src={logo} alt="" />
+            </div>
             <h1>Foodiee</h1>
           </div>
         </NavLink>
