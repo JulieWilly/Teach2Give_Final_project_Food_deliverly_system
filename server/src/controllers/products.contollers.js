@@ -126,6 +126,7 @@ export const addedToCart = async (req, res) => {
   const custID = customer.cust_id;
 
   const productID = req.params.product_id;
+  const {addedToCart} = req.body
 
   try {
     // find the order first
@@ -156,7 +157,7 @@ export const addedToCart = async (req, res) => {
 
     const toCart = await prisma.food_products.update({
       where: { product_id:  productID  },
-      data: { addedToCart: true }
+      data: { addedToCart: addedToCart }
     })
     res.json({ success: true, message: 'Added to cart successfully', data:  toCart});
 

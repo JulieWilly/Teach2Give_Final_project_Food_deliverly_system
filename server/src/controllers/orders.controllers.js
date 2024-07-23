@@ -25,7 +25,7 @@ export const getOrders = async (req, res) => {
     } else {
       res
         .status(500)
-        .json({ success: false, message: "No orders have been found!!" });
+        .json({ success: false, message: "No orders have been found!!"});
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -79,11 +79,10 @@ export const createOrder = async (req, res) => {
   const user = req.user;
   const cust_id = user.cust_id;
   try {
-    const {totalAmount, noOfItems } = req.body;
+    const {totalAmount} = req.body;
     const createOrder = await prisma.orders.create({
       data: {
         totalAmount,
-        noOfItems,
         cust_id: cust_id,
       },
     });

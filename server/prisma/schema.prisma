@@ -66,7 +66,7 @@ model Orders{
   order_id String @id @default(uuid())
   orderStatus Boolean @default(false) @map("order_status") 
   totalAmount Int @map("total_amount")
-  noOfItems Int @map("no_of_items")
+  noOfItems Int @default(1) @map("no_of_items")
   orderDate DateTime @default(now())
   cust_id String
   customers Customers @relation(fields: [cust_id], references: [cust_id])
@@ -78,7 +78,7 @@ model Orders{
 
 model Order_items {
   order_items_id String @id @default(uuid())
-  orderQuantity String @map("order_quantity")
+  orderQuantity Int  @default(1) @map("order_quantity")
   itemPrice String @map("item_price")
   orders Orders @relation(fields: [order_id], references: [order_id])
   order_id String @unique
