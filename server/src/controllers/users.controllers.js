@@ -156,32 +156,34 @@ export const updateCustomer = async (req, res) => {
 
   try {
     // find the order first
-    const approveCustAccout = await prisma.orders.findUnique({
+    const approveCustAccout = await prisma.customers.findUnique({
       where: { cust_id: custId  },
       // data: { approved: true }
     });
 
 
      // retuen eerror if the order has not been found.
-  //   if (!updatedOrder) {
-  //     return res
-  //       .status(404)
-  //       .json({ success: false, message: "Order not found." });
-  //   }
+    if (!updatedOrder) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Order not found." });
+    }
 
   // //   // check if the order belongs to the authenticated user.
-  //   if (approveCustAccout.cust_id != custID) {
-  //     return res
-  //       .status(403)
-  //       .json({ success: false, message: "Unauthorized action." });
-  //   }
+    if (approveCustAccout.cust_id != custID) {
+      return res
+        .status(403)
+        .json({ success: false, message: "Unauthorized action." });
+    }
 
 
-  //   await prisma.orders.update({
-  //     where: { order_id: orderID  },
-  //     data: {orderStatus: true}
-  //   })
-  //   res.json({ success: true, message: 'Order approved successfully', data: updatedOrder });
+    await prisma.customers.update({
+      where: { cust_id_id: custId  },
+      data:{
+        
+      }
+    })
+    res.json({ success: true, message: 'Order approved successfully', data: updatedOrder });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

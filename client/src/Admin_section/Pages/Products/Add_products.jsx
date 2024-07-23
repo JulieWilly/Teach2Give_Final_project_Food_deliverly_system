@@ -1,5 +1,5 @@
 import "./products.css";
-import React from "react";
+import React, { useEffect } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
@@ -23,15 +23,19 @@ const Add_products = () => {
   };
 
   // GET DATA TO EDIT AND MAKE CHANGES.
-  const updateProduct = async () => {
-    try {
-      const update = await axios
-        .get(`${VITE_API_URL_BASE}/products/${product_id}`)
-        .catch((error) => console.log(error));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(()=> {
+ const updateProduct = async () => {
+   try {
+     const update = await axios
+       .get(`${VITE_API_URL_BASE}/products/${product_id}`)
+       .catch((error) => console.log(error));
+   } catch (error) {
+     console.log(error);
+   }
+ };
+ updateProduct()
+  }, [product_id])
+
 
   const handleImageChange = (event) => {
     const imageUploaded = event.target.files[0];

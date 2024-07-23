@@ -17,7 +17,7 @@ router
   .get("/customers", verifyToken, getAllCustomers)
   .get("/:cust_id", verifyToken, getOneCustomer)
   .post("/create", createCustomer)
-  .put("/:cust_id", verifyToken, updateCustomer)
+  .patch("/:cust_id", verifyToken, updateCustomer)
   .delete("/:cust_id", verifyToken, deleteCustomer);
 
 export default router;
