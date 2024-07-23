@@ -1,62 +1,75 @@
-import './products.css'
-import React from 'react';
+import "./products.css";
+import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import axios from 'axios';
-import { useState } from 'react';
-import { VITE_API_URL_BASE } from '../../../configs/configs';
+import axios from "axios";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { VITE_API_URL_BASE } from "../../../configs/configs";
 
 const Add_products = () => {
-     const [loading, setLoading] = useState();
-     const [error, setError] = useState();
-     const [image, setImage] = useState();
-    const previewFiles = (file) => {
-      const reader = new FileReader(); // read the file or image
-      // convert the file into a url to pass it to the cloudinary
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        // provide and set the image after it has completely loaded onto the application.
-        setImage(reader.result);
-      };
+  const [loading, setLoading] = useState();
+  const [error, setError] = useState();
+  const [image, setImage] = useState();
+  const { product_id } = useParams();
+  const previewFiles = (file) => {
+    const reader = new FileReader(); // read the file or image
+    // convert the file into a url to pass it to the cloudinary
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      // provide and set the image after it has completely loaded onto the application.
+      setImage(reader.result);
     };
+  };
 
-    const handleImageChange = (event) => {
-      const imageUploaded = event.target.files[0];
-      console.log(image);
+  // GET DATA TO EDIT AND MAKE CHANGES.
+  const updateProduct = async () => {
+    try {
+      const update = await axios
+        .get(`${VITE_API_URL_BASE}/products/${product_id}`)
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-      setImage(imageUploaded);
+  const handleImageChange = (event) => {
+    const imageUploaded = event.target.files[0];
+    console.log(image);
 
-      previewFiles(imageUploaded);
-    };
+    setImage(imageUploaded);
 
-    // post products to the database.
-    const handleSubmit = async (values) => {
-      // values.preventDefault();
-      try {
-        const postProducts = await axios
-          .post(
-            `${VITE_API_URL_BASE}/products/create`,
-            {
-              productName: values.productName,
-              productDesc: values.productDesc,
-              productPrice: values.productPrice,
-              productCartegory: values.productCategory,
-              productImg: image,
-            },
-            {
-              withCredentials: true,
-            }
-          )
-          .catch((error) => console.log(error));
-        console.log("products", postProducts);
+    previewFiles(imageUploaded);
+  };
 
-        if (postProducts.data.success === true) {
-          alert("Products posted successfully.");
-        }
-      } catch (error) {
-        console.log(error);
+  // post products to the database.
+  const handleSubmit = async (values) => {
+    // values.preventDefault();
+    try {
+      const postProducts = await axios
+        .post(
+          `${VITE_API_URL_BASE}/products/create`,
+          {
+            productName: values.productName,
+            productDesc: values.productDesc,
+            productPrice: values.productPrice,
+            productCartegory: values.productCategory,
+            productImg: image,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .catch((error) => console.log(error));
+      console.log("products", postProducts);
+
+      if (postProducts.data.success === true) {
+        alert("Products posted successfully.");
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // find products and meals
   const formValidation = Yup.object({
@@ -163,6 +176,6 @@ const Add_products = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Add_products;

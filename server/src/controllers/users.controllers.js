@@ -149,31 +149,39 @@ export const loginCustomer = async (req, res) => {
 };
 
 export const updateCustomer = async (req, res) => {
+ const customer = req.user;
+  const custID = customer.cust_id;
+
+  const custId = req.params.cust_id;
+
   try {
-    const {
-      custName,
-      custEmail,
-      custPhoneNumber,
-      custLocation,
-      approvedCust,
-      customerRole,
-    } = req.body;
-    const createCust = await prisma.customers.create({
-      data: {
-        custName,
-        custEmail,
-        custPhoneNumber,
-        custLocation,
-        approvedCust,
-        customerAddress,
-        customerRole,
-      },
+    // find the order first
+    const approveCustAccout = await prisma.orders.findUnique({
+      where: { cust_id: custId  },
+      // data: { approved: true }
     });
-    res.status(201).json({
-      success: true,
-      message: "Customer created successfully.",
-      data: createCust,
-    });
+
+
+     // retuen eerror if the order has not been found.
+  //   if (!updatedOrder) {
+  //     return res
+  //       .status(404)
+  //       .json({ success: false, message: "Order not found." });
+  //   }
+
+  // //   // check if the order belongs to the authenticated user.
+  //   if (approveCustAccout.cust_id != custID) {
+  //     return res
+  //       .status(403)
+  //       .json({ success: false, message: "Unauthorized action." });
+  //   }
+
+
+  //   await prisma.orders.update({
+  //     where: { order_id: orderID  },
+  //     data: {orderStatus: true}
+  //   })
+  //   res.json({ success: true, message: 'Order approved successfully', data: updatedOrder });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

@@ -3,9 +3,10 @@ import React, { useEffect } from "react";
 import icon from "../../../assets/react.svg";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
+
 
 const Products = () => {
   const [loading, setLoading] = useState();
@@ -33,11 +34,11 @@ const Products = () => {
   }, []);
 
   // DELETE AN PRODUCT FROM THE APPLICATION.
-  const handleDelete = async () => {
-    const deleteItems = await axios.delete(`${VITE_API_URL_BASE}/products`, {
+  const handleDelete = async (product_id) => {
+    await axios.delete(`${VITE_API_URL_BASE}/products/${product_id}`, {
       withCredentials: true,
     });
-    alert("delete successfully.");
+    alert("deleted successfully.");
   };
 
   // EDIT OR UPDATE AN ITEM.
@@ -49,6 +50,7 @@ const Products = () => {
     navigate('/add_product')
   }
  
+
   return (
     <div className="products_sect">
       <h1>Products available.</h1>
@@ -71,8 +73,16 @@ const Products = () => {
                   <p className="price">{product.productPrice} $</p>
                 </div>
                 <div className="buttons">
-                  <button onClick={handleEdit}>Edit</button>
-                  <button onClick={handleDelete}>Remove</button>
+                  <Link
+                    className="update"
+                    to={`/add_product/${product.product_id}`}
+                  >
+                    <button onClick={handleEdit}>Edit</button>
+                  </Link>
+
+                  <button onClick={() => handleDelete(product.product_id)}>
+                    Remove
+                  </button>
                 </div>
               </div>
             </div>

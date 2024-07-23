@@ -18,7 +18,6 @@ const Orders = () => {
         .catch((error) => console.log(error));
       console.log("orders", orders.data.data);
       setOrders(orders.data.data);
-
     } catch (error) {
       console.log(error);
     }
@@ -26,15 +25,34 @@ const Orders = () => {
 
   // delete an order
   const handleDelete = async (id) => {
-    try{
-
-      const deleteItem = await axios.delete(`${VITE_API_URL_BASE}/orders/${id}`, {withCredentials:true}).catch(console.log(error))
-      console.log(deleteItem)
-
-    } catch(error) {
-      console.log(error)
+    try {
+      const deleteItem = await axios
+        .delete(`${VITE_API_URL_BASE}/orders/${id}`, { withCredentials: true })
+        .catch(console.log(error));
+      console.log(deleteItem);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+
+  const handleApproval = async (order_id) => {
+    try {
+      const approveOrder = await axios
+        .put(
+          `${VITE_API_URL_BASE}/orders/${order_id}`,
+          {
+            orderStatus: true,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .catch((error) => console.log(error));
+      console.log("id", order_id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     findOders();
@@ -51,11 +69,26 @@ const Orders = () => {
               <div className="order_desc">
                 <h2>{order.orderName}</h2>
                 <p className="p">{order.noOfItems}</p>
-                <p className="p">{order.orderStatus}</p>
+                <p className="p">
+                  {order.orderStatus == false ? "Pending approval" : "Approved"}
+                </p>
                 <p className="p">{order.totalAmount}</p>
-                <p>{order.order_id}</p>
                 <div className="buttons">
-                  <button className="btn_2">Approve</button>
+                  {order && order.orderStatus == true ? (
+                    <button
+                      className="btn_2"
+                      onClick={() => handleApproval(order.order_id)}
+                    >
+                      Approved
+                    </button>
+                  ) : (
+                    <button
+                      className="btn2"
+                      onClick={() => handleApproval(order.order_id)}
+                    >
+                      Approve
+                    </button>
+                  )}
 
                   <button
                     onClick={() => handleDelete(order.order_id)}

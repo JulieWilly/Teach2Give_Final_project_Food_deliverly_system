@@ -12,6 +12,18 @@ const ManageUsers = () => {
   const [error, setError] = useState();
   const [customer, setCustomer] = useState([]);
 
+
+  /// delete customer
+  const handleDelete = async (product_id) => {
+    await axios.delete(
+      `${VITE_API_URL_BASE}/${product_id}`,
+      {
+        withCredentials: true,
+      }
+    );
+    alert("delete successfully.");
+  };
+
   useEffect(() => {
     const getCustomers = async () => {
       try {
@@ -57,7 +69,9 @@ const ManageUsers = () => {
             </div>
             <div className="buttons">
               <button>Approve</button>
-              <button>Reject</button>
+              <button onClick={() => handleDelete(customers.cust_id)}>
+                Reject
+              </button>
             </div>
           </div>
         ))

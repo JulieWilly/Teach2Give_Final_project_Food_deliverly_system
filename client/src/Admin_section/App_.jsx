@@ -42,6 +42,12 @@ const App = () => {
             <Route exact path="reviewers" element={<Reviewers />} />
             {/* <Route exact path="*" element={<div>Page not found.</div>} /> */}
             <Route exact path="add_product" element={<Add_products />} />
+
+            <Route
+              exact
+              path="/add_product/:product_id"
+              element={<Add_products/>}
+            />
           </Routes>
         </div>
       </BrowserRouter>

@@ -10,6 +10,14 @@ const Reviewers = () => {
   const [loading, setLoading] = useState();
   const [review, setReview] = useState([]);
 
+
+  // REJECT REVIEW
+  const handleReviewReject = async(review_id) => {
+     await axios.delete(`${VITE_API_URL_BASE}/customer/review/${review_id}`, {
+       withCredentials: true,
+     });
+    alert("deleted successfully.");
+  }
   useEffect(() => {
     const getReviews = async () => {
       try {
@@ -54,14 +62,18 @@ const Reviewers = () => {
               </div>
             </div>
             <div className="buttons">
-              <button>Reject Review</button>
+              <button onClick={() => handleReviewReject(reviews.review_id)}>
+                Reject Review
+              </button>
             </div>
           </div>
         ))
       ) : (
         <p>Loading reviews</p>
       )}
+
     </div>
+
   );
 };
 

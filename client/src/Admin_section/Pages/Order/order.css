@@ -48,7 +48,7 @@
   justify-content: space-between;
 }
 
-.order_desc .buttons button{
+ .buttons button{
   background-color:#52556C;
 }
 .order_desc .buttons button:hover{
@@ -60,4 +60,14 @@
   color: white;
 }
 
+
+ .buttons .btn2{
+  background-color: none;
+  background-color: yellow;
+  color: black;
+}
+
+.buttons .btn2:hover{
+  color: white;
+}
 
