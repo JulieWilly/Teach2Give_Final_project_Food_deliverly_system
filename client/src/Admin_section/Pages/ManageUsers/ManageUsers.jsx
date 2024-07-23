@@ -24,6 +24,28 @@ const ManageUsers = () => {
     alert("delete successfully.");
   };
 
+  const handleApproval = async (cust_id) => {
+    try {
+    const approveCustomer = await axios
+      .patch(
+        `${VITE_API_URL_BASE}/${cust_id}`,
+        {
+          approvedCust: true,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .catch((error) => console.log(error));
+    console.log("id", cust_id);
+    alert('done')
+  } catch (error) {
+    console.log(error);
+  }
+};
+   
+  
+
   useEffect(() => {
     const getCustomers = async () => {
       try {
@@ -68,7 +90,7 @@ const ManageUsers = () => {
               </div>
             </div>
             <div className="buttons">
-              <button>Approve</button>
+              <button onClick={() => handleApproval(customers.cust_id)}>Approve</button>
               <button onClick={() => handleDelete(customers.cust_id)}>
                 Reject
               </button>
