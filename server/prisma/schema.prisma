@@ -43,7 +43,9 @@ model food_products {
   productDesc  String   @map("product_description")
   productPrice Int      @map("product_price")
   productCartegory String @map("product_category")
+  addedToCart Boolean @default(false) @map("added_to_cart")
   createdAt    DateTime @default(now()) @map("product_createdAt")
+
   updatedAt    DateTime @updatedAt() @map("product_updatedAt")
   order_items Order_items?
   

@@ -4,12 +4,9 @@ import { getRounds } from "bcrypt";
 const prisma = new PrismaClient();
 
 export const getAllReviews = async (req, res) => {
-  const customer = req.user;
-  const custID = customer.cust_id;
 
   try {
     const getAllReviews = await prisma.reviews.findMany({
-      where: { cust_id: custID },
       select: {
         review_id: true,
         reviewRating: true,
@@ -18,7 +15,36 @@ export const getAllReviews = async (req, res) => {
         cust_id: true,
       },
     });
+    if (getAllReviews !== null) {
+      return res.status(200).json({
+        success: true,
+        message: "Products have been found successfully.",
+        data: getAllReviews,
+      });
+    } else {
+      return res
+        .status(500)
+        .json({ success: false, message: "Products have not been found." });
+    }
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
 
+export const getAllByCustomer= async (req, res) => {
+  const customer = req.user;
+  const custID = customer.cust_id;
+
+  try {
+    const getAllReviews = await prisma.reviews.findMany({
+      select: {
+        review_id: true,
+        reviewRating: true,
+        reviewComment: true,
+        customerName: true,
+        cust_id: true,
+      },
+    });
     if (getAllReviews !== null) {
       return res.status(200).json({
         success: true,

@@ -6,6 +6,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  addedToCart
 } from "../controllers/products.contollers.js";
 import { PrismaClient } from "@prisma/client";
 import verifyToken from "../middleware/verifyToken.js";
@@ -18,6 +19,7 @@ router
   .get("/:product_id", getOneProduct)
   .post("/create", createProduct)
   .patch("/:product_id", updateProduct)
+  .put('/:product_id', verifyToken, addedToCart)
   .delete("/:product_id", verifyToken, deleteProduct);
 
 export default router;
