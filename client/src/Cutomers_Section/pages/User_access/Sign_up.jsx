@@ -8,6 +8,7 @@ import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Title from "../../compnents/Title";
 const Sign_up = () => {
   const [inputs, setInputs] = useState("");
   const [loading, setLoading] = useState("");
@@ -85,106 +86,116 @@ const Sign_up = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div>
-        <input
-          type="text"
-          placeholder="First name"
-          name="custName"
-          value={formik.values.custName}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.custName && formik.errors.custName && (
-          <p>{formik.errors.custName}</p>
-        )}
-      </div>
-      <div>
-        <input
-          type="email"
-          placeholder="Email address"
-          name="custEmail"
-          value={formik.values.custEmail}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.custEmail && formik.errors.custEmail && (
-          <p>{formik.errors.custEmail}</p>
-        )}
-      </div>
-      <div>
-        <input
-          type="number"
-          placeholder="Phone numnbr"
-          name="custPhoneNumber"
-          value={formik.values.custPhoneNumber}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.custPhoneNumber && formik.errors.custPhoneNumber && (
-          <p>{formik.errors.custPhoneNumber}</p>
-        )}
-      </div>
+    <>
+      <Title
+        title={"Create your new account"}
+        description={"Proceed to create a new account. "}
+      />
+      <div className="signup_sect">
+        <form className="_form" onSubmit={formik.handleSubmit}>
+          <div>
+            <input
+              type="text"
+              placeholder="First name"
+              name="custName"
+              value={formik.values.custName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.custName && formik.errors.custName && (
+              <p>{formik.errors.custName}</p>
+            )}
+          </div>
+          <div>
+            <input
+              type="email"
+              placeholder="Email address"
+              name="custEmail"
+              value={formik.values.custEmail}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.custEmail && formik.errors.custEmail && (
+              <p>{formik.errors.custEmail}</p>
+            )}
+          </div>
+          <div>
+            <input
+              type="number"
+              placeholder="Phone numnbr"
+              name="custPhoneNumber"
+              value={formik.values.custPhoneNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.custPhoneNumber &&
+              formik.errors.custPhoneNumber && (
+                <p>{formik.errors.custPhoneNumber}</p>
+              )}
+          </div>
 
-      <div>
-        <input
-          type="text"
-          placeholder="Post address name"
-          name="customerAddress"
-          value={formik.values.customerAddress}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.customerAddress && formik.errors.customerAddress && (
-          <p>{formik.errors.customerAddress}</p>
-        )}
-      </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Post address name"
+              name="customerAddress"
+              value={formik.values.customerAddress}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.customerAddress &&
+              formik.errors.customerAddress && (
+                <p>{formik.errors.customerAddress}</p>
+              )}
+          </div>
 
-      <div>
-        <input
-          type="text"
-          placeholder="Location"
-          name="custLocation"
-          value={formik.values.custLocation}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.custLocation && formik.errors.custLocation && (
-          <p>{formik.errors.custLocation}</p>
-        )}
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Role"
-          name="customerRole"
-          value={formik.values.customerRole}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.customerRole && formik.errors.customerRole && (
-          <p>{formik.errors.customerRole}</p>
-        )}
-      </div>
-      <div>
-        <input
-          type="number"
-          placeholder="Password"
-          name="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-      </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Location"
+              name="custLocation"
+              value={formik.values.custLocation}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.custLocation && formik.errors.custLocation && (
+              <p>{formik.errors.custLocation}</p>
+            )}
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Role"
+              name="customerRole"
+              value={formik.values.customerRole}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.customerRole && formik.errors.customerRole && (
+              <p>{formik.errors.customerRole}</p>
+            )}
+          </div>
+          <div>
+            <input
+              type="number"
+              placeholder="Password"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </div>
 
-      <button type="submit">
-        {loading ? "Signing up. Please wait ..." : "Sign up"}
-      </button>
-      <ToastContainer />
-      <p>
-        Already have an account? <Link to={"/"}> Sign in</Link>
-      </p>
-    </form>
+          <button type="submit">
+            {loading ? "Signing up. Please wait ..." : "Sign up"}
+          </button>
+          <ToastContainer />
+          <p>
+            Already have an account? <Link to={"/"}> Sign in</Link>
+          </p>
+        </form>
+      </div>
+    </>
   );
 };
 

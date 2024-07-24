@@ -4,12 +4,14 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
+import Title from "../../../Cutomers_Section/compnents/Title";
 
 const Add_products = () => {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
+  const [product, setProduct] = useState([])
   const [image, setImage] = useState();
   const { product_id } = useParams();
   const previewFiles = (file) => {
@@ -27,8 +29,12 @@ const Add_products = () => {
  const updateProduct = async () => {
    try {
      const update = await axios
-       .get(`${VITE_API_URL_BASE}/products/${product_id}`)
+       .get(`${VITE_API_URL_BASE}/products/${product_id}`, {
+        withCredentials:true
+       })
        .catch((error) => console.log(error));
+       console.log(update.data.data);
+       setProduct(update.data.data)
    } catch (error) {
      console.log(error);
    }
@@ -95,19 +101,22 @@ const Add_products = () => {
   });
   return (
     <div>
+      <Title title={'Add a new product here!!'} description={'Provide correct details for the new product below.'}/>
       <div className="top">
         <div className="products_left">
-          <form onSubmit={formik.handleSubmit}>
+          <form className="_form" onSubmit={formik.handleSubmit}>
             <h2 className="title">Enter products details here.</h2>
             <div>
               <input
                 type="file"
                 placeholder="Add image here."
                 name="productImage"
+               
                 value={formik.values.productImg}
                 onChange={(e) => handleImageChange(e)}
                 accept="image/png, image/jpeg, image/jpg, image/jfif"
                 onBlur={formik.handleBlur}
+              
               />
               {formik.touched.productImg && formik.errors.productImg && (
                 <p>{formik.errors.productImg}</p>

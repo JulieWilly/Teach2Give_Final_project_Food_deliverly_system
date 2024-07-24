@@ -105,6 +105,7 @@ export const updateOrder = async (req, res) => {
   const custID = customer.cust_id;
 
   const orderID = req.params.order_id;
+  const {orderStatus} = req.body
 
   try {
     // find the order first
@@ -131,7 +132,7 @@ export const updateOrder = async (req, res) => {
 
     await prisma.orders.update({
       where: { order_id: orderID  },
-      data: {orderStatus: true}
+      data: {orderStatus: orderStatus}
     })
     res.json({ success: true, message: 'Order approved successfully', data: updatedOrder });
   } catch (error) {

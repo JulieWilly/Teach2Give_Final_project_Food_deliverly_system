@@ -20,7 +20,7 @@ router
   // get('product', getProductByCustomer)
   .get("/:product_id",verifyToken, getOneProduct)
   .post("/create", createProduct)
-  .patch("/:product_id", updateProduct)
+  .patch("/:product_id",verifyToken, updateProduct)
   .put('/:product_id', verifyToken, addedToCart)
   .delete("/:product_id", verifyToken, deleteProduct);
 

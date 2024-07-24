@@ -41,10 +41,7 @@ const Products = () => {
     alert("deleted successfully.");
   };
 
-  // EDIT OR UPDATE AN ITEM.
-  const handleEdit = () => {
-    alert("update a product.");
-  };
+
   
   const handleNavigate = () => {
     navigate('/add_product')
@@ -75,9 +72,9 @@ const Products = () => {
                 <div className="buttons">
                   <Link
                     className="update"
-                    to={`/add_product/${product.product_id}`}
+                    to={`/update_product/${product.product_id}`}
                   >
-                    <button onClick={handleEdit}>Edit</button>
+                    <button>Edit</button>
                   </Link>
 
                   <button onClick={() => handleDelete(product.product_id)}>

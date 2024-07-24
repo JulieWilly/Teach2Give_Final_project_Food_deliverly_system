@@ -1,9 +1,10 @@
 .products_sect {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 2rem;
   align-items: center;
   justify-content: center;
+
   padding: 1rem;
 }
 
@@ -16,7 +17,7 @@
   height: 30rem;
 }
 .products_left form {
-  height: 20rem;
+  /* height: 20rem; */
   display: flex;
   justify-content: center;
 }

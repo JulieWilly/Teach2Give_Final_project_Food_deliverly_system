@@ -20,7 +20,7 @@ const Header = () => {
         <div
           className="logo"
           onClick={() => {
-            navigate("/home");
+            navigate("/users_home");
           }}
         >
           <div className="foodie_logo">

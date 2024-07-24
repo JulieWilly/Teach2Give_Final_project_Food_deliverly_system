@@ -8,6 +8,7 @@ import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { MdOpenWith } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Title from "../../compnents/Title";
 
 const Sign_in = () => {
   const [loading, setLoading] = useState();
@@ -70,42 +71,47 @@ const Sign_in = () => {
     validationSchema: formValidation,
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div>
-        <input
-          type="text"
-          placeholder="Email address"
-          name="custEmail"
-          value={formik.values.custEmail}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.custEmail && formik.errors.custEmail && (
-          <p>{formik.errors.custEmail}</p>
-        )}
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="password"
-          name="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.password && formik.errors.password && (
-          <p>{formik.errors.password}</p>
-        )}
-      </div>
+    <>
+    <Title title={'Welcome back!'} description={'Proceed to log in in you account'}/>
+      <div className="signup_sect">
+        <form className="_form" onSubmit={formik.handleSubmit}>
+          <div>
+            <input
+              type="text"
+              placeholder="Email address"
+              name="custEmail"
+              value={formik.values.custEmail}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.custEmail && formik.errors.custEmail && (
+              <p>{formik.errors.custEmail}</p>
+            )}
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="password"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.password && formik.errors.password && (
+              <p>{formik.errors.password}</p>
+            )}
+          </div>
 
-      <button onClick={notify}>
-        {loading ? "Signing in. Please wait ..." : "Sign in"}
-      </button>
-      <ToastContainer />
-      <p>
-        Create accout with us. <Link to={"/sign_up"}> Sign up</Link>
-      </p>
-    </form>
+          <button onClick={notify}>
+            {loading ? "Signing in. Please wait ..." : "Sign in"}
+          </button>
+          <ToastContainer />
+          <p>
+            Create accout with us. <Link to={"/sign_up"}> Sign up</Link>
+          </p>
+        </form>
+      </div>
+    </>
   );
 };
 

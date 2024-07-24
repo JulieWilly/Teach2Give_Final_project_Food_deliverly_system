@@ -1,19 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NavigationLink = () => {
   return (
     <div className="heros_sect">
       <nav>
         <ul>
-          <NavLink className={"link"} to={"/dashboard"}>
+          <Link className={"link"} to={"/dashboard"}>
             Dashboard
-          </NavLink>
-          <NavLink to={"/orders"}>Orders</NavLink>
-          <NavLink to={"/products"}>Add products</NavLink>
-          <NavLink to={"/manage_users"}>Manage customers</NavLink>
-          <NavLink to={"/reviewers"}>Reviewers</NavLink>
-          <NavLink to={"/reviewers"}>Log out</NavLink>
+          </Link>
+          <Link to={"/orders"}>Orders</Link>
+          <Link to={"/products"}>Add products</Link>
+          <Link to={"/manage_users"}>Manage customers</Link>
+          <Link to={"/reviewers"}>Reviewers</Link>
+          <Link to={"/reviewers"}>Log out</Link>
         </ul>
       </nav>
     </div>

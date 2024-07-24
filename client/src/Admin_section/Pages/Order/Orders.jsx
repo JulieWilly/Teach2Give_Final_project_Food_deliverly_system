@@ -4,6 +4,7 @@ import Footer from "../../../Cutomers_Section/compnents/Footer.jsx";
 import ordersData from "../../Data/ordersData.js";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs.js";
+import Title from "../../../Cutomers_Section/compnents/Title.jsx";
 const Orders = () => {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
@@ -59,13 +60,14 @@ const Orders = () => {
   }, []);
   return (
     <>
+      <Title title={"Orders available"} />
       <div className="orders_sect">
         {orders &&
           orders.map((order, ket) => (
             <div className="order" key={ket}>
-              <div className="order_img">
+              {/* <div className="order_img">
                 <img src={order.orderImg} alt="" />
-              </div>
+              </div> */}
               <div className="order_desc">
                 <h2>{order.orderName}</h2>
                 <p className="p">{order.noOfItems}</p>
@@ -73,30 +75,30 @@ const Orders = () => {
                   {order.orderStatus == false ? "Pending approval" : "Approved"}
                 </p>
                 <p className="p">{order.totalAmount}</p>
-                <div className="buttons">
-                  {order && order.orderStatus == true ? (
-                    <button
-                      className="btn_2"
-                      onClick={() => handleApproval(order.order_id)}
-                    >
-                      Approved
-                    </button>
-                  ) : (
-                    <button
-                      className="btn2"
-                      onClick={() => handleApproval(order.order_id)}
-                    >
-                      Approve
-                    </button>
-                  )}
-
+              </div>
+              <div className="buttons">
+                {order && order.orderStatus == true ? (
                   <button
-                    onClick={() => handleDelete(order.order_id)}
-                    className="btn_1"
+                    className="btn_2"
+                    onClick={() => handleApproval(order.order_id)}
                   >
-                    Delete
+                    Approved
                   </button>
-                </div>
+                ) : (
+                  <button
+                    className="btn2"
+                    onClick={() => handleApproval(order.order_id)}
+                  >
+                    Approve
+                  </button>
+                )}
+
+                <button
+                  onClick={() => handleDelete(order.order_id)}
+                  className="btn_1"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}

@@ -1,11 +1,10 @@
 import React from "react";
-import Header from "../../components/Header";
-import NavigationLink from "../../components/NavigationLink";
+
+import Dashboard from "../Dashboard/Dashboard";
 const AdminHome = () => {
   return (
     <div>
-      {/* <Header />
-       <NavigationLink /> */}
+       <Dashboard/>
     </div>
   );
 };
