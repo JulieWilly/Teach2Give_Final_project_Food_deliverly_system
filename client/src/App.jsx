@@ -13,6 +13,7 @@ import Header from "./Cutomers_Section/compnents/Header";
 import Billing from "./Cutomers_Section/pages/Billing/Billing";
 import Root from "./Cutomers_Section/Root";
 import Add_products from "./Admin_section/Pages/Products/Add_products";
+import Add_Reviews from "./Cutomers_Section/pages/Profile/Reviews/Add_Reviews";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -34,6 +35,7 @@ function App() {
 
           {/* <Route exact path="profile" element={<Profile />} /> */}
           <Route exact path="billing" element={<Billing />} />
+          <Route exact path="add_reviews" element={<Add_Reviews />} />
 
           {/* admin  */}
         </Routes>

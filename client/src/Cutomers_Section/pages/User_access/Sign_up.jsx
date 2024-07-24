@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Sign_up = () => {
   const [inputs, setInputs] = useState("");
   const [loading, setLoading] = useState("");
@@ -28,16 +30,19 @@ const Sign_up = () => {
           customerAddress: values.customerAddress,
           password: values.password,
         })
-        .catch((error) => console.log(error));
+      .catch((error) => toast.warning('Something went wrong!!!'));
       setInputs(createCustomer);
 
       console.log(createCustomer);
       if (createCustomer.data.success === true) {
+        toast('Account created successfully.')
         navigate("/");
       }
     } catch (error) {
       console.log(error);
       setError(error);
+        toast("Server error");
+
     } finally {
       setLoading(false);
     }
@@ -175,7 +180,7 @@ const Sign_up = () => {
       <button type="submit">
         {loading ? "Signing up. Please wait ..." : "Sign up"}
       </button>
-
+      <ToastContainer />
       <p>
         Already have an account? <Link to={"/"}> Sign in</Link>
       </p>

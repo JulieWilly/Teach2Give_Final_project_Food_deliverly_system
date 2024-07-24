@@ -2,21 +2,20 @@ form {
   background-color: white;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
+  justify-content: space-around;
+  /* align-items: center; */
+  padding: 0 1rem;
   border-radius: 0.5rem;
   width: 20rem;
-  height: 30rem;
 }
 
 form input {
-  height: 2rem;
   padding-inline-start: 0.5rem;
   min-width: 90%;
+
 }
 form div {
-  border: 2px solid black;
-  padding: 0;
+  width: 100%;
   height: auto;
 }
 

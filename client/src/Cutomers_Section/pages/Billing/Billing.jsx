@@ -4,15 +4,77 @@ import Banner from "../../compnents/Banner";
 import Title from "../../compnents/Title";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import Footer from "../../compnents/Footer";
+import { VITE_API_URL_BASE } from "../../../configs/configs";
+import { useNavigate } from "react-router-dom";
 
-const Billing = () => {
-  const handleSubmit = () => {};
+const Billing = (values) => {
+  const navigate = useNavigate()
+  const handleAddresses = async (values) => {
+    console.log(values)
+    alert('sdsdsd')
+
+
+    // try {
+    //   const createAddresses = await axios
+    //     .post(
+    //       `${VITE_API_URL_BASE}/address/create`,
+    //       {
+    //         customerAddress: values.customerAddress,
+    //         city: values.city,
+    //         state: values.state,
+    //         zipcode: values.zipcode,
+    //       },
+    //       {
+    //         withCredentials: true,
+    //       }
+    //     )
+    //     .catch((error) => console.log(error));
+
+    //   console.log("payment v", values);
+    //   console.log("addresses", createAddresses);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const createPayment = async (values) => {
+    try {
+      const createPayment = await axios
+        .post(
+          `${VITE_API_URL_BASE}/payments/pay`,
+          {
+            paymentMethod: values.paymentMethod,
+            amount: values.amount,
+            paymentStatus: values.paymentStatus,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .catch((error) => console.log(error));
+
+      console.log("payment v", values);
+      console.log("payment", createPayment);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = (values) => {
+createPayment(values)
+handleAddresses(values)
+  }
+
+  // NAVIGATE
+  const handleNavigate = () => {
+    navigate("/add_reviews");
+  }
+
   const formValidation = Yup.object({
     customerAddress: Yup.string().required("County name required."),
-    amount: Yup.number()
-      .required("Amount paid required.")
-      .integer("Password should be a number."),
+    amount: Yup.string().required("Amount paid required."),
     city: Yup.string().required("City name required."),
     state: Yup.string().required("State name required."),
     zipcode: Yup.string().required("Zip codes required."),
@@ -41,7 +103,7 @@ const Billing = () => {
       <Title title={"Enter billing detaails below."} />
       <div className="billing_details">
         <div className="address_details_left">
-          <form className="form" onSubmit={formik.handleSubmit}>
+          <form className="form">
             <div className="inputs">
               <label htmlFor="customerAddress">County name:</label>
               <input
@@ -105,6 +167,10 @@ const Billing = () => {
                 <p>{formik.errors.zipcode}</p>
               )}
             </div>
+
+            <div className="buttons">
+              <button onClick={(e) => handleAddresses}>Submit addresses</button>
+            </div>
           </form>
         </div>
         <div className="billing_details_right">
@@ -161,7 +227,7 @@ const Billing = () => {
               <label htmlFor="amount">Amount:</label>
 
               <input
-                type="number"
+                type="text"
                 placeholder="Amount"
                 name="amount"
                 value={formik.values.amount}
@@ -188,7 +254,7 @@ const Billing = () => {
             </div>
 
             <div className="buttons">
-              <button>Place order</button>
+              <button onClick={ handleNavigate}>Place order</button>
             </div>
           </form>
         </div>

@@ -1,7 +1,6 @@
 .billing_details {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
   gap: 2rem;
 }
 
@@ -36,6 +35,7 @@ table tr th {
 .form {
   background-color: none;
   width: 30rem;
+  height: auto;
 }
 
 label {

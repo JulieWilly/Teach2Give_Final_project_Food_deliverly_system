@@ -6,12 +6,15 @@ import * as Yup from "yup";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { MdOpenWith } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Sign_in = () => {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
   const navigate = useNavigate();
 
+  const notify = () => {};
   const handleSubmit = async (values) => {
     try {
       setLoading(true);
@@ -23,24 +26,31 @@ const Sign_in = () => {
           {
             custEmail: values.custEmail,
             password: values.password,
-          },{
-            withCredentials: true
+          },
+          {
+            withCredentials: true,
           }
         )
-        .catch((error) => console.log(error));
+        .catch((error) => toast.warning('Invalid user credentials!!'));
 
       console.log(login.data.data.customerRole);
       console.log(login);
       if (login.data.success === true) {
         if (login.data.data.customerRole === "Admin") {
+          toast("Customer logged in sucessfully.");
+
           navigate("/admin_home");
         } else {
+          toast("Admin logged in successfully");
+
           navigate("/users_home");
         }
       }
     } catch (error) {
       console.log(error);
       setError(error);
+      toast.error(`Something went wrong!!`);
+
     } finally {
       setLoading(false);
     }
@@ -49,8 +59,7 @@ const Sign_in = () => {
     custEmail: Yup.string()
       .email("Incorrect email format.")
       .required("Customer email address required."),
-    password: Yup.string()
-      .required("Password required.")
+    password: Yup.string().required("Password required."),
   });
   const formik = useFormik({
     initialValues: {
@@ -89,10 +98,10 @@ const Sign_in = () => {
         )}
       </div>
 
-      <button type="submit">
+      <button onClick={notify}>
         {loading ? "Signing in. Please wait ..." : "Sign in"}
       </button>
-
+      <ToastContainer />
       <p>
         Create accout with us. <Link to={"/sign_up"}> Sign up</Link>
       </p>

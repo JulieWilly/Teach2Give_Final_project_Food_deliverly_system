@@ -18,7 +18,7 @@ const router = Router();
 router
   .get("/products", getAllProducts)
   // get('product', getProductByCustomer)
-  .get("/:product_id", getOneProduct)
+  .get("/:product_id",verifyToken, getOneProduct)
   .post("/create", createProduct)
   .patch("/:product_id", updateProduct)
   .put('/:product_id', verifyToken, addedToCart)
