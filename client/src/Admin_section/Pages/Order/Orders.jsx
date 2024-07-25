@@ -13,7 +13,7 @@ const Orders = () => {
   const findOders = async () => {
     try {
       const orders = await axios
-        .get(`${VITE_API_URL_BASE}/orders/all`, {
+        .get(`${VITE_API_URL_BASE}/orders/all/orders`, {
           withCredentials: true,
         })
         .catch((error) => console.log(error));
@@ -69,12 +69,12 @@ const Orders = () => {
                 <img src={order.orderImg} alt="" />
               </div> */}
               <div className="order_desc">
-                <h2>{order.orderName}</h2>
-                <p className="p">{order.noOfItems}</p>
+                <h2>Order name: {order.orderName}</h2>
+                <p className="p">No if items: {order.noOfItems}</p>
                 <p className="p">
                   {order.orderStatus == false ? "Pending approval" : "Approved"}
                 </p>
-                <p className="p">{order.totalAmount}</p>
+                <p className="p">Total amount: {order.totalAmount}</p>
               </div>
               <div className="buttons">
                 {order && order.orderStatus == true ? (

@@ -6,11 +6,13 @@ import {
   createOrder,
   updateOrder,
   deleteOrder,
+  getAllOrders
 } from "../controllers/orders.controllers.js";
 const router = Router();
 
 router
   .get("/all", verifyToken, getOrders)
+  .get('/all/orders',verifyToken, getAllOrders )
   .get("/:order_id", verifyToken, getOrder)
   .post("/create", verifyToken, createOrder)
   .put("/:order_id", verifyToken, updateOrder)

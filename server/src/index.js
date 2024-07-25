@@ -25,7 +25,7 @@ foodDelivery.use(
 foodDelivery.use(express.json());
 foodDelivery.use(cookieParser());
 foodDelivery.use(bodyParser({ limit: "50mb" }));
-foodDelivery.use(express.urlencoded({ extended: true, limit: "50mb" }));
+foodDelivery.use(express.urlencoded({ extended: true }));
 foodDelivery.listen(process.env.PORT, () => {
   console.log(`Application running at port 3001`);
 });

@@ -32,6 +32,36 @@ export const getOrders = async (req, res) => {
   }
 };
 
+export const getAllOrders = async (req, res) => {
+  const customer = req.user;
+  const custID = customer.cust_id;
+  try {
+    const getOrders = await prisma.orders.findMany({
+      select: {
+        orderStatus: true,
+        totalAmount: true,
+        noOfItems: true,
+        cust_id: true,
+        order_id: true,
+      },
+    });
+    if (getOrder !== null) {
+      res.status(200).json({
+        success: true,
+        message: "Orders found successfully",
+        data: getOrders,
+      });
+    } else {
+      res
+        .status(500)
+        .json({ success: false, message: "No orders have been found!!"});
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
 export const getOrder = async (req, res) => {
   const customer = req.user;
   const custID = customer.cust_id;

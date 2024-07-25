@@ -52,7 +52,7 @@ const Dashboard = () => {
   const findOders = async () => {
     try {
       const orders = await axios
-        .get(`${VITE_API_URL_BASE}/orders/all`, {
+        .get(`${VITE_API_URL_BASE}/orders/all/orders`, {
           withCredentials: true,
         })
         .catch((error) => console.log(error));

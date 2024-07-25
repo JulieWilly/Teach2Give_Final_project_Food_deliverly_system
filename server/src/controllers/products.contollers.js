@@ -50,7 +50,7 @@ export const getProductByCustomer = async (req, res) => {
 
 export const getOneProduct = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.params.product_id;
     const findProduct = await prisma.food_products.findFirst({
       where: { product_id: id },
     });

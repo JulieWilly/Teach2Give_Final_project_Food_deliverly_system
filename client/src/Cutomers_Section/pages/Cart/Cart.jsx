@@ -22,13 +22,18 @@ const Cart = () => {
       console.log(cart)
       cart.map( async(quatity) => {
         const price = quatity.productPrice
-        console.log(price)
-        await axios.post(`${VITE_API_URL_BASE}/orders/create`,{
-          totalAmount:price
-        },
-      {
-        withCredentials:true
-      }).catch(error => console.log(error))
+        console.log('current price', price)
+        await axios
+          .post(
+            `${VITE_API_URL_BASE}/orders/create`,
+            {
+              totalAmount: quatity.productPrice,
+            },
+            {
+              withCredentials: true,
+            }
+          )
+          .catch((error) => console.log(error));
 
         navigate("/billing");
       })
