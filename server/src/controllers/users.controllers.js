@@ -15,10 +15,8 @@ export const getAllCustomers = async (req, res) => {
         custName: true,
         custEmail: true,
         custPhoneNumber: true,
-        custLocation: true,
         approvedCust: true,
-        customerRole: true,
-        customerAddress: true,
+     
       },
     });
 
@@ -67,10 +65,8 @@ export const createCustomer = async (req, res) => {
       custName,
       custEmail,
       custPhoneNumber,
-      custLocation,
       password,
-      customerAddress,
-      customerRole,
+
     } = req.body;
     const passToString = password.toString();
     const passwordHash = bcrypt.hashSync(passToString, 10);
@@ -79,10 +75,8 @@ export const createCustomer = async (req, res) => {
         custName,
         custEmail,
         custPhoneNumber,
-        custLocation,
         password: passwordHash,
-        customerAddress,
-        customerRole,
+    
       },
     });
     res.status(200).json({
@@ -119,9 +113,7 @@ export const loginCustomer = async (req, res) => {
           custName: loginCustomer.custName,
           custEmail: loginCustomer.custEmail,
           custPhoneNumber: loginCustomer.custPhoneNumber,
-          approvedCust: loginCustomer.approvedCust,
-          customerRole: loginCustomer.customerRole,
-          customerAddress: loginCustomer.customerAddress,
+          approvedCust: loginCustomer.approvedCust
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {

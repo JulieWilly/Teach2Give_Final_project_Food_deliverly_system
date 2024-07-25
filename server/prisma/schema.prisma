@@ -18,10 +18,8 @@ model Customers {
   custName        String   @map("customer_name")
   custEmail       String   @unique @map("customer_email")
   custPhoneNumber Int      @map("customer_phone_number")
-  custLocation    String   @map("customer location")
   password        String   @map("customer_password")
-  customerAddress String @map("customer_address")
-  customerRole    String   @map("customer_role")
+  customerRole    String   @default("User") @map("customer_role")
   approvedCust    Boolean  @default(false) @map("approved_customer")
   createdAt       DateTime @default(now()) @map("customer_createdAt")
   updatedAt       DateTime @updatedAt() @map("customer_updatedAt")
@@ -29,8 +27,6 @@ model Customers {
   orders Orders[]
   reviewer Reviews[]
   payment Payment[]
-
-
 
   @@map("customers_tb")
 }
