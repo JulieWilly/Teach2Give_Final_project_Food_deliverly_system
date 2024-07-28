@@ -16,6 +16,7 @@ export const getAllCustomers = async (req, res) => {
         custEmail: true,
         custPhoneNumber: true,
         approvedCust: true,
+        customerRole:true
      
       },
     });
@@ -113,7 +114,8 @@ export const loginCustomer = async (req, res) => {
           custName: loginCustomer.custName,
           custEmail: loginCustomer.custEmail,
           custPhoneNumber: loginCustomer.custPhoneNumber,
-          approvedCust: loginCustomer.approvedCust
+          approvedCust: loginCustomer.approvedCust,
+          customerRole: loginCustomer.customerRole
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {

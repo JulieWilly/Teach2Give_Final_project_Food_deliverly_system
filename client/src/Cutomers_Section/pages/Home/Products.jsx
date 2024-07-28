@@ -1,10 +1,13 @@
 import "./home.css";
 import React, { useEffect, useState } from "react";
-import food from "../../../assets/foods.jpg";
 import Title from "../../compnents/Title";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { useNavigate } from "react-router-dom";
+import { FaCartPlus } from "react-icons/fa";
+import { GrFormCheckmark } from "react-icons/gr";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Products = () => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
@@ -28,7 +31,7 @@ const Products = () => {
         .catch((error) => console.log(error));
         console.log('product id', product_id)
         console.log(addToCart)
-      alert('added to cart successfully.')
+      toast('Product added to cart.')
     } catch(error) {
       console.log(error)
     }
@@ -62,7 +65,7 @@ const Products = () => {
                 <p>{products.productDesc}</p>
                 <p>$ ({products.productPrice})</p>
               </div>
-              <div className="buttons">
+              <div className="buttons btn_to_cart">
                 {products && products.addedToCart == true ? (
                   <button
                     className="btn_2"
@@ -70,15 +73,17 @@ const Products = () => {
                       handleAddToCart(products.product_id);
                     }}
                   >
+                    {<GrFormCheckmark />}
                     Added to cart
                   </button>
                 ) : (
                   <button
-                    className="btn2"
+                    className="btn2 btn_2"
                     onClick={() => {
                       handleAddToCart(products.product_id);
                     }}
                   >
+                    {<FaCartPlus />}
                     Add to Cart
                   </button>
                 )}
@@ -89,6 +94,7 @@ const Products = () => {
           <p>Loading data ...</p>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

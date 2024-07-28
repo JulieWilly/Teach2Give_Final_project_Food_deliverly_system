@@ -6,19 +6,34 @@
   padding: 1rem;
 }
 
+.form{
+  width: 50%;
+}
+
 form {
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 0 1rem;
-  border-radius: 0.5rem;
   width: 20rem;
   height: auto;
 }
 
+.login_img{
+  width: 50%;
+  height: 75vh;
+}
+.login_img img{
+width: 100%;
+height: 100%;
+  display: block;
+  object-fit: cover;
+
+}
 ._form{
   padding: 1rem;
+  width: 50%;
 }
 ._form input {
   height: 2rem;
@@ -26,9 +41,30 @@ form {
 }
 form input {
   padding-inline-start: 0.5rem;
-  min-width: 90%;
-
+  min-width:50%;
 }
+
+.form_inputs{
+  height: 90% ;
+  display: grid;
+  place-content: center;
+}
+
+.form_inputs div{
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+}
+.form_inputs div input{
+  width: 100%;
+  height: 3rem;
+}
+
+.title{
+  color: black;
+}
+
+
 form div {
   width: 100%;
   height: auto;
@@ -38,3 +74,7 @@ form p {
   color: black;
   padding: 0;
 }
+
+
+
+
