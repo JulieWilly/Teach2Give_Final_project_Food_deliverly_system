@@ -10,14 +10,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Title from "../../compnents/Title";
 import loginImg from "../../../assets/login_image.jpg";
+import createStore from "../../../Store/userStore";
 const Sign_in = () => {
+  const setUser = createStore((state) => state.setUser)
+
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
   const navigate = useNavigate();
-
-  const notify = () => {
-    toast("Logged in successfully");
-  };
   const handleSubmit = async (values) => {
     try {
       setLoading(true);
@@ -35,21 +34,20 @@ const Sign_in = () => {
           },
         )
         .catch((error) => toast.warning("Invalid user credentials!!"));
-      const loginData = login.data.success;
-      console.log("Login data", loginData);
-      if (loginData === true) {
-        if (loginData.customerRole === "Admin") {
+      const loginData = login.data;
+      if (login.status == 200 && loginData.success === true) {
+        toast(" Logged in successfully, as an Amin");
+       const items =  login.data
+       console.log('set user 2',setUser(items));
+        if (loginData.data.customerRole === "Admin") {
           navigate("/admin_home");
-
         } else {
           navigate("/users_home");
-
         }
       }
     } catch (error) {
       setError(error);
       toast.error(`Something went wrong!!`);
-      setError * "";
     } finally {
       setLoading(false);
     }
@@ -105,7 +103,7 @@ const Sign_in = () => {
             </div>
 
             <div className="buttons">
-              <button onClick={notify}>
+              <button>
                 {loading ? "Signing in. Please wait ..." : "Sign in"}
               </button>
             </div>

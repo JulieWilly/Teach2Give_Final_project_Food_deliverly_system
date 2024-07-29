@@ -18,7 +18,7 @@ const Heros = () => {
         </p>
 
         <div className="button">
-          <Link to={'/cart'}>
+          <Link to={"/cart"}>
             <button>Order Now</button>
           </Link>
           <button>Explore Menu</button>

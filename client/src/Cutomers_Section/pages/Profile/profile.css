@@ -33,20 +33,20 @@
   height: 100%;
 }
 
-.form_input{
+.form_input {
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: center;
 }
-.form_input ._form{
+.form_input ._form {
   border-radius: 1rem;
   width: 40%;
   display: flex;
   align-items: center;
 }
 
-.form_input ._form .custImage{
+.form_input ._form .custImage {
   border: 1px solid black;
   width: 8rem;
   height: 8rem;
@@ -60,10 +60,9 @@
 }
 
 .form_input ._form .inputs input {
-  width: 20rem;  
+  width: 20rem;
 }
 
-.form_input ._form button{
+.form_input ._form button {
   width: 21rem;
-
 }

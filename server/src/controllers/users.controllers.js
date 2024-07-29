@@ -134,11 +134,12 @@ export const loginCustomer = async (req, res) => {
   }
 };
 
-export const updateCustomer = async (req, res) => {
+export const approveCustomer = async (req, res) => {
   const customer = req.user;
   const custID = customer.cust_id;
 
   const custId = req.params.cust_id;
+  const { approvedCust, customerRole } = req.body;
 
   try {
     // find the order first
@@ -151,26 +152,20 @@ export const updateCustomer = async (req, res) => {
     if (!approveCustAccout) {
       return res
         .status(404)
-        .json({ success: false, message: "Order not found." });
+        .json({ success: false, message: "Customer not found." });
     }
-
-    console.log(approveCustAccout);
-
-    // //   // check if the order belongs to the authenticated user.
-    // if (approveCustAccout.cust_id != custID) {
-    //   return res
-    //     .status(403)
-    //     .json({ success: false, message: "Unauthorized action." });
-    // }
 
     const updates = await prisma.customers.update({
       where: { cust_id: custId },
-      data: { approvedCust: true },
+      data: {
+        approvedCust: approvedCust,
+        customerRole: customerRole,
+      },
     });
 
     res.json({
       success: true,
-      message: "Order approved successfully",
+      message: "Customer details updated successfully",
       data: updates,
     });
   } catch (error) {

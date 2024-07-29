@@ -18,13 +18,11 @@ export const createAddress = async (req, res) => {
     });
 
     if (createAddress !== null) {
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Address created successfully.",
-          data: createAddress,
-        });
+      res.status(200).json({
+        success: true,
+        message: "Address created successfully.",
+        data: createAddress,
+      });
     } else {
       res
         .status(500)

@@ -1,12 +1,11 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
-import {VITE_API_URL_BASE} from "../../../configs/configs";
+import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { useNavigate } from "react-router-dom";
-  import { Link } from "react-router-dom";
-  import './profile.css'
-
+import { Link } from "react-router-dom";
+import "./profile.css";
 
 const UpdateCustomerDetails = () => {
   const [inputs, setInputs] = useState("");
@@ -14,15 +13,13 @@ const UpdateCustomerDetails = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-
   // get data from the database and prepopulate the field.
 
   useEffect(() => {
     const getDetails = async () => {
-      const getData  = await axios.get(`${VITE_API_URL_BASE}`)
-    }
-  })
-
+      const getData = await axios.get(`${VITE_API_URL_BASE}`);
+    };
+  });
 
   // form validations.
 
@@ -86,7 +83,7 @@ const UpdateCustomerDetails = () => {
       customerRole: "",
       customerAddress: "",
       password: "",
-      custImage:''
+      custImage: "",
     },
     onSubmit: handleSubmit,
     validationSchema: formValidations,
@@ -149,7 +146,6 @@ const UpdateCustomerDetails = () => {
           )}
         </div>
 
-        
         <div className="inputs">
           <input
             type="number"

@@ -3,7 +3,7 @@ import {
   getAllCustomers,
   getOneCustomer,
   createCustomer,
-  updateCustomer,
+  approveCustomer,
   deleteCustomer,
   loginCustomer,
 } from "../controllers/users.controllers.js";
@@ -17,7 +17,7 @@ router
   .get("/customers", verifyToken, getAllCustomers)
   .get("/:cust_id", verifyToken, getOneCustomer)
   .post("/create", createCustomer)
-  .patch("/:cust_id", verifyToken, updateCustomer)
+  .patch("/:cust_id", verifyToken, approveCustomer)
   .delete("/:cust_id", verifyToken, deleteCustomer);
 
 export default router;

@@ -45,7 +45,7 @@ const Header = () => {
             <NavLink to={"/cart"}>
               <FaCartPlus className="_icons" />
             </NavLink>
-            <div className="user_profile" >
+            <div className="user_profile">
               <div className="img">
                 <img onClick={(e) => setOpen(!open)} src={icon} alt="" />
               </div>

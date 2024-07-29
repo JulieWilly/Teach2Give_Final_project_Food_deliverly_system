@@ -25,7 +25,7 @@ import ManageUsers from "./Admin_section/Pages/ManageUsers/ManageUsers";
 import Products from "./Admin_section/Pages/Products/Products";
 import Reviewers from "./Admin_section/Pages/Reviews/Reviewers";
 import Update_product from "./Admin_section/Pages/Products/Update_product";
-import UpdateCustomerDetails from './Cutomers_Section/pages/Profile/UpdateCustomerDetails'
+import UpdateCustomerDetails from "./Cutomers_Section/pages/Profile/UpdateCustomerDetails";
 const AdminLayout = () => (
   <div className="admin-layout">
     <AdminHeader />
@@ -112,7 +112,11 @@ function App() {
             <Route exact path="/cart" element={<Cart />} />
             <Route exact path="/billing" element={<Billing />} />
             <Route exact path="/add_reviews" element={<Add_Reviews />} />
-            <Route exact path="/update_details" element={<UpdateCustomerDetails/>}/>
+            <Route
+              exact
+              path="/update_details"
+              element={<UpdateCustomerDetails />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
