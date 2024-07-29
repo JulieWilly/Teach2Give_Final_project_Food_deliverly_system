@@ -12,12 +12,11 @@ const Reviews = () => {
 
   useEffect(() => {
     const getReviews = async () => {
-      const reviews = await axios.get(
-        `${VITE_API_URL_BASE}/customer/review/all`,
-        {
+      const reviews = await axios
+        .get(`${VITE_API_URL_BASE}/customer/review/all`, {
           withCredentials: true,
-        },
-      ).catch(error => console.log(error))
+        })
+        .catch((error) => console.log(error));
       console.log("reviews", reviews);
       setReviews(reviews.data.data);
     };

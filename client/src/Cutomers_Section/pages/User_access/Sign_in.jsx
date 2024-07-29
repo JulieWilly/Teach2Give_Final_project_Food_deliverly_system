@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import { Form, Link, useNavigate } from "react-router-dom";
 import "./user_access.css";
 import { useFormik } from "formik";
-import '../../compnents/global.css'
+import "../../compnents/global.css";
 import * as Yup from "yup";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Title from "../../compnents/Title";
-import loginImg from '../../../assets/login_image.jpg'
+import loginImg from "../../../assets/login_image.jpg";
 const Sign_in = () => {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
   const navigate = useNavigate();
 
   const notify = () => {
-    toast('Logged in successfully')
+    toast("Logged in successfully");
   };
   const handleSubmit = async (values) => {
     try {
@@ -32,30 +32,24 @@ const Sign_in = () => {
           },
           {
             withCredentials: true,
-          }
+          },
         )
-        .catch((error) => toast.warning('Invalid user credentials!!'));
-        const loginData = login.data.success;
-        console.log('Login data', loginData)
+        .catch((error) => toast.warning("Invalid user credentials!!"));
+      const loginData = login.data.success;
+      console.log("Login data", loginData);
       if (loginData === true) {
-
-        if (!loginData.customerRole === "Admin") {
-          navigate("/users_home");
-
-        } else {
+        if (loginData.customerRole === "Admin") {
           navigate("/admin_home");
 
-
+        } else {
+          navigate("/users_home");
 
         }
       }
-
-
     } catch (error) {
       setError(error);
       toast.error(`Something went wrong!!`);
-      setError*('')
-
+      setError * "";
     } finally {
       setLoading(false);
     }
@@ -93,7 +87,7 @@ const Sign_in = () => {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.custEmail && formik.errors.custEmail && (
-                <p className="error" >{formik.errors.custEmail}</p>
+                <p className="error">{formik.errors.custEmail}</p>
               )}
             </div>
             <div>
@@ -125,6 +119,7 @@ const Sign_in = () => {
           <img src={loginImg} alt="" />
         </div>
       </div>
+      <p> {error}</p>
     </>
   );
 };

@@ -10,14 +10,13 @@ const Reviewers = () => {
   const [loading, setLoading] = useState();
   const [review, setReview] = useState([]);
 
-
   // REJECT REVIEW
-  const handleReviewReject = async(review_id) => {
-     await axios.delete(`${VITE_API_URL_BASE}/customer/review/${review_id}`, {
-       withCredentials: true,
-     });
+  const handleReviewReject = async (review_id) => {
+    await axios.delete(`${VITE_API_URL_BASE}/customer/review/${review_id}`, {
+      withCredentials: true,
+    });
     alert("deleted successfully.");
-  }
+  };
   useEffect(() => {
     const getReviews = async () => {
       try {
@@ -28,7 +27,7 @@ const Reviewers = () => {
             withCredentials: true,
           })
           .catch((error) => console.log(error));
-          console.log('reviews', reviews)
+        console.log("reviews", reviews);
         setReview(reviews.data.data);
       } catch (error) {
         console.log(error);
@@ -71,9 +70,7 @@ const Reviewers = () => {
       ) : (
         <p>Loading reviews</p>
       )}
-
     </div>
-
   );
 };
 

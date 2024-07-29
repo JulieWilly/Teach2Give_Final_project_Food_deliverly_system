@@ -4,7 +4,7 @@ import Dashboard from "../Dashboard/Dashboard";
 const AdminHome = () => {
   return (
     <div>
-       <Dashboard/>
+      <Dashboard />
     </div>
   );
 };

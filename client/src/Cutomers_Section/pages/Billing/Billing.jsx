@@ -10,11 +10,10 @@ import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { useNavigate } from "react-router-dom";
 
 const Billing = (values) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleAddresses = async (values) => {
-    console.log(values)
-    alert('sdsdsd')
-
+    console.log(values);
+    alert("sdsdsd");
 
     // try {
     //   const createAddresses = await axios
@@ -51,7 +50,7 @@ const Billing = (values) => {
           },
           {
             withCredentials: true,
-          }
+          },
         )
         .catch((error) => console.log(error));
 
@@ -63,14 +62,14 @@ const Billing = (values) => {
   };
 
   const handleSubmit = (values) => {
-createPayment(values)
-handleAddresses(values)
-  }
+    createPayment(values);
+    handleAddresses(values);
+  };
 
   // NAVIGATE
   const handleNavigate = () => {
     navigate("/add_reviews");
-  }
+  };
 
   const formValidation = Yup.object({
     customerAddress: Yup.string().required("County name required."),
@@ -254,7 +253,7 @@ handleAddresses(values)
             </div>
 
             <div className="buttons">
-              <button onClick={ handleNavigate}>Place order</button>
+              <button onClick={handleNavigate}>Place order</button>
             </div>
           </form>
         </div>

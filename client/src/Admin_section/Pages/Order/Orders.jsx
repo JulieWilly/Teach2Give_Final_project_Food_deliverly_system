@@ -46,7 +46,7 @@ const Orders = () => {
           },
           {
             withCredentials: true,
-          }
+          },
         )
         .catch((error) => console.log(error));
       console.log("id", order_id);

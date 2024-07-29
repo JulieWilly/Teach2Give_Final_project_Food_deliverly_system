@@ -8,38 +8,34 @@
 /*  */
 /* .app {
     border: 2px solid white;
-} */ */
-
-.dashboardsect{
-    display: flex;
-    flex-direction: row;
-    border: 2px solid white;
-
+} */
+*/ .dashboardsect {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid white;
 }
 .orders {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 
-align-items: center;
-justify-content: center;
-gap: 2rem;
-
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
-._orders{
-    width: 30rem;
-    padding: 2rem;
-    border-radius: 1rem;
-    background-color: #0F0F13;
-}
-
-._orders .icon{
-    font-size: 1.5rem;
-    padding: 1rem;
-    border: 1px solid white;
-    border-radius: 50%;
+._orders {
+  width: 30rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #0f0f13;
 }
 
-.res{
-    color: red;
+._orders .icon {
+  font-size: 1.5rem;
+  padding: 1rem;
+  border: 1px solid white;
+  border-radius: 50%;
 }
 
+.res {
+  color: red;
+}

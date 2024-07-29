@@ -1,6 +1,13 @@
 import { useState } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route, Link, useLocation, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+  Outlet,
+} from "react-router-dom";
 import Sign_in from "./Cutomers_Section/pages/User_access/Sign_in";
 import Sign_up from "./Cutomers_Section/pages/User_access/Sign_up";
 import AdminHome from "./Admin_section/Pages/Home/AdminHome";
@@ -18,39 +25,38 @@ import ManageUsers from "./Admin_section/Pages/ManageUsers/ManageUsers";
 import Products from "./Admin_section/Pages/Products/Products";
 import Reviewers from "./Admin_section/Pages/Reviews/Reviewers";
 import Update_product from "./Admin_section/Pages/Products/Update_product";
- const AdminLayout = () => (
-    <div className="admin-layout">
-      <AdminHeader />
-      <NavigationLink/>
-      <div className="admin-main">
-        <Outlet />
-      </div>
+import UpdateCustomerDetails from './Cutomers_Section/pages/Profile/UpdateCustomerDetails'
+const AdminLayout = () => (
+  <div className="admin-layout">
+    <AdminHeader />
+    <NavigationLink />
+    <div className="admin-main">
+      <Outlet />
     </div>
-  );
+  </div>
+);
 
-  const UserLayout = () => (
-    <div className="user-layout">
-      <Header />
-      <div className="user-main">
-        <Outlet />
-      </div>
+const UserLayout = () => (
+  <div className="user-layout">
+    <Header />
+    <div className="user-main">
+      <Outlet />
     </div>
-  );
+  </div>
+);
 
-  const MainLayout = () => {
-    const location = useLocation();
-    const isAdminRoute = location.pathname.startsWith("/admin");
-    const isUserRoute = location.pathname.startsWith("/user");
-    return (
-      <>
-        {/* {!isAdminRoute && !isUserRoute && <Header />} */}
-        <Outlet />
-      </>
-    );
-  };
+const MainLayout = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isUserRoute = location.pathname.startsWith("/user");
+  return (
+    <>
+      {/* {!isAdminRoute && !isUserRoute && <Header />} */}
+      <Outlet />
+    </>
+  );
+};
 function App() {
- 
-
   return (
     <>
       <BrowserRouter>
@@ -106,6 +112,7 @@ function App() {
             <Route exact path="/cart" element={<Cart />} />
             <Route exact path="/billing" element={<Billing />} />
             <Route exact path="/add_reviews" element={<Add_Reviews />} />
+            <Route exact path="/update_details" element={<UpdateCustomerDetails/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

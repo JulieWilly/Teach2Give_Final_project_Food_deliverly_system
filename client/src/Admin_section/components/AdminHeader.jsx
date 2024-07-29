@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from "react";
 import icon from "../../../src/assets/food_logo.avif";
 import "./global.css";
-import axios from 'axios'
+import axios from "axios";
 import { VITE_API_URL_BASE } from "../../configs/configs";
 
-const AdminHeader= () => {
-  const [name, setName] = useState([])
-  // getAdminName = 
+const AdminHeader = () => {
+  const [name, setName] = useState([]);
+  // getAdminName =
   const getAdminName = async () => {
-    try{
+    try {
+      const getName = await axios
+        .get(`${VITE_API_URL_BASE}/customers`, {
+          withCredentials: true,
+        })
+        .catch((error) => console.log(error));
 
-      const getName = await axios.get(`${VITE_API_URL_BASE}/customers`, {
-        withCredentials:true
-      }).catch(error => console.log(error)) 
-      
       setName(getName.data.data);
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-getAdminName()
-  },[])
+    getAdminName();
+  }, []);
   return (
     <div className="admin_header_sect">
       <div className="header_sect">

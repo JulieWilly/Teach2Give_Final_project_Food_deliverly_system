@@ -1,5 +1,5 @@
 .admin_header_sect {
-  background-color: #0F0F13;
+  background-color: #0f0f13;
   width: 100%;
 }
 
@@ -23,19 +23,18 @@
   align-items: center;
   gap: 1rem;
 }
-._logo{
+._logo {
   width: 4rem;
   height: 4rem;
   display: grid;
   place-content: center;
   overflow: hidden;
   border-radius: 50%;
-
 }
 
- ._logo img {
+._logo img {
   width: 100%;
-  height: 100% ;
+  height: 100%;
   display: block;
   object-fit: cover;
 }
@@ -54,7 +53,7 @@ nav ul {
   padding: 0;
 }
 
-.heros_sect{
+.heros_sect {
   max-height: 1rem;
   margin-bottom: 1rem;
 }
@@ -63,8 +62,8 @@ nav ul {
 .error {
   color: red;
   padding: 0;
-  margin-top: -.4rem;
+  margin-top: -0.4rem;
   text-align: start;
-  padding-left: .5rem;
-  font-size: .8rem;
+  padding-left: 0.5rem;
+  font-size: 0.8rem;
 }

@@ -1,69 +1,66 @@
-import React from 'react';
-import Banner from '../../../compnents/Banner';
-import axios from 'axios';
-import { VITE_API_URL_BASE } from '../../../../configs/configs';
-import * as Yup from 'yup'
-import { useFormik } from 'formik';
-import Footer from '../../../compnents/Footer';
-import Title from '../../../compnents/Title';
-
+import React from "react";
+import Banner from "../../../compnents/Banner";
+import axios from "axios";
+import { VITE_API_URL_BASE } from "../../../../configs/configs";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import Footer from "../../../compnents/Footer";
+import Title from "../../../compnents/Title";
 
 const Add_Reviews = () => {
   const createAddresses = async () => {
-      try{
-          const createAddresses = await axios
-            .post(
-              `${VITE_API_URL_BASE}/address/create`,
-              {
-                customerAddress: values.customerAddress,
-                city: values.city,
-                state: values.state,
-                zipcode: values.zipcode,
-              },
-              {
-                withCredentials: true,
-              }
-            )
-            .catch((error) => console.log(error));
+    try {
+      const createAddresses = await axios
+        .post(
+          `${VITE_API_URL_BASE}/address/create`,
+          {
+            customerAddress: values.customerAddress,
+            city: values.city,
+            state: values.state,
+            zipcode: values.zipcode,
+          },
+          {
+            withCredentials: true,
+          },
+        )
+        .catch((error) => console.log(error));
 
-            console.log("payment v", values);
-            console.log('addresses',createAddresses)
-      } catch(error) {
-        console.log(error)
-      }
-  }
+      console.log("payment v", values);
+      console.log("addresses", createAddresses);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const createPayement = async (values) => {
-try {
-  const createPayment = await axios
-    .post(
-      `${VITE_API_URL_BASE}/payments/pay`,
-      {
-        paymentMethod: values.paymentMethod,
-        amount: values.amount,
-        paymentStatus: values.paymentStatus,
-      },
-      {
-        withCredentials: true,
-      }
-    )
-    .catch((error) => console.log(error));
+    try {
+      const createPayment = await axios
+        .post(
+          `${VITE_API_URL_BASE}/payments/pay`,
+          {
+            paymentMethod: values.paymentMethod,
+            amount: values.amount,
+            paymentStatus: values.paymentStatus,
+          },
+          {
+            withCredentials: true,
+          },
+        )
+        .catch((error) => console.log(error));
 
-  console.log('payment v',values);
-  console.log('payment',createPayment);
-} catch (error) {
-  console.log(error);
-}
-  }
-
+      console.log("payment v", values);
+      console.log("payment", createPayment);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = (values) => {
-    createAddresses(values)
-    createPayement(values)
+    createAddresses(values);
+    createPayement(values);
   };
   const formValidation = Yup.object({
     customerAddress: Yup.string().required("County name required."),
-    amount: Yup.string()
-      .required("Amount paid required."),
+    amount: Yup.string().required("Amount paid required."),
     city: Yup.string().required("City name required."),
     state: Yup.string().required("State name required."),
     zipcode: Yup.string().required("Zip codes required."),
@@ -75,7 +72,6 @@ try {
       reviewRating: "",
       reviewComment: "",
       customerName: "",
-     
     },
     onSubmit: handleSubmit,
     validationSchema: formValidation,
@@ -139,7 +135,7 @@ try {
           </div>
 
           <div className="buttons">
-            <button >Submit review</button>
+            <button>Submit review</button>
           </div>
         </form>
       </div>
@@ -147,9 +143,6 @@ try {
       <Footer />
     </div>
   );
-}
-
-
-
+};
 
 export default Add_Reviews;

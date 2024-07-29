@@ -3,10 +3,9 @@ import React, { useEffect } from "react";
 import icon from "../../../assets/react.svg";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { useState } from "react";
-import { useNavigate, Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
-
 
 const Products = () => {
   const [loading, setLoading] = useState();
@@ -14,7 +13,6 @@ const Products = () => {
   const [image, setImage] = useState();
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-
 
   // find products
   useEffect(() => {
@@ -41,12 +39,9 @@ const Products = () => {
     alert("deleted successfully.");
   };
 
-
-  
   const handleNavigate = () => {
-    navigate('/add_product')
-  }
- 
+    navigate("/add_product");
+  };
 
   return (
     <div className="products_sect">

@@ -8,7 +8,7 @@ import cors from "cors";
 import order_itemsRouter from "./routers/order_item.router.js";
 import reviewRouter from "./routers/customer.review.router.js";
 import paymentRouter from "./routers/payments.router.js";
-import addressRouter from './routers/addresses.router.js'
+import addressRouter from "./routers/addresses.router.js";
 import categoriesRouter from "./routers/categories.router.js";
 import bodyParser from "body-parser";
 
@@ -39,4 +39,4 @@ foodDelivery.use("/foodie.com/ke/api/v1/customer/review", reviewRouter);
 
 foodDelivery.use("/foodie.com/ke/api/v1/payments", paymentRouter);
 foodDelivery.use("/foodie.com/ke/api/v1/cartegories", categoriesRouter);
-foodDelivery.use('/foodie.com/ke/api/v1/address', addressRouter)
+foodDelivery.use("/foodie.com/ke/api/v1/address", addressRouter);

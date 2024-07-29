@@ -12,39 +12,33 @@ const ManageUsers = () => {
   const [error, setError] = useState();
   const [customer, setCustomer] = useState([]);
 
-
   /// delete customer
   const handleDelete = async (product_id) => {
-    await axios.delete(
-      `${VITE_API_URL_BASE}/${product_id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    await axios.delete(`${VITE_API_URL_BASE}/${product_id}`, {
+      withCredentials: true,
+    });
     alert("delete successfully.");
   };
 
   const handleApproval = async (cust_id) => {
     try {
-    const approveCustomer = await axios
-      .patch(
-        `${VITE_API_URL_BASE}/${cust_id}`,
-        {
-          approvedCust: true,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .catch((error) => console.log(error));
-    console.log("id", cust_id);
-    alert('done')
-  } catch (error) {
-    console.log(error);
-  }
-};
-   
-  
+      const approveCustomer = await axios
+        .patch(
+          `${VITE_API_URL_BASE}/${cust_id}`,
+          {
+            approvedCust: true,
+          },
+          {
+            withCredentials: true,
+          },
+        )
+        .catch((error) => console.log(error));
+      console.log("id", cust_id);
+      alert("done");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const getCustomers = async () => {
@@ -91,7 +85,10 @@ const ManageUsers = () => {
             </div>
             <div className="buttons">
               {customers && customers.approvedCust == true ? (
-                <button className="btn_2" onClick={() => handleApproval(customers.cust_id)}>
+                <button
+                  className="btn_2"
+                  onClick={() => handleApproval(customers.cust_id)}
+                >
                   Approved
                 </button>
               ) : (
@@ -114,5 +111,5 @@ const ManageUsers = () => {
     </div>
   );
 };
- 
+
 export default ManageUsers;

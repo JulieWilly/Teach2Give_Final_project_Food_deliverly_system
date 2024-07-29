@@ -29,19 +29,18 @@ const Sign_up = () => {
           custPhoneNumber: values.custPhoneNumber,
           password: values.password,
         })
-      .catch((error) => toast.warning('Something went wrong!!!'));
+        .catch((error) => toast.warning("Something went wrong!!!"));
       setInputs(createCustomer);
 
       console.log(createCustomer);
       if (createCustomer.data.success === true) {
-        toast('Account created successfully.')
+        toast("Account created successfully.");
         navigate("/");
       }
     } catch (error) {
       console.log(error);
       setError(error);
-        toast("Server error");
-
+      toast("Server error");
     } finally {
       setLoading(false);
     }

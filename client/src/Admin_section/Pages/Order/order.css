@@ -7,7 +7,7 @@
 }
 .orders_sect .order {
   padding: 0.5rem;
-  background-color: #0F0F13;
+  background-color: #0f0f13;
   border-radius: 0.5rem;
   display: flex;
   color: white;
@@ -20,12 +20,10 @@
 
 .order_desc {
   width: 50%;
-
 }
 .order .order_img {
   width: 50%;
   display: block;
-
 }
 
 .order .order_img img {
@@ -41,17 +39,17 @@
   justify-content: space-between;
 }
 
- .order_desc .buttons {
+.order_desc .buttons {
   display: flex;
   gap: 2rem;
   width: 100%;
   justify-content: space-between;
 }
 
- .buttons button{
-  background-color:#52556C;
+.buttons button {
+  background-color: #52556c;
 }
-.order_desc .buttons button:hover{
+.order_desc .buttons button:hover {
   background-color: black;
 }
 
@@ -60,14 +58,12 @@
   color: white;
 }
 
-
- .buttons .btn2{
+.buttons .btn2 {
   background-color: none;
   background-color: yellow;
   color: black;
 }
 
-.buttons .btn2:hover{
+.buttons .btn2:hover {
   color: black;
 }
-

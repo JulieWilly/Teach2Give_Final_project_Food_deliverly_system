@@ -1,9 +1,10 @@
 import "./home.css";
 import { useNavigate } from "react-router-dom";
 
+import { Link } from "react-router-dom";
 import React from "react";
 import icon from "../../../assets/react.svg";
-import foods from '../../../assets/foods.jpg'
+import foods from "../../../assets/foods.jpg";
 
 const Heros = () => {
   const navigate = useNavigate();
@@ -17,7 +18,9 @@ const Heros = () => {
         </p>
 
         <div className="button">
-          <button>Order Now</button>
+          <Link to={'/cart'}>
+            <button>Order Now</button>
+          </Link>
           <button>Explore Menu</button>
         </div>
       </div>

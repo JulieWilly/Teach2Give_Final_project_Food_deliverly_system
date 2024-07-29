@@ -14,10 +14,9 @@ const Products = () => {
   const [product, setProducts] = useState([]);
   const navigate = useNavigate();
 
-
   // ADD PRODUCTS TO THE CART.
   const handleAddToCart = async (product_id) => {
-    try{
+    try {
       const addToCart = await axios
         .put(
           `${VITE_API_URL_BASE}/products/${product_id}`,
@@ -26,16 +25,16 @@ const Products = () => {
           },
           {
             withCredentials: true,
-          }
+          },
         )
         .catch((error) => console.log(error));
-        console.log('product id', product_id)
-        console.log(addToCart)
-      toast('Product added to cart.')
-    } catch(error) {
-      console.log(error)
+      console.log("product id", product_id);
+      console.log(addToCart);
+      toast("Product added to cart.");
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   useEffect(() => {
     const getProducts = async () => {
       try {

@@ -12,9 +12,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
   const [customer, setCustomer] = useState([]);
-  const [products, setProducts] = useState([])
-    const [orders, setOrders] = useState([]);
-  
+  const [products, setProducts] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const getCustomers = async () => {
     try {
@@ -65,7 +64,7 @@ const Dashboard = () => {
   useEffect(() => {
     getCustomers();
     findProducts();
-    findOders()
+    findOders();
   }, []);
   return (
     <div>
@@ -74,7 +73,10 @@ const Dashboard = () => {
         <div className="orders">
           <div className="_orders">
             <FaCartPlus className="icon" />
-            <h2>Orders ({orders.length > 0 ? (orders.length ): ('There are no orders yet.')}) </h2>
+            <h2>
+              Orders (
+              {orders.length > 0 ? orders.length : "There are no orders yet."}){" "}
+            </h2>
           </div>
           <div className="_orders">
             <LuUsers className="icon" />

@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import { application } from "express";
 import { config } from "dotenv";
 
-config()
+config();
 
 export const getAllCustomers = async (req, res) => {
   try {
@@ -16,8 +16,7 @@ export const getAllCustomers = async (req, res) => {
         custEmail: true,
         custPhoneNumber: true,
         approvedCust: true,
-        customerRole:true
-     
+        customerRole: true,
       },
     });
 
@@ -62,13 +61,7 @@ export const getOneCustomer = async (req, res) => {
 
 export const createCustomer = async (req, res) => {
   try {
-    const {
-      custName,
-      custEmail,
-      custPhoneNumber,
-      password,
-
-    } = req.body;
+    const { custName, custEmail, custPhoneNumber, password } = req.body;
     const passToString = password.toString();
     const passwordHash = bcrypt.hashSync(passToString, 10);
     const createCust = await prisma.customers.create({
@@ -77,7 +70,6 @@ export const createCustomer = async (req, res) => {
         custEmail,
         custPhoneNumber,
         password: passwordHash,
-    
       },
     });
     res.status(200).json({
@@ -99,7 +91,7 @@ export const loginCustomer = async (req, res) => {
       where: { custEmail: custEmail },
     });
 
-    console.log(custEmail + '' + password)
+    console.log(custEmail + "" + password);
     if (loginCustomer) {
       const matchPassword = bcrypt.compareSync(
         password,
@@ -115,15 +107,15 @@ export const loginCustomer = async (req, res) => {
           custEmail: loginCustomer.custEmail,
           custPhoneNumber: loginCustomer.custPhoneNumber,
           approvedCust: loginCustomer.approvedCust,
-          customerRole: loginCustomer.customerRole
+          customerRole: loginCustomer.customerRole,
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-          expiresIn: "3600m", 
+          expiresIn: "3600m",
         });
 
         res.cookie("access_token", token);
-        console.log('gen token - ',token)
+        console.log("gen token - ", token);
         res.status(200).json({
           success: true,
           message: "Customer logged in successfully.",
@@ -143,7 +135,7 @@ export const loginCustomer = async (req, res) => {
 };
 
 export const updateCustomer = async (req, res) => {
- const customer = req.user;
+  const customer = req.user;
   const custID = customer.cust_id;
 
   const custId = req.params.cust_id;
@@ -151,21 +143,20 @@ export const updateCustomer = async (req, res) => {
   try {
     // find the order first
     const approveCustAccout = await prisma.customers.findUnique({
-      where: { cust_id: custId  },
+      where: { cust_id: custId },
       // data: { approved: true }
     });
 
-
-     // retuen eerror if the order has not been found.
+    // retuen eerror if the order has not been found.
     if (!approveCustAccout) {
       return res
         .status(404)
         .json({ success: false, message: "Order not found." });
     }
 
-    console.log(approveCustAccout)
+    console.log(approveCustAccout);
 
-  // //   // check if the order belongs to the authenticated user.
+    // //   // check if the order belongs to the authenticated user.
     // if (approveCustAccout.cust_id != custID) {
     //   return res
     //     .status(403)
@@ -173,11 +164,15 @@ export const updateCustomer = async (req, res) => {
     // }
 
     const updates = await prisma.customers.update({
-      where: { cust_id: custId  },
-      data: { approvedCust: true }
-    })
-      
-    res.json({ success: true, message: 'Order approved successfully', data: updates });
+      where: { cust_id: custId },
+      data: { approvedCust: true },
+    });
+
+    res.json({
+      success: true,
+      message: "Order approved successfully",
+      data: updates,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

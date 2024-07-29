@@ -1,12 +1,11 @@
-
-.signup_sect{
+.signup_sect {
   display: flex;
   align-content: center;
   justify-content: center;
   padding: 1rem;
 }
 
-.form{
+.form {
   width: 50%;
 }
 
@@ -20,50 +19,48 @@ form {
   height: auto;
 }
 
-.login_img{
+.login_img {
   width: 50%;
   height: 75vh;
 }
-.login_img img{
-width: 100%;
-height: 100%;
+.login_img img {
+  width: 100%;
+  height: 100%;
   display: block;
   object-fit: cover;
-
 }
-._form{
+._form {
   padding: 1rem;
   width: 50%;
 }
 ._form input {
   height: 2rem;
-  margin: .5rem;
+  margin: 0.5rem;
 }
 form input {
   padding-inline-start: 0.5rem;
-  min-width:50%;
+  min-width: 50%;
 }
 
-.form_inputs{
-  height: 90% ;
+.form_inputs {
+  height: 90%;
   display: grid;
   place-content: center;
 }
 
-.form_inputs div{
+.form_inputs div {
   width: 25rem;
   display: flex;
   flex-direction: column;
 }
-.form_inputs div input{
+.form_inputs div input {
   width: 100%;
   height: 3rem;
 }
 
-.title{
+.title {
   color: black;
 }
-
 
 form div {
   width: 100%;
@@ -74,7 +71,3 @@ form p {
   color: black;
   padding: 0;
 }
-
-
-
-

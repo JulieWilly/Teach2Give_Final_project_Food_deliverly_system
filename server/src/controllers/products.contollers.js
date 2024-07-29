@@ -11,7 +11,7 @@ export const getAllProducts = async (req, res) => {
         productDesc: true,
         productPrice: true,
         productCartegory: true,
-        addedToCart:true,
+        addedToCart: true,
         productImg: true,
       },
     });
@@ -34,7 +34,7 @@ export const getProductByCustomer = async (req, res) => {
         productDesc: true,
         productPrice: true,
         productCartegory: true,
-        addedToCart:true,
+        addedToCart: true,
         productImg: true,
       },
     });
@@ -116,55 +116,51 @@ export const createProduct = async (req, res) => {
   );
 };
 
-export const updateProduct =async(req, res) => {
-  res.json('Update order.')
-}
-
+export const updateProduct = async (req, res) => {
+  res.json("Update order.");
+};
 
 export const addedToCart = async (req, res) => {
   const customer = req.user;
   const custID = customer.cust_id;
 
   const productID = req.params.product_id;
-  const {addedToCart} = req.body
+  const { addedToCart } = req.body;
 
   try {
     // find the order first
     const addToCart = await prisma.food_products.findUnique({
-      where: { product_id:  productID  },
+      where: { product_id: productID },
       // data: { approved: true }
     });
 
-
-
-
-     // return eerror if the order has not been found.
+    // return eerror if the order has not been found.
     if (!addToCart) {
       return res
         .status(404)
         .json({ success: false, message: "Order not found." });
     }
-    
 
-  //   // check if the order belongs to the authenticated user.
+    //   // check if the order belongs to the authenticated user.
     // if (addToCart.cust_id != custID) {
     //   return res
     //     .status(403)
     //     .json({ success: false, message: "Unauthorized action." });
     // }
 
-
-
     const toCart = await prisma.food_products.update({
-      where: { product_id:  productID  },
-      data: { addedToCart: addedToCart }
-    })
-    res.json({ success: true, message: 'Added to cart successfully', data:  toCart});
-
+      where: { product_id: productID },
+      data: { addedToCart: addedToCart },
+    });
+    res.json({
+      success: true,
+      message: "Added to cart successfully",
+      data: toCart,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-}
+};
 
 export const deleteProduct = async (req, res) => {
   try {

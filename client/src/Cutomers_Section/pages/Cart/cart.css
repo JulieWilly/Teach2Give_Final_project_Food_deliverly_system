@@ -11,7 +11,7 @@ table {
 }
 
 thead {
-  background-color: #0F0F13;
+  background-color: #0f0f13;
 }
 thead tr th {
   padding: 0.5rem;
@@ -33,7 +33,7 @@ th h3 {
   width: 40%;
   padding: 1rem;
   color: white;
-  background-color: #0F0F13;
+  background-color: #0f0f13;
 }
 .order_sect {
   display: flex;

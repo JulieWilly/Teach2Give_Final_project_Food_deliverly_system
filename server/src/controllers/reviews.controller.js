@@ -4,7 +4,6 @@ import { getRounds } from "bcrypt";
 const prisma = new PrismaClient();
 
 export const getAllReviews = async (req, res) => {
-
   try {
     const getAllReviews = await prisma.reviews.findMany({
       select: {
@@ -31,7 +30,7 @@ export const getAllReviews = async (req, res) => {
   }
 };
 
-export const getAllByCustomer= async (req, res) => {
+export const getAllByCustomer = async (req, res) => {
   const customer = req.user;
   const custID = customer.cust_id;
 

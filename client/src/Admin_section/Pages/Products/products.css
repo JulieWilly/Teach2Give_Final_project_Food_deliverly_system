@@ -57,7 +57,7 @@ form div p {
 }
 
 .bottom .order {
-  background-color: #151C32;
+  background-color: #151c32;
   display: flex;
   align-items: start;
   flex-direction: row;
@@ -71,7 +71,7 @@ form div p {
   justify-content: space-between;
 }
 
-.order_desc{
+.order_desc {
   width: 50%;
   margin: 0 1rem;
 }
@@ -85,7 +85,7 @@ form div p {
   color: red;
 }
 
-.order_img{
+.order_img {
   height: 100%;
   width: 50%;
 }
@@ -97,22 +97,21 @@ form div p {
   width: 100%;
 }
 
-.product_desc p{
+.product_desc p {
   min-width: 70%;
 }
 
-.add{
+.add {
   width: 15rem;
   height: 13rem;
   display: grid;
   place-content: center;
   border-radius: 1rem;
-    background-color: #151C32;
+  background-color: #151c32;
   font-size: 5rem;
-  
 }
 
-.add:hover{
-  background-color: #0F0F14;
-  transition: all ease-in-out .5s;
+.add:hover {
+  background-color: #0f0f14;
+  transition: all ease-in-out 0.5s;
 }

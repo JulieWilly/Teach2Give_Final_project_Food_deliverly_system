@@ -1,7 +1,7 @@
 import "./global.css";
 import { FaSearch } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa";
-import food_logo from '../../assets/food_logo.avif'
+import food_logo from "../../assets/food_logo.avif";
 import React, { useState } from "react";
 import icon from "../../assets/react.svg";
 import { NavLink } from "react-router-dom";
@@ -45,7 +45,7 @@ const Header = () => {
             <NavLink to={"/cart"}>
               <FaCartPlus className="_icons" />
             </NavLink>
-            <div className="user_profile">
+            <div className="user_profile" >
               <div className="img">
                 <img onClick={(e) => setOpen(!open)} src={icon} alt="" />
               </div>

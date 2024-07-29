@@ -12,7 +12,6 @@ const Update_product = () => {
   const [image, setImage] = useState();
   const { product_id } = useParams();
 
-
   const previewFiles = (file) => {
     const reader = new FileReader(); // read the file or image
     // convert the file into a url to pass it to the cloudinary
@@ -34,7 +33,7 @@ const Update_product = () => {
           .catch((error) => console.log(error));
         console.log("products - ", update.data.data);
         setProduct(update.data.data);
-        console.log(setProduct(update.data.data))
+        console.log(setProduct(update.data.data));
       } catch (error) {
         console.log(error);
       }
@@ -55,8 +54,7 @@ const Update_product = () => {
       }
       console.log("product", product);
     };
-      updateValues();
-
+    updateValues();
   }, [product]);
 
   const handleImageChange = (event) => {
@@ -84,12 +82,12 @@ const Update_product = () => {
           },
           {
             withCredentials: true,
-          }
+          },
         )
         .catch((error) => console.log(error));
       console.log("products", postProducts);
-      if (postProducts.status == 200){
-        alert('Updated successfully.')
+      if (postProducts.status == 200) {
+        alert("Updated successfully.");
       }
 
       if (postProducts.data.success === true) {
