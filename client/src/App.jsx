@@ -26,6 +26,7 @@ import Products from "./Admin_section/Pages/Products/Products";
 import Reviewers from "./Admin_section/Pages/Reviews/Reviewers";
 import Update_product from "./Admin_section/Pages/Products/Update_product";
 import UpdateCustomerDetails from "./Cutomers_Section/pages/Profile/UpdateCustomerDetails";
+import ProtectedRoute from "./Auth/ProtectedRoute";
 const AdminLayout = () => (
   <div className="admin-layout">
     <AdminHeader />
@@ -46,38 +47,12 @@ const UserLayout = () => (
 );
 
 const MainLayout = () => {
-  const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
-  const isUserRoute = location.pathname.startsWith("/user");
-  return (
-    <>
-      {/* {!isAdminRoute && !isUserRoute && <Header />} */}
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 };
 function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <Routes>
-          <Route exact path="/home" element={} />
-          <Route exact path="/" element={<Sign_in />}></Route>
-          <Route exact path="/sign_up" element={<Sign_up />} />
-          <Route exact path="/users_home" element={<Home />} />
-          <Route path="/header" element={<Header />} />
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path="/root" element={<Root />} />
-          <Route exact path="search" element={<Search />} />
-          <Route exact path="cart" element={<Cart />} />
-          <Route exact path="/admin_home" element={<AdminHome />} />
-
-          <Route exact path="profile" element={<Profile />} />
-          <Route exact path="billing" element={<Billing />} />
-          <Route exact path="add_reviews" element={<Add_Reviews />} />
-
-        </Routes> */}
-
         <Routes>
           <Route element={<MainLayout />}>
             <Route exact path="/" element={<Sign_in />}></Route>
@@ -86,41 +61,132 @@ function App() {
 
           <Route element={<AdminLayout />}>
             <Route exact path="/admin_home" element={<AdminHome />} />
-            <Route exact path="/orders" element={<Orders />} />
-            <Route exact path="dashboard" element={<Dashboard />} />
-            <Route exact path="manage_users" element={<ManageUsers />} />
-            <Route exact path="products" element={<Products />} />
-            <Route exact path="reviewers" element={<Reviewers />} />
-            <Route exact path="*" element={<div>Page not found.</div>} />
-            <Route exact path="add_product" element={<Add_products />} />
 
             <Route
               exact
+              path="/orders"
+              element={
+                <ProtectedRoute>
+                  <Orders />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="manage_users"
+              element={
+                <ProtectedRoute>
+                  <ManageUsers />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="products"
+              element={
+                <ProtectedRoute>
+                  <Products />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="reviewers"
+              element={
+                <ProtectedRoute>
+                  <Reviewers />
+                </ProtectedRoute>
+              }
+            />
+            <Route exact path="*" element={<div>Page not found.</div>} />
+            <Route
+              exact
+              path="add_product"
+              element={
+                <ProtectedRoute>
+                  <Add_products />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
               path="/add_product/:product_id"
-              element={<Add_products />}
+              element={
+                <ProtectedRoute>
+                  <Add_products />
+                </ProtectedRoute>
+              }
             />
 
             <Route
               exact
               path="/update_product/:product_id"
-              element={<Update_product />}
+              element={
+                <ProtectedRoute>
+                  <Update_product />
+                </ProtectedRoute>
+              }
             />
           </Route>
 
           <Route element={<UserLayout />}>
-            <Route exact path="/users_home" element={<Home />} />
-            <Route exact path="/cart" element={<Cart />} />
-            <Route exact path="/billing" element={<Billing />} />
-            <Route exact path="/add_reviews" element={<Add_Reviews />} />
+            <Route
+              exact
+              path="/users_home"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/cart"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/billing"
+              element={
+                <ProtectedRoute>
+                  <Billing />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/add_reviews"
+              element={
+                <ProtectedRoute>
+                  <Add_Reviews />
+                </ProtectedRoute>
+              }
+            />
             <Route
               exact
               path="/update_details"
-              element={<UpdateCustomerDetails />}
+              element={
+                <ProtectedRoute>
+                  <UpdateCustomerDetails />
+                </ProtectedRoute>
+              }
             />
           </Route>
         </Routes>
       </BrowserRouter>
-      {/* <App_ /> */}
     </>
   );
 }

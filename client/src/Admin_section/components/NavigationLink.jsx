@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import createStore from "../../Store/userStore";
 const NavigationLink = () => {
+  const navigate = useNavigate();
+  const clearUser = createStore((state) => state.clearUser);
+  const handleLogOut = () => {
+    clearUser();
+    navigate("/");
+  };
   return (
     <div className="heros_sect">
       <nav>
@@ -13,7 +19,7 @@ const NavigationLink = () => {
           <Link to={"/products"}>Add products</Link>
           <Link to={"/manage_users"}>Manage customers</Link>
           <Link to={"/reviewers"}>Reviewers</Link>
-          <Link to={"/reviewers"}>Log out</Link>
+          <Link onClick={handleLogOut}>Log out</Link>
         </ul>
       </nav>
     </div>

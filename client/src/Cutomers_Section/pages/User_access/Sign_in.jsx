@@ -12,7 +12,7 @@ import Title from "../../compnents/Title";
 import loginImg from "../../../assets/login_image.jpg";
 import createStore from "../../../Store/userStore";
 const Sign_in = () => {
-  const setUser = createStore((state) => state.setUser)
+  const setUser = createStore((state) => state.setUser);
 
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
@@ -37,8 +37,8 @@ const Sign_in = () => {
       const loginData = login.data;
       if (login.status == 200 && loginData.success === true) {
         toast(" Logged in successfully, as an Amin");
-       const items =  login.data
-       console.log('set user 2',setUser(items));
+        const items = login.data;
+        console.log("set user 2", setUser(items));
         if (loginData.data.customerRole === "Admin") {
           navigate("/admin_home");
         } else {

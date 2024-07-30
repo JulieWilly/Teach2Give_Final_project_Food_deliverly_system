@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
+import "../../components/global.css";
 import Footer from "../../../Cutomers_Section/compnents/Footer";
 import { FaCartPlus } from "react-icons/fa";
 import { LuUsers } from "react-icons/lu";
@@ -7,8 +8,10 @@ import { IoFastFoodSharp } from "react-icons/io5";
 import { CiDeliveryTruck } from "react-icons/ci";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
+import createStore from "../../../Store/userStore";
 
 const Dashboard = () => {
+  const user = createStore((state) => state.user);
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
   const [customer, setCustomer] = useState([]);
@@ -68,7 +71,7 @@ const Dashboard = () => {
   }, []);
   return (
     <div>
-      <h2 className="res">Welcome back !! {"Admin name"}</h2>
+      <h2 className="res adminName">Welcome back, {user.data.custName}</h2>
       <div className="dashboardsect">
         <div className="orders">
           <div className="_orders">

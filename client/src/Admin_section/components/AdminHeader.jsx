@@ -3,8 +3,11 @@ import icon from "../../../src/assets/food_logo.avif";
 import "./global.css";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../configs/configs";
-
+import createStore from "../../Store/userStore";
+import { useNavigate } from "react-router-dom";
 const AdminHeader = () => {
+  const navigate = useNavigate();
+  const user = createStore((state) => state.user);
   const [name, setName] = useState([]);
   // getAdminName =
   const getAdminName = async () => {
@@ -38,7 +41,7 @@ const AdminHeader = () => {
             <img src={icon} alt="Company logo," />
           </div>
 
-          <h3>Admin{name.custName}</h3>
+          <h3 className="adminName">Admin {user.data.custName}</h3>
         </div>
       </div>
     </div>

@@ -1,18 +1,16 @@
 import "./profile.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { useNavigate } from "react-router-dom";
 import createStore from "../../../Store/userStore";
 
 const Profile = () => {
-  const [loading, setLoading] = useState("");
   const { user, clearUser } = createStore((state) => ({
     user: state.user,
-    clearUser: state.clearUser
+    clearUser: state.clearUser,
   }));
-  const [error, setError] = useState();
-  const [profile, setProfile] = useState([]);
+
   const navigate = useNavigate();
 
   const updateDetails = async () => {
@@ -20,9 +18,9 @@ const Profile = () => {
   };
 
   const handleLogout = async () => {
-    clearUser()
-    // navigate('/')
-  }
+    clearUser();
+    navigate("/");
+  };
   useEffect(() => {
     const getUserProfile = async () => {
       try {
