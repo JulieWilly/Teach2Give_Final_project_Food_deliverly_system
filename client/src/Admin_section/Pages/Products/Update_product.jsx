@@ -31,9 +31,7 @@ const Update_product = () => {
             withCredentials: true,
           })
           .catch((error) => console.log(error));
-        console.log("products - ", update.data.data);
         setProduct(update.data.data);
-        console.log(setProduct(update.data.data));
       } catch (error) {
         console.log(error);
       }
@@ -52,14 +50,12 @@ const Update_product = () => {
           productDesc: product.productDesc,
         });
       }
-      console.log("product", product);
     };
     updateValues();
   }, [product]);
 
   const handleImageChange = (event) => {
     const imageUploaded = event.target.files[0];
-    console.log(image);
 
     setImage(imageUploaded);
 
@@ -82,10 +78,9 @@ const Update_product = () => {
           },
           {
             withCredentials: true,
-          },
+          }
         )
         .catch((error) => console.log(error));
-      console.log("products", postProducts);
       if (postProducts.status == 200) {
         alert("Updated successfully.");
       }

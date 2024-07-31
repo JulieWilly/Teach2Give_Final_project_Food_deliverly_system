@@ -21,21 +21,7 @@ const Profile = () => {
     clearUser();
     navigate("/");
   };
-  useEffect(() => {
-    const getUserProfile = async () => {
-      try {
-        const profile = await axios
-          .get(`${VITE_API_URL_BASE}/customers`, {
-            withCredentials: true,
-          })
-          .catch((error) => console.log(error));
-        console.log("profile data", profile);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUserProfile();
-  }, []);
+
   return (
     <div className="profile_sect">
       <h3>{user.data.custName}</h3>

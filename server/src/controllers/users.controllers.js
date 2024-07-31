@@ -17,6 +17,7 @@ export const getAllCustomers = async (req, res) => {
         custPhoneNumber: true,
         approvedCust: true,
         customerRole: true,
+        custAvatar:true
       },
     });
 
@@ -109,6 +110,7 @@ export const loginCustomer = async (req, res) => {
           custPhoneNumber: loginCustomer.custPhoneNumber,
           approvedCust: loginCustomer.approvedCust,
           customerRole: loginCustomer.customerRole,
+          custAvatar:  loginCustomer.custAvatar
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
@@ -174,6 +176,17 @@ export const approveCustomer = async (req, res) => {
   }
 };
 
+export const updateCustomer = async(req, res) => {
+  const customer = res.user;
+  const customerID = customer.cust_id;
+
+  try{
+    // check if the user exists.
+    
+  }catch(error) {
+    res.status(500).json({success: false, message: error.message})
+  }
+}
 export const deleteCustomer = async (req, res) => {
   try {
     const id = req.params.cust_id;
