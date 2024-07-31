@@ -1,17 +1,18 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as Yup from "yup";
+import default_profile from "../../../assets/default_profile.png"
 import { VITE_API_URL_BASE } from "../../../configs/configs";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./profile.css";
-
 const UpdateCustomerDetails = () => {
   const [inputs, setInputs] = useState("");
   const [loading, setLoading] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const inputRef  = useRef()
+  const [image, setImage] = useState()
 
   // get data from the database and prepopulate the field.
 
@@ -89,18 +90,46 @@ const UpdateCustomerDetails = () => {
     validationSchema: formValidations,
   });
 
+  const handleImageChange = () => {
+    inputRef.current.click()
+  }
+   const previewFiles = (file) => {
+     const reader = new FileReader(); // read the file or image
+     // convert the file into a url to pass it to the cloudinary
+     reader.readAsDataURL(file);
+     reader.onloadend = () => {
+       // provide and set the image after it has completely loaded onto the application.
+       setImage(reader.result);
+     };
+   };
+
+  const handleImage = (event) => {
+    const file = event.target.files[0]
+    console.log(file)
+    setImage(file)
+    previewFiles(file)
+  }
+
+
   return (
     <div className="form_input">
       <form className="_form" onSubmit={formik.handleSubmit}>
-        <div className="custImage">
+        <div className="custImage" onClick={handleImageChange}>
+          {image ? (
+            <img src={image} alt="customer image" />
+          ) : (
+            <img src={default_profile} alt="customer image" />
+          )}
           <input
             type="file"
             name="custImage"
             value={formik.values.custImage}
-            onChange={formik.handleChange}
+            onChange={handleImage}
             onBlur={formik.handleBlur}
             className="cust_img"
             placeholder="Add new Image"
+            ref={inputRef}
+            style={{ display: "none" }}
           />
           {formik.touched.custImage && formik.errors.custImage && (
             <p className="error">{formik.errors.custImage}</p>
