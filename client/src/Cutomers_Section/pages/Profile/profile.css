@@ -33,7 +33,7 @@
   height: 100%;
 }
 
-.form_input {
+/* .form_input {
   display: flex;
   align-items: center;
   width: 100%;
@@ -44,9 +44,9 @@
   width: 40%;
   display: flex;
   align-items: center;
-}
+} */
 
-.form_input ._form .custImage {
+/* .form_input ._form .custImage {
   border: 1px solid black;
   width: 9rem;
   height: 9rem;
@@ -61,7 +61,7 @@
   height: 100%;
   display: block;
   object-fit: contain;
-} 
+}  */
 
 .form_input ._form .custImage input {
   place-content: center;
@@ -73,4 +73,34 @@
 
 .form_input ._form button {
   width: 21rem;
+}
+
+.update_details{
+display: flex;
+align-items: center;
+background-color: red;
+justify-content: center;
+}
+
+.update_details .custImage {
+  border: 2px solid red;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.update_details .custImage img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+
+}
+
+.update_details ._form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }

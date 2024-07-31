@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import * as Yup from "yup";
 import default_profile from "../../../assets/default_profile.png";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
-import { useNavigate } from "react-router-dom";
 import useStore from "../../../Store/userStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -79,7 +78,7 @@ const UpdateCustomerDetails = () => {
             custName: values.custName,
             custEmail: values.custEmail,
             custPhoneNumber: values.custPhoneNumber,
-            custAvatar: values.custAvatar
+            custAvatar: image
           },
           {
             withCredentials: true,
@@ -114,8 +113,7 @@ const UpdateCustomerDetails = () => {
     validationSchema: formValidation,
   });
   return (
-    <div className="input">
-      <div className="products_left">
+    <div className="update_details">
         <form className="_form" onSubmit={formik.handleSubmit}>
           <div className="custImage" onClick={handleImageChange}>
             {image ? (
@@ -139,7 +137,7 @@ const UpdateCustomerDetails = () => {
             )}
           </div>
 
-          <div>
+          <div className="form_inputs">
             <input
               type="text"
               placeholder="Name"
@@ -152,7 +150,7 @@ const UpdateCustomerDetails = () => {
               <p>{formik.errors.custName}</p>
             )}
           </div>
-          <div>
+          <div className="form_inputs">
             <input
               type="text"
               placeholder="Email address"
@@ -165,7 +163,7 @@ const UpdateCustomerDetails = () => {
               <p>{formik.errors.custEmail}</p>
             )}
           </div>
-          <div>
+          <div className="form_inputs">
             <input
               type="number"
               placeholder="Phone number"
@@ -184,7 +182,7 @@ const UpdateCustomerDetails = () => {
           </button>
         </form>
       </div>
-    </div>
+   
   );
 };
 

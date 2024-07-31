@@ -177,12 +177,36 @@ export const approveCustomer = async (req, res) => {
 };
 
 export const updateCustomer = async(req, res) => {
-  const customer = res.user;
-  const customerID = customer.cust_id;
+// get entries.
+  const customerDetails = req.body;
+  const customerFields = ['custName', 'custEmail', 'custPhoneNumber', 'custAvatar'] 
 
-  try{
+ 
+   try{
     // check if the user exists.
-    
+    const custID = req.params.cust_id;
+    const checkCustomer = await prisma.customers.findUnique({
+      where: {cust_id: custID}
+    })
+    //return if not successful.
+    if (!checkCustomer) {
+      res.status(404).json({success: false, message: 'Customer not found.'})
+    }
+     // object to hold data to be updated
+  let updates = {}
+
+  // loop to update the fields accordingly.
+  for (let cust in customerDetails){
+    if (customerFields.includes(cust)){
+      updates[cust] = customerDetails[cust]
+    }
+  }
+
+  const update = await prisma.customers.update({
+    where: {cust_id: custID},
+    data: updates
+  })
+    res.status(200).json({success: true, message: 'Customer updated successfully.', data: update})
   }catch(error) {
     res.status(500).json({success: false, message: error.message})
   }

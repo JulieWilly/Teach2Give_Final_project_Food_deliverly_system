@@ -2,6 +2,7 @@ import "./products.css";
 import React, { useEffect } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import '../../components/global.css'
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -108,7 +109,7 @@ const Add_products = () => {
         <div className="products_left">
           <form className="_form" onSubmit={formik.handleSubmit}>
             <h2 className="title">Enter products details here.</h2>
-            <div>
+            <div className="form_inputs">
               <input
                 type="file"
                 placeholder="Add image here."
@@ -122,7 +123,7 @@ const Add_products = () => {
                 <p>{formik.errors.productImg}</p>
               )}
             </div>
-            <div>
+            <div className="form_inputs">
               <input
                 type="text"
                 placeholder="Product name"
@@ -135,7 +136,7 @@ const Add_products = () => {
                 <p>{formik.errors.productName}</p>
               )}
             </div>
-            <div>
+            <div className="form_inputs">
               <input
                 type="text"
                 placeholder="Product Description"
@@ -149,7 +150,7 @@ const Add_products = () => {
               )}
             </div>
 
-            <div>
+            <div className="form_inputs">
               <input
                 type="text"
                 placeholder="Product Category"
@@ -163,7 +164,7 @@ const Add_products = () => {
                   <p>{formik.errors.productCategory}</p>
                 )}
             </div>
-            <div>
+            <div className="form_inputs">
               <input
                 type="number"
                 placeholder="Price"
