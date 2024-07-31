@@ -61,7 +61,7 @@ export const getOneCustomer = async (req, res) => {
 
 export const createCustomer = async (req, res) => {
   try {
-    const { custName, custEmail, custPhoneNumber, password } = req.body;
+    const { custName, custEmail, custPhoneNumber, password, custAvatar} = req.body;
     const passToString = password.toString();
     const passwordHash = bcrypt.hashSync(passToString, 10);
     const createCust = await prisma.customers.create({
@@ -70,6 +70,7 @@ export const createCustomer = async (req, res) => {
         custEmail,
         custPhoneNumber,
         password: passwordHash,
+        custAvatar:null
       },
     });
     res.status(200).json({
@@ -127,7 +128,7 @@ export const loginCustomer = async (req, res) => {
           .json({ success: false, message: "Wrong user credentials." });
       }
     } else {
-      res.status(404).json({ success: false, message: "User not found" });
+      res.status(404).json({ success: false, message: "Customer has not been created" });
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

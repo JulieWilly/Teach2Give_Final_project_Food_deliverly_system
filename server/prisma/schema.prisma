@@ -22,6 +22,7 @@ model Customers {
   customerRole    String   @default("User") @map("customer_role")
   approvedCust    Boolean  @default(false) @map("approved_customer")
   createdAt       DateTime @default(now()) @map("customer_createdAt")
+  custAvatar    String? @map("cust_avatar")
   updatedAt       DateTime @updatedAt() @map("customer_updatedAt")
   profile         Profile?
   orders Orders[]
