@@ -22,8 +22,9 @@ const Sign_up = () => {
     try {
       setError(false);
       setLoading(true);
-      console.log(values)
-      const createCustomer = await axios.post(`${VITE_API_URL_BASE}/create`, {
+      console.log(values);
+      const createCustomer = await axios
+        .post(`${VITE_API_URL_BASE}/create`, {
           custName: values.custName,
           custEmail: values.custEmail,
           custPhoneNumber: values.custPhoneNumber,

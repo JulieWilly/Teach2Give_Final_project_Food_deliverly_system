@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 import bcrypt from "bcrypt";
 import { application } from "express";
 import { config } from "dotenv";
+import cloudinary from "../cloudinary/cloudinary.js";
 
 config();
 
@@ -17,7 +18,7 @@ export const getAllCustomers = async (req, res) => {
         custPhoneNumber: true,
         approvedCust: true,
         customerRole: true,
-        custAvatar:true
+        custAvatar: true,
       },
     });
 
@@ -62,7 +63,8 @@ export const getOneCustomer = async (req, res) => {
 
 export const createCustomer = async (req, res) => {
   try {
-    const { custName, custEmail, custPhoneNumber, password, custAvatar} = req.body;
+    const { custName, custEmail, custPhoneNumber, password, custAvatar } =
+      req.body;
     const passToString = password.toString();
     const passwordHash = bcrypt.hashSync(passToString, 10);
     const createCust = await prisma.customers.create({
@@ -71,7 +73,7 @@ export const createCustomer = async (req, res) => {
         custEmail,
         custPhoneNumber,
         password: passwordHash,
-        custAvatar:null
+        custAvatar: null,
       },
     });
     res.status(200).json({
@@ -110,7 +112,7 @@ export const loginCustomer = async (req, res) => {
           custPhoneNumber: loginCustomer.custPhoneNumber,
           approvedCust: loginCustomer.approvedCust,
           customerRole: loginCustomer.customerRole,
-          custAvatar:  loginCustomer.custAvatar
+          custAvatar: loginCustomer.custAvatar,
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
@@ -130,7 +132,9 @@ export const loginCustomer = async (req, res) => {
           .json({ success: false, message: "Wrong user credentials." });
       }
     } else {
-      res.status(404).json({ success: false, message: "Customer has not been created" });
+      res
+        .status(404)
+        .json({ success: false, message: "Customer has not been created" });
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -176,41 +180,80 @@ export const approveCustomer = async (req, res) => {
   }
 };
 
-export const updateCustomer = async(req, res) => {
-// get entries.
+export const updateCustomer = async (req, res) => {
+  // get entries.
   const customerDetails = req.body;
-  const customerFields = ['custName', 'custEmail', 'custPhoneNumber', 'custAvatar'] 
+  const customerFields = [
+    "custName",
+    "custEmail",
+    "custPhoneNumber",
+    "custAvatar",
+  ];
 
- 
-   try{
-    // check if the user exists.
-    const custID = req.params.cust_id;
-    const checkCustomer = await prisma.customers.findUnique({
-      where: {cust_id: custID}
-    })
-    //return if not successful.
-    if (!checkCustomer) {
-      res.status(404).json({success: false, message: 'Customer not found.'})
-    }
-     // object to hold data to be updated
-  let updates = {}
+  // upload customer image.
+  const { custAvatar } = req.body;
 
-  // loop to update the fields accordingly.
-  for (let cust in customerDetails){
-    if (customerFields.includes(cust)){
-      updates[cust] = customerDetails[cust]
-    }
-  }
+  await cloudinary.uploader.upload(
+    // the image to be uploaded to cloudinary
+    custAvatar,
 
-  const update = await prisma.customers.update({
-    where: {cust_id: custID},
-    data: updates
-  })
-    res.status(200).json({success: true, message: 'Customer updated successfully.', data: update})
-  }catch(error) {
-    res.status(500).json({success: false, message: error.message})
-  }
-}
+    {
+      //presets infomation and also the image allowed formats.
+      upload_preset: "food_delivery_app",
+      allowed_formats: ["png", "jpg", "jpeg", "svg", "ico", "jfif", "webp"],
+    },
+    // handle errors in the upload process.
+    async function (error, result) {
+      if (error) {
+        return res
+          .status(500)
+          .json({ success: false, message: "Avatar upload failed." });
+      } else {
+        try {
+          // check if the user exists.
+          const custID = req.params.cust_id;
+          const checkCustomer = await prisma.customers.findUnique({
+            where: { cust_id: custID },
+          });
+          //return if not successful.
+          if (!checkCustomer) {
+            res
+              .status(404)
+              .json({ success: false, message: "Customer not found." });
+          }
+          // object to hold data to be updated
+          let updates = {};
+
+          // loop to update the fields accordingly.
+          for (let cust in customerDetails) {
+            if (customerFields.includes(cust)) {
+              updates[cust] = customerDetails[cust];
+            }
+          }
+
+          const update = await prisma.customers.update({
+            where: { cust_id: custID },
+            data: {
+              custName: updates.custName,
+              custEmail: updates.custEmail,
+              custPhoneNumber: updates.custPhoneNumber,
+              custAvatar: result.url,
+            },
+          });
+          res
+            .status(200)
+            .json({
+              success: true,
+              message: "Customer updated successfully.",
+              data: update,
+            });
+        } catch (error) {
+          res.status(500).json({ success: false, message: error.message });
+        }
+      }
+    },
+  );
+};
 export const deleteCustomer = async (req, res) => {
   try {
     const id = req.params.cust_id;

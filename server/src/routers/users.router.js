@@ -6,7 +6,7 @@ import {
   approveCustomer,
   deleteCustomer,
   loginCustomer,
-  updateCustomer
+  updateCustomer,
 } from "../controllers/users.controllers.js";
 import verifyToken from "../middleware/verifyToken.js";
 
@@ -18,7 +18,7 @@ router
   .get("/customers", verifyToken, getAllCustomers)
   .get("/:cust_id", verifyToken, getOneCustomer)
   .post("/create", createCustomer)
-  .patch('/update/:cust_id', updateCustomer)
+  .patch("/update/:cust_id", updateCustomer)
   .patch("/:cust_id", verifyToken, approveCustomer)
   .delete("/:cust_id", verifyToken, deleteCustomer);
 

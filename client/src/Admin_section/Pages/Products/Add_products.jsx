@@ -2,7 +2,7 @@ import "./products.css";
 import React, { useEffect } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import '../../components/global.css'
+import "../../components/global.css";
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";

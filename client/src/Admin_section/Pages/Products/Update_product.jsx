@@ -78,7 +78,7 @@ const Update_product = () => {
           },
           {
             withCredentials: true,
-          }
+          },
         )
         .catch((error) => console.log(error));
       if (postProducts.status == 200) {

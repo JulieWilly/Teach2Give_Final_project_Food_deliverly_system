@@ -18,7 +18,6 @@ const UpdateCustomerDetails = () => {
   const user = useStore((state) => state.user);
   const userID = user.data.cust_id;
 
-
   const handleImageChange = () => {
     inputRef.current.click();
   };
@@ -47,6 +46,7 @@ const UpdateCustomerDetails = () => {
             console.log(error);
           });
         setCustomer(getDetails.data.data);
+        console.log("retrieved details.", getDetails.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -78,15 +78,18 @@ const UpdateCustomerDetails = () => {
             custName: values.custName,
             custEmail: values.custEmail,
             custPhoneNumber: values.custPhoneNumber,
-            custAvatar: image
+            custAvatar: image,
           },
           {
             withCredentials: true,
-          }
+          },
         )
         .catch((error) => console.log(error));
 
-        console.log(updateCustomer)
+      console.log(updateCustomer);
+      if (updateCustomer.data.status === 200) {
+        toast("Customer details updated successfully.");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -107,82 +110,80 @@ const UpdateCustomerDetails = () => {
       custName: "",
       custEmail: "",
       custPhoneNumber: "",
-      custAvatar: null,
+      custAvatar: "",
     },
     onSubmit: handleSubmit,
     validationSchema: formValidation,
   });
   return (
     <div className="update_details">
-        <form className="_form" onSubmit={formik.handleSubmit}>
-          <div className="custImage" onClick={handleImageChange}>
-            {image ? (
-              <img src={image} alt="customer image" />
-            ) : (
-              <img src={default_profile} alt="customer image" />
-            )}
-            <input
-              type="file"
-              name="custAvatar"
-              value={formik.values.custAvatar}
-              onChange={handleImage}
-              onBlur={formik.handleBlur}
-              className="cust_img"
-              placeholder="Add new Image"
-              ref={inputRef}
-              style={{ display: "none" }}
-            />
-            {formik.touched.custAvatar && formik.errors.custAvatar && (
-              <p className="error">{formik.errors.custAvatar}</p>
-            )}
-          </div>
+      <form className="_form" onSubmit={formik.handleSubmit}>
+        <div className="custImage" onClick={handleImageChange}>
+          {image ? (
+            <img src={image} alt="customer image" />
+          ) : (
+            <img src={default_profile} alt="customer image" />
+          )}
+          <input
+            type="file"
+            name="custAvatar"
+            value={formik.values.custAvatar}
+            onChange={handleImage}
+            onBlur={formik.handleBlur}
+            className="cust_img"
+            placeholder="Add new Image"
+            ref={inputRef}
+            style={{ display: "none" }}
+          />
+          {formik.touched.custAvatar && formik.errors.custAvatar && (
+            <p className="error">{formik.errors.custAvatar}</p>
+          )}
+        </div>
 
-          <div className="form_inputs">
-            <input
-              type="text"
-              placeholder="Name"
-              name="custName"
-              value={formik.values.custName}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.custName && formik.errors.custName && (
-              <p>{formik.errors.custName}</p>
-            )}
-          </div>
-          <div className="form_inputs">
-            <input
-              type="text"
-              placeholder="Email address"
-              name="custEmail"
-              value={formik.values.custEmail}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.custEmail && formik.errors.custEmail && (
-              <p>{formik.errors.custEmail}</p>
-            )}
-          </div>
-          <div className="form_inputs">
-            <input
-              type="number"
-              placeholder="Phone number"
-              name="custPhoneNumber"
-              value={formik.values.custPhoneNumber}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.custPhoneNumber &&
-              formik.errors.custPhoneNumber && (
-                <p>{formik.errors.custPhoneNumber}</p>
-              )}
-          </div>
-          <button type="submit">
-            {loading ? "Updating details. Please wait ..." : "Update details"}
-          </button>
-        </form>
-      </div>
-   
+        <div className="form_inputs">
+          <input
+            type="text"
+            placeholder="Name"
+            name="custName"
+            value={formik.values.custName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.custName && formik.errors.custName && (
+            <p>{formik.errors.custName}</p>
+          )}
+        </div>
+        <div className="form_inputs">
+          <input
+            type="text"
+            placeholder="Email address"
+            name="custEmail"
+            value={formik.values.custEmail}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.custEmail && formik.errors.custEmail && (
+            <p>{formik.errors.custEmail}</p>
+          )}
+        </div>
+        <div className="form_inputs">
+          <input
+            type="number"
+            placeholder="Phone number"
+            name="custPhoneNumber"
+            value={formik.values.custPhoneNumber}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.custPhoneNumber && formik.errors.custPhoneNumber && (
+            <p>{formik.errors.custPhoneNumber}</p>
+          )}
+        </div>
+        <button type="submit">
+          {loading ? "Updating details. Please wait ..." : "Update details"}
+        </button>
+      </form>
+    </div>
   );
 };
 
