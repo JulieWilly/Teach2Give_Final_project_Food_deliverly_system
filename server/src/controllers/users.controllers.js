@@ -240,13 +240,11 @@ export const updateCustomer = async (req, res) => {
               custAvatar: result.url,
             },
           });
-          res
-            .status(200)
-            .json({
-              success: true,
-              message: "Customer updated successfully.",
-              data: update,
-            });
+          res.status(200).json({
+            success: true,
+            message: "Customer updated successfully.",
+            data: update,
+          });
         } catch (error) {
           res.status(500).json({ success: false, message: error.message });
         }

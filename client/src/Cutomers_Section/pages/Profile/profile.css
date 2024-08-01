@@ -78,14 +78,12 @@
 .update_details {
   display: flex;
   align-items: center;
-  background-color: red;
   justify-content: center;
 }
 
 .update_details .custImage {
-  border: 2px solid red;
-  width: 15rem;
-  height: 15rem;
+  width: 12rem;
+  height: 12rem;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -101,4 +99,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.custImage {
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 600;
+  background-color: rgb(214, 156, 156);
+}
+
+.custImage ._char {
+  color: red;
 }

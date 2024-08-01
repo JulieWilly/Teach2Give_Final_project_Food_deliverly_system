@@ -22,10 +22,10 @@ foodDelivery.use(
     credentials: true,
   }),
 );
-foodDelivery.use(express.json());
+foodDelivery.use(express.json({ limit: "10mb" }));
 foodDelivery.use(cookieParser());
-foodDelivery.use(bodyParser({ limit: "50mb" }));
-foodDelivery.use(express.urlencoded({ extended: true }));
+foodDelivery.use(bodyParser({ limit: "10mb" }));
+foodDelivery.use(express.urlencoded({ limit: "10mb", extended: true }));
 foodDelivery.listen(process.env.PORT, () => {
   console.log(`Application running at port 3001`);
 });

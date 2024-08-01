@@ -27,7 +27,6 @@ const Reviewers = () => {
             withCredentials: true,
           })
           .catch((error) => console.log(error));
-        console.log("reviews", reviews);
         setReview(reviews.data.data);
       } catch (error) {
         console.log(error);

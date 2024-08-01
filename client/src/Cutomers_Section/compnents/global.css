@@ -23,8 +23,8 @@
 }
 
 .foodie_logo {
-  height: 4rem;
-  width: 4rem;
+  height: 3rem;
+  width: 3 rem;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -34,6 +34,23 @@
   height: 100%;
   display: block;
   object-fit: cover;
+}
+
+.user_profile .img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+  place-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.user_profile .img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
 }
 /* BANNERS SECTION  */
 .banner_sect {

@@ -17,6 +17,8 @@ const UpdateCustomerDetails = () => {
   const [image, setImage] = useState();
   const user = useStore((state) => state.user);
   const userID = user.data.cust_id;
+  const userName = user.data.custName;
+  const firstCharacter = getFirstCharacter(userName);
 
   const handleImageChange = () => {
     inputRef.current.click();
@@ -46,7 +48,7 @@ const UpdateCustomerDetails = () => {
             console.log(error);
           });
         setCustomer(getDetails.data.data);
-        console.log("retrieved details.", getDetails.data.data);
+        setImage(getDetails.data.data.custAvatar);
       } catch (error) {
         console.log(error);
       }
@@ -60,7 +62,7 @@ const UpdateCustomerDetails = () => {
           custName: customer.custName,
           custEmail: customer.custEmail,
           custPhoneNumber: customer.custPhoneNumber,
-          custAvatar: customer.custAvatar,
+          custAvatar: image !== null ? image.custAvatar : null,
         });
       }
     };
@@ -87,7 +89,7 @@ const UpdateCustomerDetails = () => {
         .catch((error) => console.log(error));
 
       console.log(updateCustomer);
-      if (updateCustomer.data.status === 200) {
+      if (updateCustomer.data.success === true) {
         toast("Customer details updated successfully.");
       }
     } catch (error) {
@@ -119,10 +121,12 @@ const UpdateCustomerDetails = () => {
     <div className="update_details">
       <form className="_form" onSubmit={formik.handleSubmit}>
         <div className="custImage" onClick={handleImageChange}>
-          {image ? (
+          {image !== null ? (
             <img src={image} alt="customer image" />
           ) : (
-            <img src={default_profile} alt="customer image" />
+            <div className="_char">{firstCharacter}</div>
+
+            // <img src={default_profile} alt="" />
           )}
           <input
             type="file"
@@ -187,4 +191,7 @@ const UpdateCustomerDetails = () => {
   );
 };
 
+const getFirstCharacter = (name) => {
+  return name.charAt(0).toUpperCase();
+};
 export default UpdateCustomerDetails;

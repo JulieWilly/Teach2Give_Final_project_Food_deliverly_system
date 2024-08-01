@@ -1,5 +1,4 @@
 .admin_header_sect {
-  background-color: #0f0f13;
   width: 100%;
 }
 
@@ -24,19 +23,20 @@
   gap: 1rem;
 }
 ._logo {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   display: grid;
   place-content: center;
   overflow: hidden;
   border-radius: 50%;
+  background-color: wheat;
 }
 
 ._logo img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 /* // nav links */
@@ -70,4 +70,10 @@ nav ul {
 
 .adminName {
   text-transform: capitalize;
+}
+
+._logo ._char {
+  color: black;
+  font-weight: 600;
+  font-size: 2rem;
 }
