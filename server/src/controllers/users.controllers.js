@@ -204,7 +204,8 @@ export const updateCustomer = async (req, res) => {
     },
     // handle errors in the upload process.
     async function (error, result) {
-      if (error) {
+    try{
+  if (error) {
         return res
           .status(500)
           .json({ success: false, message: "Avatar upload failed." });
@@ -249,6 +250,9 @@ export const updateCustomer = async (req, res) => {
           res.status(500).json({ success: false, message: error.message });
         }
       }
+    }catch(error){
+      console.log(error)
+    }
     },
   );
 };

@@ -9,6 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./profile.css";
 
+
+
 const UpdateCustomerDetails = () => {
   const [customer, setCustomer] = useState("");
   const [loading, setLoading] = useState("");
@@ -19,6 +21,7 @@ const UpdateCustomerDetails = () => {
   const userID = user.data.cust_id;
   const userName = user.data.custName;
   const firstCharacter = getFirstCharacter(userName);
+  const [isButtonActive, setIsButtonActive] = useState(false);
 
   const handleImageChange = () => {
     inputRef.current.click();
@@ -80,13 +83,14 @@ const UpdateCustomerDetails = () => {
             custName: values.custName,
             custEmail: values.custEmail,
             custPhoneNumber: values.custPhoneNumber,
-            custAvatar: image,
+            custAvatar: image !== null ? image : "",
           },
           {
             withCredentials: true,
-          },
+          }
         )
         .catch((error) => console.log(error));
+      console.log(updateCustomer);
 
       console.log(updateCustomer);
       if (updateCustomer.data.success === true) {
@@ -117,6 +121,16 @@ const UpdateCustomerDetails = () => {
     onSubmit: handleSubmit,
     validationSchema: formValidation,
   });
+
+  // HANDLE CHANGES TO USER DETAILS AND ACTIVATE THE BUTTON TO SUBMIT CHANGE.
+
+  useEffect(() => {
+    const formChange = Object.keys(customer).some(
+      key => formik.values[key] !== customer[key]
+    );
+    setIsButtonActive(formChange);
+    console.log( formik.values)
+  }, [formik.values, formik.initialValues]);
   return (
     <div className="update_details">
       <form className="_form" onSubmit={formik.handleSubmit}>
@@ -183,7 +197,7 @@ const UpdateCustomerDetails = () => {
             <p>{formik.errors.custPhoneNumber}</p>
           )}
         </div>
-        <button type="submit">
+        <button className="_btn" type="submit" disabled={!isButtonActive}>
           {loading ? "Updating details. Please wait ..." : "Update details"}
         </button>
       </form>

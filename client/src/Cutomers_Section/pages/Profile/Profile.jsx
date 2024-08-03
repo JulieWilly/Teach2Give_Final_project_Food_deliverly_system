@@ -1,7 +1,5 @@
 import "./profile.css";
 import React, { useEffect } from "react";
-import axios from "axios";
-import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { useNavigate } from "react-router-dom";
 import createStore from "../../../Store/userStore";
 
