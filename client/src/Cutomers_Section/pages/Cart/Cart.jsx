@@ -2,24 +2,34 @@ import Banner from "../../compnents/Banner";
 import Title from "../../compnents/Title";
 import "./cart.css";
 import React, { useEffect, useState } from "react";
-import icon from "../../../assets/foods.jpg";
 import { MdDeleteForever } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../compnents/Footer";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
+import createStore from "../../../Store/userStore";
 const Cart = () => {
   const navigate = useNavigate();
   const [error, setError] = useState();
   const [loading, setloading] = useState();
-  const [cart, setCart] = useState();
-  const [addQuantity, setAddQuantity] = useState([]);
+  // const [cart, setCart] = useState([]);
+  const [addQuantity, setAddQuantity] = useState(0);
   const [totalAmt, setTotalAmt] = useState(0);
+  const {
+    cartItems,
+    setCart,
+    addToCart,
+    incrementQuantity,
+    decrementQuantity,
+    removeFromCart,
+  } = createStore();
+
 
   const handleCheckOut = async () => {
     try {
-      console.log(cart);
-      cart.map(async (quatity) => {
+      setloading(true)
+      setError(false)
+      cartItems.map(async (quatity) => {
         const price = quatity.productPrice;
         console.log("current price", price);
         await axios
@@ -38,32 +48,24 @@ const Cart = () => {
       });
     } catch (error) {
       console.log(error);
+      setError(error)
+    } finally{
+      setloading(false)
     }
   };
   // ADD ITEMS
-  const addItem = (id) => {
-    // const addItems = cart.map( add => {
-    //   if (add.product_id === id){
-    //     return {...add, addQuantity:add.addQuantity + 1}
-    //   }
-    //   return add
-    // })
-    // setCart(addItems)
-    // setTotalAmt(addItems)
-
-    const add = addQuantity + 1;
-    setAddQuantity(add);
-  };
-
-  // REMOVE ITEMS
-  const reduceItems = () => {
-    const reduce = addQuantity - 1;
-    setAddQuantity(reduce);
-  };
+  const reduceItem = (id) => {
+    console.log('id reduce',id)
+    decrementQuantity(id)
+  }
+ const addItem = (id) => {
+   console.log("id add", id);
+  //  incrementQuantity(id);
+ };
   // REMOVE AN ITEM FROM THE CART.
   const handleRemoveFromCart = async (product_id) => {
     try {
-      const removeFromCart = await axios
+      const removeCart = await axios
         .put(
           `${VITE_API_URL_BASE}/products/${product_id}`,
           {
@@ -74,35 +76,41 @@ const Cart = () => {
           },
         )
         .catch((error) => console.log(error));
-      console.log(removeFromCart);
-      const removedItem = removeFromCart;
-      const approvedItems = removedItem.filter(
-        (item) => item.addedToCart === true,
-      );
-      setCart(approvedItems);
-      alert("Item removed successfully.");
+      const removedItem = removeCart.data.data;
+     
+      console.log('removed item', removedItem)
+      
+    removeFromCart(removedItem.product_id);
     } catch (error) {
       console.log(error);
     }
   };
+
+
   //fetch products added to the cart
   const toCart = async () => {
     try {
+      setloading(true)
+      setError(false)
       const cartItems = await axios
         .get(`${VITE_API_URL_BASE}/products/products`)
         .catch((error) => console.log(error));
       const approvedToCart = cartItems.data.data;
-      const approvedItems = approvedToCart.filter(
-        (item) => item.addedToCart === true,
-      );
-      setCart(approvedItems);
+      const approvedItems = approvedToCart.filter((item) => item.addedToCart === true );
+      const defaultQuantity = approvedItems.map(item => ({
+        ...item, quantity:item.quantity || 1
+      }))
+      setCart(defaultQuantity);
     } catch (error) {
       console.log(error);
+      setError(error)
+    } finally{
+      setloading(false)
     }
   };
   useEffect(() => {
     toCart();
-  }, []);
+  }, [setCart]);
   return (
     <div>
       <Banner
@@ -121,8 +129,10 @@ const Cart = () => {
                 <th>SubTotal</th>
               </tr>
             </thead>
-            {cart && cart.length > 0 ? (
-              cart.map((cartItem, key) => (
+            {error && <div>{error}</div>}
+
+            {cartItems && cartItems.length > 0 ? (
+              cartItems.map((cartItem, key) => (
                 <tbody key={key}>
                   <tr className="_row">
                     <td>
@@ -137,19 +147,22 @@ const Cart = () => {
                     <td>
                       <p>
                         <button
-                          onClick={() => reduceItems(cartItem.product_id)}
+                          onClick={() => decrementQuantity(cartItem.product_id)}
                         >
                           -
-                        </button>{" "}
-                        ({addQuantity}){" "}
-                        <button onClick={() => addItem(cartItem.product_id)}>
+                        </button>
+
+                        <p> ({cartItem.quantity})</p>
+                        <button
+                          onClick={() => incrementQuantity(cartItem.product_id)}
+                        >
                           +
                         </button>
                       </p>
                     </td>
                     <td>
                       <div className="del">
-                        ${12}
+                        ${cartItem.quantity * cartItem.productPrice}
                         <MdDeleteForever
                           onClick={() =>
                             handleRemoveFromCart(cartItem.product_id)
