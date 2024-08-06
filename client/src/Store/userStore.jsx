@@ -29,13 +29,13 @@ const createStore = create(
 
               cartItems: state.cartItems.map((cartItem) => {
                 cartItem.product_id === item.product_id
-                  ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                  ? { ...cartItem, quantity: cartItem.quantity + 1, subTotal: (item.quantity + 1) * item.productPrice }
                   : cartItem;
               }),
             };
           } else {
             return {
-              cartItems: [...state.cartItems, { ...item, quantity: 1 }],
+              cartItems: [...state.cartItems, { ...item, quantity: 1, subTotal: item.productPrice}],
             };
           }
         }),
@@ -44,7 +44,7 @@ const createStore = create(
         set((state) => ({
           cartItems: state.cartItems.map((item) =>
             item.product_id === itemID
-              ? { ...item, quantity: item.quantity + 1 }
+              ? { ...item, quantity: item.quantity + 1, subTotal: (item.quantity + 1) * item.productPrice }
               : item
           ),
         })),
@@ -52,7 +52,7 @@ const createStore = create(
         set((state) => ({
           cartItems: state.cartItems.map((item) =>
             item.product_id === itemID && item.quantity > 1
-              ? { ...item, quantity: item.quantity - 1 }
+              ? { ...item, quantity: item.quantity - 1, subTotal: (item.quantity + 1) * item.productPrice, reduced: (item.quantity + 1) / item.productPrice}
               : item
           ),
         }));

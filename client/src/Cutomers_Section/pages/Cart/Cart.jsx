@@ -24,14 +24,43 @@ const Cart = () => {
     removeFromCart,
   } = createStore();
 
+  console.log('default amount ', cartItems)
+
+  const totalAmount = () => {
+    const totalAmount = cartItems.reduce((acc, value) => {
+      return  acc + (value.subTotal)
+    }, 0)
+      console.log(totalAmount);
+      setTotalAmt(totalAmount)
+  }
+
+  const reduceTotalAmount = () => {
+    const totalAmount = cartItems.reduce((acc, value) => {
+      console.log('acc', acc)
+      console.log("value - ", value.reduced);
+      return acc -= value.subTotal 
+    }, 0);
+    setTotalAmt(totalAmount);
+  };
+
+  const addItems = (id) => {
+    totalAmount()
+incrementQuantity(id)
+  }
+
+   const reduceItems = (id) => {
+     reduceTotalAmount();
+     decrementQuantity(id);
+   };
 
   const handleCheckOut = async () => {
     try {
       setloading(true)
       setError(false)
       cartItems.map(async (quatity) => {
+        const quantity = cartItems;
+        console.log(quantity)
         const price = quatity.productPrice;
-        console.log("current price", price);
         await axios
           .post(
             `${VITE_API_URL_BASE}/orders/create`,
@@ -52,16 +81,11 @@ const Cart = () => {
     } finally{
       setloading(false)
     }
+    totalAmount();
+
   };
-  // ADD ITEMS
-  const reduceItem = (id) => {
-    console.log('id reduce',id)
-    decrementQuantity(id)
-  }
- const addItem = (id) => {
-   console.log("id add", id);
-  //  incrementQuantity(id);
- };
+
+
   // REMOVE AN ITEM FROM THE CART.
   const handleRemoveFromCart = async (product_id) => {
     try {
@@ -98,7 +122,8 @@ const Cart = () => {
       const approvedToCart = cartItems.data.data;
       const approvedItems = approvedToCart.filter((item) => item.addedToCart === true );
       const defaultQuantity = approvedItems.map(item => ({
-        ...item, quantity:item.quantity || 1
+        ...item, quantity:item.quantity || 1,
+        subTotal: item.quantity ? item.quantity * item.productPrice : item.productPrice
       }))
       setCart(defaultQuantity);
     } catch (error) {
@@ -147,22 +172,19 @@ const Cart = () => {
                     <td>
                       <p>
                         <button
-                          onClick={() => decrementQuantity(cartItem.product_id)}
+                          onClick={() => reduceItems(cartItem.product_id)}
                         >
                           -
                         </button>
-
-                        <p> ({cartItem.quantity})</p>
-                        <button
-                          onClick={() => incrementQuantity(cartItem.product_id)}
-                        >
+                        ({cartItem.quantity})
+                        <button onClick={() => addItems(cartItem.product_id)}>
                           +
                         </button>
                       </p>
                     </td>
                     <td>
                       <div className="del">
-                        ${cartItem.quantity * cartItem.productPrice}
+                        ${cartItem.subTotal}
                         <MdDeleteForever
                           onClick={() =>
                             handleRemoveFromCart(cartItem.product_id)
@@ -184,20 +206,20 @@ const Cart = () => {
           <div className="sub_totals">
             <table>
               <thead>
-                <tr>
+                {/* <tr>
                   <th>
                     <h3>Sub -total</h3>
                   </th>
                   <td>
-                    <p>$ {addQuantity}</p>
+                    <p>$ {}</p>
                   </td>
-                </tr>
+                </tr> */}
                 <tr>
                   <th>
                     <h3>Total</h3>
                   </th>
                   <td>
-                    <p>$ {300}</p>
+                    <p>$ {totalAmt == 0 ? cartItems.subTotal : totalAmt}</p>
                   </td>
                 </tr>
               </thead>
