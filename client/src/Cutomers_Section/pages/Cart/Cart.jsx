@@ -19,47 +19,47 @@ const Cart = () => {
     cartItems,
     setCart,
     addToCart,
+    totalAmount,
     incrementQuantity,
     decrementQuantity,
     removeFromCart,
   } = createStore();
 
-  console.log('default amount ', cartItems)
+  console.log("default amount ", totalAmount);
 
-  const totalAmount = () => {
-    const totalAmount = cartItems.reduce((acc, value) => {
-      return  acc + (value.subTotal)
-    }, 0)
-      console.log(totalAmount);
-      setTotalAmt(totalAmount)
-  }
+  // const totalAmount = () => {
+  //   const totalAmount = cartItems.reduce((acc, value) => {
+  //     return  acc + (value.subTotal)
+  //   }, 0)
+  //     setTotalAmt(totalAmount)
+  // }
 
-  const reduceTotalAmount = () => {
-    const totalAmount = cartItems.reduce((acc, value) => {
-      console.log('acc', acc)
-      console.log("value - ", value.reduced);
-      return acc -= value.subTotal 
-    }, 0);
-    setTotalAmt(totalAmount);
-  };
+  // const reduceTotalAmount = () => {
+  //   const totalAmount = cartItems.reduce((acc, value) => {
+  //     console.log('acc', acc)
+  //     console.log("value - ", value.reduced);
+  //     return acc -= value.subTotal
+  //   }, 0);
+  //   setTotalAmt(totalAmount);
+  // };
 
   const addItems = (id) => {
-    totalAmount()
-incrementQuantity(id)
-  }
+    // totalAmount();
+    incrementQuantity(id);
+  };
 
-   const reduceItems = (id) => {
-     reduceTotalAmount();
-     decrementQuantity(id);
-   };
+  const reduceItems = (id) => {
+    // reduceTotalAmount();
+    decrementQuantity(id);
+  };
 
   const handleCheckOut = async () => {
     try {
-      setloading(true)
-      setError(false)
+      setloading(true);
+      setError(false);
       cartItems.map(async (quatity) => {
         const quantity = cartItems;
-        console.log(quantity)
+        console.log(quantity);
         const price = quatity.productPrice;
         await axios
           .post(
@@ -69,7 +69,7 @@ incrementQuantity(id)
             },
             {
               withCredentials: true,
-            },
+            }
           )
           .catch((error) => console.log(error));
 
@@ -77,14 +77,12 @@ incrementQuantity(id)
       });
     } catch (error) {
       console.log(error);
-      setError(error)
-    } finally{
-      setloading(false)
+      setError(error);
+    } finally {
+      setloading(false);
     }
     totalAmount();
-
   };
-
 
   // REMOVE AN ITEM FROM THE CART.
   const handleRemoveFromCart = async (product_id) => {
@@ -97,40 +95,44 @@ incrementQuantity(id)
           },
           {
             withCredentials: true,
-          },
+          }
         )
         .catch((error) => console.log(error));
       const removedItem = removeCart.data.data;
-     
-      console.log('removed item', removedItem)
-      
-    removeFromCart(removedItem.product_id);
+
+      console.log("removed item", removedItem);
+
+      removeFromCart(removedItem.product_id);
     } catch (error) {
       console.log(error);
     }
   };
 
-
   //fetch products added to the cart
   const toCart = async () => {
     try {
-      setloading(true)
-      setError(false)
+      setloading(true);
+      setError(false);
       const cartItems = await axios
         .get(`${VITE_API_URL_BASE}/products/products`)
         .catch((error) => console.log(error));
       const approvedToCart = cartItems.data.data;
-      const approvedItems = approvedToCart.filter((item) => item.addedToCart === true );
-      const defaultQuantity = approvedItems.map(item => ({
-        ...item, quantity:item.quantity || 1,
-        subTotal: item.quantity ? item.quantity * item.productPrice : item.productPrice
-      }))
+      const approvedItems = approvedToCart.filter(
+        (item) => item.addedToCart === true
+      );
+      const defaultQuantity = approvedItems.map((item) => ({
+        ...item,
+        quantity: item.quantity || 1,
+        subTotal: item.quantity
+          ? item.quantity * item.productPrice
+          : item.productPrice,
+      }));
       setCart(defaultQuantity);
     } catch (error) {
       console.log(error);
-      setError(error)
-    } finally{
-      setloading(false)
+      setError(error);
+    } finally {
+      setloading(false);
     }
   };
   useEffect(() => {
@@ -219,7 +221,10 @@ incrementQuantity(id)
                     <h3>Total</h3>
                   </th>
                   <td>
-                    <p>$ {totalAmt == 0 ? cartItems.subTotal : totalAmt}</p>
+                    <p>
+                      $
+                      {totalAmount }
+                    </p>
                   </td>
                 </tr>
               </thead>
