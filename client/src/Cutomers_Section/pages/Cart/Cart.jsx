@@ -20,6 +20,8 @@ const Cart = () => {
     setCart,
     addToCart,
     totalAmount,
+    totalQuantity,
+    noOfItems,
     incrementQuantity,
     decrementQuantity,
     removeFromCart,
@@ -59,10 +61,11 @@ const Cart = () => {
       setloading(true);
       setError(false);
 
+      console.log('total quantity', totalQuantity)
+      console.log('noOfItems', noOfItems)
+      console.log('cart items', cartItems)
       cartItems.map(async (quatity) => {
-        const quantity = quatity.quatity;
-        const price = totalAmount;
-        await axios
+        const items = await axios
           .post(
             `${VITE_API_URL_BASE}/orders/create`,
             {
@@ -74,6 +77,7 @@ const Cart = () => {
           )
           .catch((error) => console.log(error));
 
+          console.log('items posted in the database.', items)
         navigate("/billing");
 
       });
