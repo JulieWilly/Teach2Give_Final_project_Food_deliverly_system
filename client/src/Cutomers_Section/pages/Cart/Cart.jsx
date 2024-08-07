@@ -25,7 +25,7 @@ const Cart = () => {
     removeFromCart,
   } = createStore();
 
-  console.log("default amount ", totalAmount);
+
 
   // const totalAmount = () => {
   //   const totalAmount = cartItems.reduce((acc, value) => {
@@ -54,26 +54,28 @@ const Cart = () => {
   };
 
   const handleCheckOut = async () => {
+
     try {
       setloading(true);
       setError(false);
+
       cartItems.map(async (quatity) => {
-        const quantity = cartItems;
-        console.log(quantity);
-        const price = quatity.productPrice;
+        const quantity = quatity.quatity;
+        const price = totalAmount;
         await axios
           .post(
             `${VITE_API_URL_BASE}/orders/create`,
             {
-              totalAmount: quatity.productPrice,
+              totalAmount: totalAmount,
             },
             {
               withCredentials: true,
-            }
+            },
           )
           .catch((error) => console.log(error));
 
         navigate("/billing");
+
       });
     } catch (error) {
       console.log(error);
@@ -81,7 +83,6 @@ const Cart = () => {
     } finally {
       setloading(false);
     }
-    totalAmount();
   };
 
   // REMOVE AN ITEM FROM THE CART.
@@ -95,13 +96,10 @@ const Cart = () => {
           },
           {
             withCredentials: true,
-          }
+          },
         )
         .catch((error) => console.log(error));
       const removedItem = removeCart.data.data;
-
-      console.log("removed item", removedItem);
-
       removeFromCart(removedItem.product_id);
     } catch (error) {
       console.log(error);
@@ -118,7 +116,7 @@ const Cart = () => {
         .catch((error) => console.log(error));
       const approvedToCart = cartItems.data.data;
       const approvedItems = approvedToCart.filter(
-        (item) => item.addedToCart === true
+        (item) => item.addedToCart === true,
       );
       const defaultQuantity = approvedItems.map((item) => ({
         ...item,
@@ -221,10 +219,7 @@ const Cart = () => {
                     <h3>Total</h3>
                   </th>
                   <td>
-                    <p>
-                      $
-                      {totalAmount }
-                    </p>
+                    <p>${totalAmount}</p>
                   </td>
                 </tr>
               </thead>

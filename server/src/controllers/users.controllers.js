@@ -204,55 +204,55 @@ export const updateCustomer = async (req, res) => {
     },
     // handle errors in the upload process.
     async function (error, result) {
-    try{
-  if (error) {
-        return res
-          .status(500)
-          .json({ success: false, message: "Avatar upload failed." });
-      } else {
-        try {
-          // check if the user exists.
-          const custID = req.params.cust_id;
-          const checkCustomer = await prisma.customers.findUnique({
-            where: { cust_id: custID },
-          });
-          //return if not successful.
-          if (!checkCustomer) {
-            res
-              .status(404)
-              .json({ success: false, message: "Customer not found." });
-          }
-          // object to hold data to be updated
-          let updates = {};
-
-          // loop to update the fields accordingly.
-          for (let cust in customerDetails) {
-            if (customerFields.includes(cust)) {
-              updates[cust] = customerDetails[cust];
+      try {
+        if (error) {
+          return res
+            .status(500)
+            .json({ success: false, message: "Avatar upload failed." });
+        } else {
+          try {
+            // check if the user exists.
+            const custID = req.params.cust_id;
+            const checkCustomer = await prisma.customers.findUnique({
+              where: { cust_id: custID },
+            });
+            //return if not successful.
+            if (!checkCustomer) {
+              res
+                .status(404)
+                .json({ success: false, message: "Customer not found." });
             }
-          }
+            // object to hold data to be updated
+            let updates = {};
 
-          const update = await prisma.customers.update({
-            where: { cust_id: custID },
-            data: {
-              custName: updates.custName,
-              custEmail: updates.custEmail,
-              custPhoneNumber: updates.custPhoneNumber,
-              custAvatar: result.url,
-            },
-          });
-          res.status(200).json({
-            success: true,
-            message: "Customer updated successfully.",
-            data: update,
-          });
-        } catch (error) {
-          res.status(500).json({ success: false, message: error.message });
+            // loop to update the fields accordingly.
+            for (let cust in customerDetails) {
+              if (customerFields.includes(cust)) {
+                updates[cust] = customerDetails[cust];
+              }
+            }
+
+            const update = await prisma.customers.update({
+              where: { cust_id: custID },
+              data: {
+                custName: updates.custName,
+                custEmail: updates.custEmail,
+                custPhoneNumber: updates.custPhoneNumber,
+                custAvatar: result.url,
+              },
+            });
+            res.status(200).json({
+              success: true,
+              message: "Customer updated successfully.",
+              data: update,
+            });
+          } catch (error) {
+            res.status(500).json({ success: false, message: error.message });
+          }
         }
+      } catch (error) {
+        console.log(error);
       }
-    }catch(error){
-      console.log(error)
-    }
     },
   );
 };

@@ -9,8 +9,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./profile.css";
 
-
-
 const UpdateCustomerDetails = () => {
   const [customer, setCustomer] = useState("");
   const [loading, setLoading] = useState("");
@@ -87,7 +85,7 @@ const UpdateCustomerDetails = () => {
           },
           {
             withCredentials: true,
-          }
+          },
         )
         .catch((error) => console.log(error));
       console.log(updateCustomer);
@@ -126,10 +124,10 @@ const UpdateCustomerDetails = () => {
 
   useEffect(() => {
     const formChange = Object.keys(customer).some(
-      key => formik.values[key] !== customer[key]
+      (key) => formik.values[key] !== customer[key],
     );
     setIsButtonActive(formChange);
-    console.log( formik.values)
+    console.log(formik.values);
   }, [formik.values, formik.initialValues]);
   return (
     <div className="update_details">
