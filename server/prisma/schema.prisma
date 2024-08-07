@@ -75,6 +75,7 @@ model Orders{
 
 model Order_items {
   order_items_id String @id @default(uuid())
+  order_item_name String @map("item_name")
   orderQuantity Int  @default(1) @map("order_quantity")
   itemPrice String @map("item_price")
   orders Orders @relation(fields: [order_id], references: [order_id])

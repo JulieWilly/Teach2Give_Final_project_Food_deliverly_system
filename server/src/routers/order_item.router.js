@@ -1,22 +1,17 @@
 import { Router } from "express";
+import {getAllOrderItems, getsingleOrderItem, createorderItem, deleteOrderItem} from '../controllers/order_items.controllers.js'
 const router = Router();
 
-router.get("/all", (req, res) => {
-  res.json("get all  items");
-});
+router.get("/all", getAllOrderItems );
 
-router.get("/:order_items_id", (req, res) => {
-  res.json("Get singlle items");
-});
+router.get("/:order_items_id", getsingleOrderItem );
 
-router.post("/create", (req, res) => {});
+router.post("/create", createorderItem);
 
-router.patch("/:order_items_id", (req, res) => {
+router.patch("/:order_items_id", async (req, res) => {
   res.json("update items");
 });
 
-router.delete("/:order_items_id", (req, res) => {
-  res.json("delete order item");
-});
+router.delete("/:order_items_id",deleteOrderItem);
 
 export default router;

@@ -118,7 +118,7 @@ export const createOrder = async (req, res) => {
     if (createOrder !== null) {
       res
         .status(200)
-        .json({ success: true, message: "User has been created.!!" });
+        .json({ success: true, message: "Order has been created.!!", data: createOrder});
     } else {
       res
         .status(500)
