@@ -7,6 +7,6 @@ import verifyToken from "../middleware/verifyToken.js";
 const router = Router();
 
 router.get("/all", verifyToken, getAddresses);
-router.post("/create", verifyToken, createAddress);
+router.post("/create", verifyToken, createAddress)
 
 export default router;

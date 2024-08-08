@@ -28,6 +28,7 @@ model Customers {
   orders Orders[]
   reviewer Reviews[]
   payment Payment[]
+  addresses Address[]
 
   @@map("customers_tb")
 }
@@ -126,6 +127,7 @@ model Address{
   city String @map("city")
   state String @map("state")
   zipcode Int @map("zipcode")
-
+  cust_id String 
+  customer Customers @relation(fields: [cust_id], references: [cust_id])
   @@map("address_tb")
 }
