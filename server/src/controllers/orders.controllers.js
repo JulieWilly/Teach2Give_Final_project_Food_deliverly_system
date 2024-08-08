@@ -16,7 +16,7 @@ export const getOrders = async (req, res) => {
         order_id: true,
       },
     });
-    if (getOrder !== null) {
+    if (getOrders !== null) {
       res.status(200).json({
         success: true,
         message: "Orders found successfully",
@@ -45,7 +45,7 @@ export const getAllOrders = async (req, res) => {
         order_id: true,
       },
     });
-    if (getOrder !== null) {
+    if (getOrders !== null) {
       res.status(200).json({
         success: true,
         message: "Orders found successfully",

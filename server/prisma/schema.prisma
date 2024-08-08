@@ -44,7 +44,7 @@ model food_products {
   createdAt    DateTime @default(now()) @map("product_createdAt")
 
   updatedAt    DateTime @updatedAt() @map("product_updatedAt")
-  order_items Order_items?
+  order_items Order_items[]
   
 
   @@map("food_products_tb")
@@ -79,12 +79,11 @@ model Order_items {
   orderQuantity Int  @default(1) @map("order_quantity")
   itemPrice String @map("item_price")
   orders Orders @relation(fields: [order_id], references: [order_id])
-  order_id String @unique
-  products food_products @relation(fields: [product_id], references: [product_id])
-  product_id String @unique
+  order_id String 
+  product_id String 
+  food_products food_products @relation(fields: [product_id], references: [product_id])
 
   @@map("order_items_tb")
-
 }
 
 model Reviews {
