@@ -7,6 +7,7 @@ export const getAllOrderItems  = async (req, res) => {
 
     const getAllOrderItems = await prisma.order_items.findMany({
       select: {
+        order_items_id: true,
         orderQuantity:true,
         itemPrice:true, 
         order_item_name: true,
@@ -30,7 +31,31 @@ export const getAllOrderItems  = async (req, res) => {
 
 
 export const getsingleOrderItem = async(req, res) => {
-  res.json("Get singlle items");
+  const {order_items_id} = req.params;
+  try{
+    // check if the order exists first.
+    const checkOrder = await prisma.order_items.findUnique({
+      where: {order_items_id: order_items_id}
+    })
+
+    if (!checkOrder){
+      res.status(500).json({success:false, message: 'Order item not found.'})
+    } 
+
+  const getItem = await prisma.order_items.findUnique({
+      where: {order_items_id: order_items_id},
+  })
+
+  if (getItem != null){
+    res.status(200).json({success: true, message:'Order has been found successfully.', data: getItem})
+  } else{
+    res.status(500).json({success: true, message:'Order no found. Something  went wrong!!.'})
+
+  }
+
+  } catch(error) {
+    res.status(500).json({success:false, message: error.message})
+  }
 }
 
 
