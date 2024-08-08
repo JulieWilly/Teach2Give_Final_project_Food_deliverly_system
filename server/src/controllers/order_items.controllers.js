@@ -103,8 +103,7 @@ export const createorderItem = async (req, res) => {
         .status(200)
         .json({
           success: true,
-          message: "Order item created successfully.",
-          data: createorderItem,
+          message: "Order item created successfully."
         });
     } else {
       res
