@@ -107,11 +107,13 @@ export const getOrder = async (req, res) => {
 export const createOrder = async (req, res) => {
   const user = req.user;
   const cust_id = user.cust_id;
+  
   try {
-    const { totalAmount } = req.body;
+    const { totalAmount, noOfItems } = req.body;
     const createOrder = await prisma.orders.create({
       data: {
         totalAmount,
+        noOfItems,
         cust_id: cust_id,
       },
     });

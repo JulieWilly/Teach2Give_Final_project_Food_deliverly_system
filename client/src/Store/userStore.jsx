@@ -17,7 +17,7 @@ const createStore = create(
       cartItems: [],
       totalAmount: 0,
       totalQuantity: 0,
-      noOfItem: 0,
+      noOfItems: 0,
       setCart: (items) =>
         set((state) => {
           const updatedItems = items.map((item) => ({

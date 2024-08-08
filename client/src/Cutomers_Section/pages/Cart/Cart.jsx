@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../compnents/Footer";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import createStore from "../../../Store/userStore";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Cart = () => {
   const navigate = useNavigate();
   const [error, setError] = useState();
@@ -61,26 +63,26 @@ const Cart = () => {
       setloading(true);
       setError(false);
 
+      console.log('total amt',totalAmount)
       console.log('total quantity', totalQuantity)
-      console.log('noOfItems', noOfItems)
-      console.log('cart items', cartItems)
-      cartItems.map(async (quatity) => {
-        const items = await axios
-          .post(
-            `${VITE_API_URL_BASE}/orders/create`,
-            {
-              totalAmount: totalAmount,
-            },
-            {
-              withCredentials: true,
-            },
-          )
-          .catch((error) => console.log(error));
+      console.log("items in cart", noOfItems);
 
-          console.log('items posted in the database.', items)
-        navigate("/billing");
 
-      });
+      const items = await axios
+        .post(
+          `${VITE_API_URL_BASE}/orders/create`,
+          {
+            totalAmount: totalAmount,
+            noOfItems: totalQuantity,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .catch((error) => console.log(error));
+
+   console.log('items', items)
+      navigate("/billing");
     } catch (error) {
       console.log(error);
       setError(error);
@@ -180,7 +182,9 @@ const Cart = () => {
                         >
                           -
                         </button>
+
                         ({cartItem.quantity})
+
                         <button onClick={() => addItems(cartItem.product_id)}>
                           +
                         </button>
@@ -229,10 +233,11 @@ const Cart = () => {
               </thead>
             </table>
             <div className="buttons">
-              <button onClick={handleCheckOut}>Check Out</button>
+              <button onClick={handleCheckOut}>{ totalAmount == 0 ?  'Order Now' : (`Order ${totalQuantity} for KES ${totalAmount}`)}</button>
             </div>
           </div>
         </div>
+        <ToastContainer/>
       </div>
       <Footer />
     </div>

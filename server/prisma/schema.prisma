@@ -63,7 +63,7 @@ model Orders{
   order_id String @id @default(uuid())
   orderStatus Boolean @default(false) @map("order_status") 
   totalAmount Int @map("total_amount")
-  noOfItems Int @default(1) @map("no_of_items")
+  noOfItems Int  @map("no_of_items")
   orderDate DateTime @default(now())
   cust_id String
   customers Customers @relation(fields: [cust_id], references: [cust_id])

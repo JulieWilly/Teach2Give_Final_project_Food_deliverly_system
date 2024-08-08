@@ -64,20 +64,17 @@ export const createorderItem =  async (req, res) => {
     const {orderQuantity, itemPrice, order_item_name, } = req.body;
     const createOrderItem = await prisma.order_items.create({
       data: {
-        // orderQuantity,
-        // itemPrice,
-        // order_item_name,
-        orderQuantity:7,
-        itemPrice:"200",
-        order_item_name:"Fried white meat with delicacies.", 
+        orderQuantity,
+        itemPrice,
+        order_item_name, 
         orders: {
           connect: {
-            order_id: 'f34f9158-6d83-4759-913b-ce3817469884'
+            order_id:order_id
           }
         },
         food_products:{
           connect:{
-             product_id:'0f2e2f76-7a05-43f5-a920-d8d042f72728'
+             product_id:product_id
           }
         }
       }
