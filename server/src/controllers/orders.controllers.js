@@ -107,7 +107,7 @@ export const getOrder = async (req, res) => {
 export const createOrder = async (req, res) => {
   const user = req.user;
   const cust_id = user.cust_id;
-  
+
   try {
     const { totalAmount, noOfItems } = req.body;
     const createOrder = await prisma.orders.create({
@@ -120,7 +120,11 @@ export const createOrder = async (req, res) => {
     if (createOrder !== null) {
       res
         .status(200)
-        .json({ success: true, message: "Order has been created.!!", data: createOrder});
+        .json({
+          success: true,
+          message: "Order has been created.!!",
+          data: createOrder,
+        });
     } else {
       res
         .status(500)
