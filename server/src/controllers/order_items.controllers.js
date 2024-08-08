@@ -95,5 +95,29 @@ export const createorderItem =  async (req, res) => {
 }
 
 export const deleteOrderItem = async (req, res) => {
-  res.json("delete order item");
+
+  // get the order id
+  const {order_items_id} = req.params
+  try{
+// check if the order exists in the database.
+  const checkItem = await prisma.order_items.findUnique({
+    where: {order_items_id: order_items_id}
+  })
+   
+  if (!checkItem) {
+    res.status(500).json({success: false, message: 'Order has not been found!!'})
+  }
+
+  const deleteItem = await prisma.order_items.delete({
+    where: {order_items_id: order_items_id}
+  })
+  if (deleteItem !== null) {
+    res.status(200).json({success:true, message: 'Order deleted successfully.'})
+  } else {
+    res.status(500).json({success:true, message: 'Order Not deleted.Something went wrong.'})
+
+  }
+  }catch(error){
+    res.status(500).json({success: false, message: error.message})
+  }
 }
