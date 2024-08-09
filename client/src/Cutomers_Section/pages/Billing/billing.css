@@ -1,43 +1,44 @@
 .billing_details {
   display: flex;
   flex-direction: row;
+  align-items: top;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
   gap: 2rem;
 }
 
-.address_details_left {
-  width: 70%;
+.location_details form{
+  border-radius: 1rem;
+  margin-top: 1rem;
+  padding: .5rem 2rem;
+}
+
+.location_details form .inputs{
+  margin: .5rem 0;
+}
+
+.location_details form input{
+  width: 90%;
+}
+
+
+ .location_details{
+  width:50%;
   display: flex;
+  align-items: flex-start;
   justify-content: center;
 }
 
-.billing_details_right {
-  width: 30%;
+
+.location_details form .form_title{
+  color: black;
 }
 
-table tr {
-  text-align: start;
+.form_inputs .inputs label {
+  text-align: left;
+  margin-left: .5rem;
 }
-table tr th {
-  text-align: start;
-}
-
-.inputs {
-  width: auto;
-}
-
-.inputs input {
-  width: auto;
-  color: white;
-  height: 2.5rem;
-  display: flex;
-}
-
-.form {
-  background-color: none;
-  width: 30rem;
-  height: auto;
-}
-
 label {
   color: black;
   float: left;

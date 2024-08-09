@@ -27,6 +27,7 @@ import Reviewers from "./Admin_section/Pages/Reviews/Reviewers";
 import Update_product from "./Admin_section/Pages/Products/Update_product";
 import UpdateCustomerDetails from "./Cutomers_Section/pages/Profile/UpdateCustomerDetails";
 import ProtectedRoute from "./Auth/ProtectedRoute";
+import ReviewOrder from "./Cutomers_Section/pages/Order_review/ReviewOrder";
 const AdminLayout = () => (
   <div className="admin-layout">
     <AdminHeader />
@@ -181,6 +182,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UpdateCustomerDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/order_review"
+              element={
+                <ProtectedRoute>
+                  <ReviewOrder />
                 </ProtectedRoute>
               }
             />

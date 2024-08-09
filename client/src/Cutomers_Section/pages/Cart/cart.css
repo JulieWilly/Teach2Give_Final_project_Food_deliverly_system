@@ -21,8 +21,11 @@ thead tr th {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 1rem;
 }
+
+
 
 th h3 {
   text-align: start;
@@ -31,9 +34,14 @@ th h3 {
 .orderstotal {
   border-radius: 1rem;
   width: 40%;
+  height: max-content;
   padding: 1rem;
   color: white;
   background-color: #0f0f13;
+}
+
+.orderstotal .buttons button:disabled{
+  cursor: not-allowed;
 }
 .order_sect {
   display: flex;

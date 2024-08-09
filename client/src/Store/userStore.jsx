@@ -30,11 +30,11 @@ const createStore = create(
 
           const totalAmt = updatedItems.reduce(
             (sum, item) => sum + item.subTotal,
-            0
+            0,
           );
           const totalQuantity = updatedItems.reduce(
             (sum, item) => sum + item.quantity,
-            0
+            0,
           );
           const noOfItems = updatedItems.length;
           return {
@@ -49,7 +49,7 @@ const createStore = create(
         set((state) => {
           // check if the item already exists.
           const itemExists = state.cartItems.find(
-            (exist) => exist.product_id === item.product_id
+            (exist) => exist.product_id === item.product_id,
           );
 
           // hold the updated values.
@@ -76,12 +76,12 @@ const createStore = create(
 
           const total = updatedItems.reduce(
             (sum, item) => sum + item.subTotal,
-            0
+            0,
           );
           const noOfItems = updatedItems.length;
           const totalQuantity = updatedItems.reduce(
             (sum, item) => sum + item.quantity,
-            0
+            0,
           );
 
           return {
@@ -101,17 +101,17 @@ const createStore = create(
                   quantity: item.quantity + 1,
                   subTotal: (item.quantity + 1) * item.productPrice,
                 }
-              : item
+              : item,
           );
 
           const total = updatedItems.reduce(
             (sum, item) => sum + item.subTotal,
-            0
+            0,
           );
 
           const totalQuantity = updatedItems.reduce(
             (sum, item) => sum + item.quantity,
-            0
+            0,
           );
           return { cartItems: updatedItems, totalAmount: total, totalQuantity };
         }),
@@ -125,15 +125,15 @@ const createStore = create(
                   quantity: item.quantity - 1,
                   subTotal: (item.quantity - 1) * item.productPrice,
                 }
-              : item
+              : item,
           );
           const total = updatedItems.reduce(
             (sum, item) => sum + item.subTotal,
-            0
+            0,
           );
           const totalQuantity = updatedItems.reduce(
             (sum, item) => sum + item.quantity,
-            0
+            0,
           );
           return { cartItems: updatedItems, totalAmount: total, totalQuantity };
         });
@@ -143,15 +143,15 @@ const createStore = create(
         set((state) => {
           // removeFromCart(removeItem);
           const updatedItems = state.cartItems.filter(
-            (item) => item.product_id !== itemID
+            (item) => item.product_id !== itemID,
           );
           const total = updatedItems.reduce(
             (sum, item) => sum + item.subTotal,
-            0
+            0,
           );
           const totalQuantity = updatedItems.reduce(
             (sum, item) => sum + item.quantity,
-            0
+            0,
           );
           const noOfItems = updatedItems.length;
           return {
@@ -166,8 +166,8 @@ const createStore = create(
     {
       name: "Foodie-storage",
       storage: createJSONStorage(() => sessionStorage),
-    }
-  )
+    },
+  ),
 );
 
 export default createStore;

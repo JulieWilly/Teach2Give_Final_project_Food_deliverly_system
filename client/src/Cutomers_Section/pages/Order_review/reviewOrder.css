@@ -1,0 +1,55 @@
+.summary{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: top;
+    gap: 2rem;
+    flex-wrap: wrap;
+    border: 2px solid red;
+    margin-top: .5rem;
+}
+
+.summary .orderDetails{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    border: 2px solid red;
+}
+
+.summary .billing_details_right{
+    border: 2px solid yellow;
+}
+
+ .orders_desc {
+    width: 40rem;
+}
+
+.orderDetails ._form{
+    background:none;
+    width: 20rem;
+
+}
+
+.orderDetails ._form .inputs{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    margin-top: .5rem;
+}
+
+.orderDetails ._form .inputs label{
+    padding-left: .5rem;
+    color: white;
+
+}
+.orderDetails ._form .inputs select{
+    height: 2rem;
+    margin-left: .5rem;
+    width: 92%;
+    padding: .5rem;
+}
+.orderDetails ._form .inputs input{
+    width: 90%;
+    padding-left: 0;
+
+}

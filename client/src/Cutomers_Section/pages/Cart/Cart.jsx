@@ -14,59 +14,60 @@ const Cart = () => {
   const navigate = useNavigate();
   const [error, setError] = useState();
   const [loading, setloading] = useState();
-  // const [cart, setCart] = useState([]);
-  const [addQuantity, setAddQuantity] = useState(0);
-  const [totalAmt, setTotalAmt] = useState(0);
+  const [isActive, setIsActive] = useState(0);
   const {
     cartItems,
     setCart,
-    addToCart,
     totalAmount,
     totalQuantity,
-    noOfItems,
     incrementQuantity,
     decrementQuantity,
     removeFromCart,
   } = createStore();
 
-
-
-  // const totalAmount = () => {
-  //   const totalAmount = cartItems.reduce((acc, value) => {
-  //     return  acc + (value.subTotal)
-  //   }, 0)
-  //     setTotalAmt(totalAmount)
-  // }
-
-  // const reduceTotalAmount = () => {
-  //   const totalAmount = cartItems.reduce((acc, value) => {
-  //     console.log('acc', acc)
-  //     console.log("value - ", value.reduced);
-  //     return acc -= value.subTotal
-  //   }, 0);
-  //   setTotalAmt(totalAmount);
-  // };
-
   const addItems = (id) => {
-    // totalAmount();
     incrementQuantity(id);
   };
 
   const reduceItems = (id) => {
-    // reduceTotalAmount();
     decrementQuantity(id);
   };
 
+  // create the order items .
+  const createOrderItems = async (items) => {
+    setError(false);
+    setloading(true);
+    try {
+      cartItems.map((item) => {
+        axios
+          .post(
+            `${VITE_API_URL_BASE}/orders/items/create`,
+            {
+              order_item_name: item.productName,
+              product_id: item.product_id,
+              orderQuantity: item.quantity,
+              itemPrice: item.productPrice,
+              itemTotal: item.subTotal,
+              order_id: items.order_id,
+            },
+            { withCredentials: true }
+          )
+          .catch((error) => {
+            console.log(error);
+            setError(error);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    } finally {
+      setloading(false);
+    }
+  };
   const handleCheckOut = async () => {
-
     try {
       setloading(true);
       setError(false);
-
-      console.log('total amt',totalAmount)
-      console.log('total quantity', totalQuantity)
-      console.log("items in cart", noOfItems);
-
 
       const items = await axios
         .post(
@@ -81,8 +82,13 @@ const Cart = () => {
         )
         .catch((error) => console.log(error));
 
-   console.log('items', items)
+      // fill the items table handle.
+      createOrderItems(items.data.data);
+
       navigate("/billing");
+      if (items.data.success == true) {
+        toast("Order has been created successfully!");
+      }
     } catch (error) {
       console.log(error);
       setError(error);
@@ -102,10 +108,14 @@ const Cart = () => {
           },
           {
             withCredentials: true,
-          },
+          }
         )
         .catch((error) => console.log(error));
       const removedItem = removeCart.data.data;
+      console.log("removed from cart", removedItem);
+      if (removeCart.data.success === true) {
+        toast("Item removed from cart.");
+      }
       removeFromCart(removedItem.product_id);
     } catch (error) {
       console.log(error);
@@ -122,7 +132,7 @@ const Cart = () => {
         .catch((error) => console.log(error));
       const approvedToCart = cartItems.data.data;
       const approvedItems = approvedToCart.filter(
-        (item) => item.addedToCart === true,
+        (item) => item.addedToCart === true
       );
       const defaultQuantity = approvedItems.map((item) => ({
         ...item,
@@ -139,14 +149,15 @@ const Cart = () => {
       setloading(false);
     }
   };
+
   useEffect(() => {
     toCart();
   }, [setCart]);
   return (
     <div>
       <Banner
-        title={"Cart section."}
-        desc={"This page contains the cart items."}
+        title={"Your cart.  "}
+        desc={"You can add items, remove items from the cart. You can also increase or reduce cart items quantity. ."}
       />
       <Title title={"Your orders"} />
       <div className="order_sect">
@@ -161,7 +172,6 @@ const Cart = () => {
               </tr>
             </thead>
             {error && <div>{error}</div>}
-
             {cartItems && cartItems.length > 0 ? (
               cartItems.map((cartItem, key) => (
                 <tbody key={key}>
@@ -182,9 +192,7 @@ const Cart = () => {
                         >
                           -
                         </button>
-
                         ({cartItem.quantity})
-
                         <button onClick={() => addItems(cartItem.product_id)}>
                           +
                         </button>
@@ -205,7 +213,7 @@ const Cart = () => {
                 </tbody>
               ))
             ) : (
-              <p>You have no items in your cart......</p>
+              <p>Your cart is empty.</p>
             )}
           </table>
         </div>
@@ -214,17 +222,9 @@ const Cart = () => {
           <div className="sub_totals">
             <table>
               <thead>
-                {/* <tr>
-                  <th>
-                    <h3>Sub -total</h3>
-                  </th>
-                  <td>
-                    <p>$ {}</p>
-                  </td>
-                </tr> */}
                 <tr>
                   <th>
-                    <h3>Total</h3>
+                    <h3>Total :</h3>
                   </th>
                   <td>
                     <p>${totalAmount}</p>
@@ -233,11 +233,23 @@ const Cart = () => {
               </thead>
             </table>
             <div className="buttons">
-              <button onClick={handleCheckOut}>{ totalAmount == 0 ?  'Order Now' : (`Order ${totalQuantity} for KES ${totalAmount}`)}</button>
+              {totalQuantity === 0 && totalAmount === 0 ? (
+                <button onClick={handleCheckOut} disabled={!isActive}>
+                  {totalAmount == 0
+                    ? "Order Now"
+                    : `Order ${totalQuantity} for KES ${totalAmount}`}
+                </button>
+              ) : (
+                <button onClick={handleCheckOut} disabled={isActive}>
+                  {totalAmount == 0
+                    ? "Order Now"
+                    : `Order ${totalQuantity} for KES ${totalAmount}`}
+                </button>
+              )}
             </div>
           </div>
         </div>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
       <Footer />
     </div>
