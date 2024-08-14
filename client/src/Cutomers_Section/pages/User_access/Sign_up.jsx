@@ -18,11 +18,11 @@ const Sign_up = () => {
 
   // form validations.
 
+  // const sign in with firebase.
   const handleSubmit = async (values) => {
     try {
       setError(false);
       setLoading(true);
-      console.log(values);
       const createCustomer = await axios
         .post(`${VITE_API_URL_BASE}/create`, {
           custName: values.custName,

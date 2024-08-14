@@ -14,7 +14,7 @@ const createStore = create(
       },
 
       // manage user item cart.
-      cartItems: [],
+      cartItems: null,
       totalAmount: 0,
       totalQuantity: 0,
       noOfItems: 0,

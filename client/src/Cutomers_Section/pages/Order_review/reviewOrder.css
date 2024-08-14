@@ -5,7 +5,6 @@
     align-items: top;
     gap: 2rem;
     flex-wrap: wrap;
-    border: 2px solid red;
     margin-top: .5rem;
 }
 
@@ -13,11 +12,6 @@
     display: flex;
     align-items: start;
     flex-direction: column;
-    border: 2px solid red;
-}
-
-.summary .billing_details_right{
-    border: 2px solid yellow;
 }
 
  .orders_desc {
@@ -52,4 +46,29 @@
     width: 90%;
     padding-left: 0;
 
+}
+
+.summary .billing_details_right {
+    margin-top: 3rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 2px 1px 1px 2px;
+    height: fit-content;
+}
+
+.summary .billing_details_right table {
+    padding: 1rem;
+}
+
+.billing_details_right table th{
+    text-align: start;
+}
+
+.billing_details_right table td{
+    text-align: end;
+}
+
+.billing_details_right table td p span{
+    text-decoration: line-through;
+    color: red;
 }

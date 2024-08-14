@@ -81,10 +81,10 @@ const Cart = () => {
           }
         )
         .catch((error) => console.log(error));
+console.log(items.data.data);
 
       // fill the items table handle.
       createOrderItems(items.data.data);
-
       navigate("/billing");
       if (items.data.success == true) {
         toast("Order has been created successfully!");
@@ -112,7 +112,6 @@ const Cart = () => {
         )
         .catch((error) => console.log(error));
       const removedItem = removeCart.data.data;
-      console.log("removed from cart", removedItem);
       if (removeCart.data.success === true) {
         toast("Item removed from cart.");
       }
