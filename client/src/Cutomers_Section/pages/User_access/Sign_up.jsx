@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Title from "../../compnents/Title";
 import loginImg from "../../../assets/sign_up.jpg";
 import auth from "../../../configs/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 const Sign_up = () => {
   const [inputs, setInputs] = useState("");
   const [loading, setLoading] = useState("");
@@ -20,6 +21,16 @@ const Sign_up = () => {
   // form validations.
 
   // const sign in with firebase.
+  const CreateFirebaseAccount = async (values) => {
+    createUserWithEmailAndPassword(auth, values.custEmail, values.password)
+      .then((userCredetials) => {
+        const user = userCredetials.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const handleSubmit = async (values) => {
     try {
       setError(false);
@@ -32,9 +43,9 @@ const Sign_up = () => {
           password: values.password,
         })
         .catch((error) => toast.warning("Something went wrong!!!"));
+      CreateFirebaseAccount(values);
       setInputs(createCustomer);
 
-      console.log(createCustomer);
       if (createCustomer.data.success === true) {
         toast("Account created successfully.");
         navigate("/");
