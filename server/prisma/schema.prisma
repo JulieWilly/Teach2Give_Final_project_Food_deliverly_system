@@ -16,9 +16,9 @@ datasource db {
 model Customers {
   cust_id         String   @id @default(uuid())
   custName        String   @map("customer_name")
-  custEmail       String   @unique @map("customer_email")
-  custPhoneNumber Int      @map("customer_phone_number")
-  password        String   @map("customer_password")
+  custEmail       String?   @unique @map("customer_email")
+  custPhoneNumber Int?     @map("customer_phone_number")
+  password        String?   @map("customer_password")
   customerRole    String   @default("User") @map("customer_role")
   approvedCust    Boolean  @default(false) @map("approved_customer")
   createdAt       DateTime @default(now()) @map("customer_createdAt")

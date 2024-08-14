@@ -11,7 +11,7 @@ const router = Router();
 
 router
   .get("/all", verifyToken, getAllOrderItems)
-  .get("/:order_items_id", verifyToken, getsingleOrderItem)
+  .get("/:order_id", verifyToken, getsingleOrderItem)
   .post("/create", verifyToken, createorderItem)
   .patch("/:order_items_id", verifyToken, async (req, res) => {
     res.json("update items");

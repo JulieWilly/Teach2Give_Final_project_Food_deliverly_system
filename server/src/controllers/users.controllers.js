@@ -25,7 +25,7 @@ export const getAllCustomers = async (req, res) => {
     if (getAllCustomers !== null) {
       res.status(200).json({
         success: true,
-        message: "Al users found successfully.",
+        message: "All users found successfully.",
         data: getAllCustomers,
       });
     } else {
@@ -65,7 +65,11 @@ export const createCustomer = async (req, res) => {
   try {
     const { custName, custEmail, custPhoneNumber, password, custAvatar } =
       req.body;
-    const passToString = password.toString();
+      const passToString =''
+    if(!password == null){
+      passToString = password.toString();
+      
+    }
     const passwordHash = bcrypt.hashSync(passToString, 10);
     const createCust = await prisma.customers.create({
       data: {
@@ -73,7 +77,7 @@ export const createCustomer = async (req, res) => {
         custEmail,
         custPhoneNumber,
         password: passwordHash,
-        custAvatar: null,
+        custAvatar: custAvatar ? custAvatar:null
       },
     });
     res.status(200).json({

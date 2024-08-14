@@ -38,11 +38,12 @@ export const getAllOrderItems = async (req, res) => {
 };
 
 export const getsingleOrderItem = async (req, res) => {
-  const { order_items_id } = req.params;
+  const { order_id } = req.params;
+  console.log(order_id)
   try {
     // check if the order exists first.
-    const checkOrder = await prisma.order_items.findUnique({
-      where: { order_items_id: order_items_id },
+    const checkOrder = await prisma.order_items.findFirst({
+      where: { order_id: order_id },
     });
 
     if (!checkOrder) {
@@ -51,8 +52,13 @@ export const getsingleOrderItem = async (req, res) => {
         .json({ success: false, message: "Order item not found." });
     }
 
-    const getItem = await prisma.order_items.findUnique({
-      where: { order_items_id: order_items_id },
+
+    // const getItem = await prisma.order_items.findUnique({
+    //   where: { order_items_id: order_items_id },
+    // });
+
+      const getItem = await prisma.order_items.findMany({
+      where: {order_id: order_id}
     });
 
     if (getItem != null) {
@@ -62,6 +68,7 @@ export const getsingleOrderItem = async (req, res) => {
           success: true,
           message: "Order has been found successfully.",
           data: getItem,
+          
         });
     } else {
       res
@@ -75,6 +82,7 @@ export const getsingleOrderItem = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 export const createorderItem = async (req, res) => {
   try {
