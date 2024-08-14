@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Title from "../../compnents/Title";
 import loginImg from "../../../assets/sign_up.jpg";
+import auth from "../../../configs/firebase";
 const Sign_up = () => {
   const [inputs, setInputs] = useState("");
   const [loading, setLoading] = useState("");
