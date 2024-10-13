@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import React from "react";
-import icon from "../../../assets/react.svg";
 import foods from "../../../assets/foods.jpg";
 
 const Heros = () => {

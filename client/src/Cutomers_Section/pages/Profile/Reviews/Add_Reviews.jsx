@@ -1,11 +1,11 @@
 import React from "react";
-import Banner from "../../../compnents/Banner";
+import Banner from "../../../components/Banner";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../../configs/configs";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import Footer from "../../../compnents/Footer";
-import Title from "../../../compnents/Title";
+import Footer from "../../../components/Footer";
+import Title from "../../../components/Title";
 
 const Add_Reviews = () => {
   const createAddresses = async () => {

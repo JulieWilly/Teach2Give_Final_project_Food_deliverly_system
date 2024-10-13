@@ -1,11 +1,11 @@
-import Banner from "../../compnents/Banner";
-import Title from "../../compnents/Title";
+import Banner from "../../components/Banner";
+import Title from "../../components/Title";
 import "./cart.css";
 import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../compnents/Footer";
+import Footer from "../../components/Footer";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import createStore from "../../../Store/userStore";
 import { ToastContainer, toast } from "react-toastify";

@@ -2,7 +2,7 @@ import "./home.css";
 import React, { useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import icon from "../../../assets/react.svg";
-import Title from "../../compnents/Title";
+import Title from "../../components/Title";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 const Reviews = () => {

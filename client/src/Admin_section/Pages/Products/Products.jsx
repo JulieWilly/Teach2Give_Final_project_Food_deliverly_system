@@ -1,6 +1,5 @@
 import "./products.css";
 import React, { useEffect } from "react";
-import icon from "../../../assets/react.svg";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";

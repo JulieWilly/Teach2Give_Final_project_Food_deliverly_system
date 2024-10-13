@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import { createJSONStorage,  persist } from "zustand/middleware";
 
 const createStore = create(
   persist(
@@ -19,7 +19,7 @@ const createStore = create(
       totalQuantity: 0,
       noOfItems: 0,
       setCart: (items) =>
-        set((state) => {
+        set(() => {
           const updatedItems = items.map((item) => ({
             ...item,
             quantity: item.quantity || 1,

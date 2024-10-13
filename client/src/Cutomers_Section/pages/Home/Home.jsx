@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "../../compnents/Header";
+import Header from "../../components/Header";
 import Heros from "./Heros";
 import Products from "./Products";
 import Reviews from "./Reviews";
 import Profile from "../Profile/Profile";
-import Footer from "../../compnents/Footer";
+import Footer from "../../components/Footer";
 import "./home.css";
 const Home = () => {
   return (

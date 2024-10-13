@@ -71,3 +71,42 @@ form p {
   color: black;
   padding: 0;
 }
+
+.or{
+ color: black;
+}
+.color{
+  color: black;
+}
+
+.social_accounts{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.social_accounts .row{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.social_accounts .account{
+    display: flex;
+    flex-direction: row;
+    background-color: #52556C;
+    max-width: 6rem;
+    align-items: center;
+    padding: .5rem;
+    justify-content: space-around;
+    border-radius: .5rem;
+    color: white;
+}
+
+.social_accounts .account:hover{
+      background-color: #663399;
+      color: white;
+}

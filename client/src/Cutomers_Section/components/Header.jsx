@@ -16,6 +16,7 @@ const Header = () => {
   const [image, setImage] = useState([]);
   const navigate = useNavigate();
   const user = createStore((state) => state.user);
+  console.log( 'user', user)
   const userName = user.data.custName;
   const firstCharacter = getFirstCharacter(userName);
 

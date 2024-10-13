@@ -7,7 +7,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
-import Title from "../../../Cutomers_Section/compnents/Title";
+import Title from "../../../Cutomers_Section/components/Title";
 
 const Add_products = () => {
   const [loading, setLoading] = useState();

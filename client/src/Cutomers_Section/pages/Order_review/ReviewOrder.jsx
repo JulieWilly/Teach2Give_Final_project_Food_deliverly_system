@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Banner from '../../compnents/Banner';
-import Title from '../../compnents/Title';
+import Banner from '../../components/Banner';
+import Title from '../../components/Title';
 import { useFormik } from 'formik';
 import "./reviewOrder.css";
-import img from '../../../assets/food2.jpg'
 import * as Yup from 'yup'
 import axios from 'axios';
 import { VITE_API_URL_BASE } from '../../../configs/configs';

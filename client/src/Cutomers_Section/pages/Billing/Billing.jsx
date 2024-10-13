@@ -1,11 +1,11 @@
 import "./billing.css";
 import React, { useState } from "react";
-import Banner from "../../compnents/Banner";
-import Title from "../../compnents/Title";
+import Banner from "../../components/Banner";
+import Title from "../../components/Title";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Footer from "../../compnents/Footer";
+import Footer from "../../components/Footer";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";

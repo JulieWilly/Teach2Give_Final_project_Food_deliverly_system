@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
 import "../../components/global.css";
-import Footer from "../../../Cutomers_Section/compnents/Footer";
+import Footer from "../../../Cutomers_Section/components/Footer";
 import { FaCartPlus } from "react-icons/fa";
 import { LuUsers } from "react-icons/lu";
 import { IoFastFoodSharp } from "react-icons/io5";

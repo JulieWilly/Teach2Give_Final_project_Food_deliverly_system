@@ -8,7 +8,7 @@ import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Title from "../../compnents/Title";
+import Title from "../../components/Title";
 import loginImg from "../../../assets/sign_up.jpg";
 import auth from "../../../configs/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";

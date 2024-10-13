@@ -13,7 +13,7 @@ import Sign_up from "./Cutomers_Section/pages/User_access/Sign_up";
 import AdminHome from "./Admin_section/Pages/Home/AdminHome";
 import Home from "./Cutomers_Section/pages/Home/Home";
 import Cart from "./Cutomers_Section/pages/Cart/Cart";
-import Header from "./Cutomers_Section/compnents/Header";
+import Header from "./Cutomers_Section/components/Header";
 import Billing from "./Cutomers_Section/pages/Billing/Billing";
 import Add_products from "./Admin_section/Pages/Products/Add_products";
 import Add_Reviews from "./Cutomers_Section/pages/Profile/Reviews/Add_Reviews";

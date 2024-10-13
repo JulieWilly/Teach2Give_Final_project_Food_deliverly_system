@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./order.css";
-import Footer from "../../../Cutomers_Section/compnents/Footer.jsx";
-import ordersData from "../../Data/ordersData.js";
+import Footer from "../../../Cutomers_Section/components/Footer.jsx";
 import axios from "axios";
 import { VITE_API_URL_BASE } from "../../../configs/configs.js";
-import Title from "../../../Cutomers_Section/compnents/Title.jsx";
+import Title from "../../../Cutomers_Section/components/Title.jsx";
 const Orders = () => {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
